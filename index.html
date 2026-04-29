@@ -529,6 +529,11 @@ function formHTML(prefix,data,types){
     <div class="fs"><div class="fs-title">車輛資訊</div>
       <div class="field"><label>購買車輛款式 *</label><input id="${prefix}-car" type="text" placeholder="Toyota Camry 2.5豪華版" value="${data?.car||''}"></div>
       <div class="fr">
+        <div class="field"><label>訂車日期</label><input id="${prefix}-order-date" type="date" value="${data?.orderDate||''}"></div>
+        <div class="field"><label>領牌日期</label><input id="${prefix}-license-date" type="date" value="${data?.licenseDate||''}"></div>
+      </div>
+      <div class="field"><label>交車日期</label><input id="${prefix}-delivery-date" type="date" value="${data?.deliveryDate||''}"></div>
+      <div class="fr">
         <div class="field"><label>原始車價</label><input id="${prefix}-base" type="number" placeholder="0" value="${data?.basePrice||''}"></div>
         <div class="field"><label>零配件總價</label><input id="${prefix}-parts" type="number" placeholder="0" value="${data?.partsPrice||''}"></div>
       </div>
@@ -642,6 +647,9 @@ function getFormData(prefix,types){
     mobile:$(prefix+'-mobile')?.value.trim()||'',
     address:$(prefix+'-addr')?.value.trim()||'',
     car:$(prefix+'-car')?.value.trim()||'',
+    orderDate:$(prefix+'-order-date')?.value||'',
+    licenseDate:$(prefix+'-license-date')?.value||'',
+    deliveryDate:$(prefix+'-delivery-date')?.value||'',
     basePrice:parseInt($(prefix+'-base')?.value)||0,
     partsPrice:parseInt($(prefix+'-parts')?.value)||0,
     costPrice:parseInt($(prefix+'-cost')?.value)||0,
@@ -683,7 +691,11 @@ $('d-submit').addEventListener('click',async function(){
 // ── RENDER ──
 function renderDash(){
   const now=new Date();
-  const mc=clients.filter(c=>{const d=new Date(c.createdAt);return d.getMonth()===now.getMonth()&&d.getFullYear()===now.getFullYear();});
+  // 以領牌日期計算本月業績，沒有領牌日期則用建檔日期
+  const mc=clients.filter(c=>{
+    const ref=c.licenseDate?new Date(c.licenseDate):new Date(c.createdAt);
+    return ref.getMonth()===now.getMonth()&&ref.getFullYear()===now.getFullYear();
+  });
   const rev=mc.reduce((s,c)=>s+(c.dealPrice||0),0);
   const pft=mc.filter(c=>c.costPrice>0).reduce((s,c)=>s+(c.dealPrice-c.costPrice),0);
   const exp=clients.filter(c=>c.insurance?.endDate&&days(new Date(c.insurance.endDate))<=30&&days(new Date(c.insurance.endDate))>=0);
@@ -717,7 +729,10 @@ function renderDB(){
     const fil=clients.filter(c=>{
       const m=!q||c.name?.toLowerCase().includes(q)||c.car?.toLowerCase().includes(q)||(c.phone||'').includes(q)||(c.mobile||'').includes(q);
       if(!m)return false;
-      if(filter==='month'){const d=new Date(c.createdAt);return d.getMonth()===now.getMonth()&&d.getFullYear()===now.getFullYear();}
+      if(filter==='month'){
+        const ref=c.licenseDate?new Date(c.licenseDate):new Date(c.createdAt);
+        return ref.getMonth()===now.getMonth()&&ref.getFullYear()===now.getFullYear();
+      }
       if(filter==='ins')return c.insurance?.startDate;
       return true;
     });
@@ -750,6 +765,8 @@ function renderDB(){
           <div class="cg">
             <div class="cf">車款<span>${c.car||'-'}</span></div>
             <div class="cf">聯絡<span>${c.mobile||c.phone||'-'}</span></div>
+            ${c.licenseDate?`<div class="cf">領牌日期<span>${c.licenseDate.replace(/-/g,'/')}</span></div>`:''}
+            ${c.deliveryDate?`<div class="cf">交車日期<span>${c.deliveryDate.replace(/-/g,'/')}</span></div>`:''}
           </div>
           ${pills?`<div class="pills">${pills}</div>`:''}
         </div>
@@ -789,6 +806,9 @@ window.openDetail=function(idx){
     ['身分證',c.idNum||'-'],['生日',c.birthday?c.birthday.replace(/-/g,'/'):'-'],
     ['電話',c.phone||'-'],['手機',c.mobile||'-'],
     ['地址',c.address||'-'],['車款',c.car||'-'],
+    ['訂車日期',c.orderDate?c.orderDate.replace(/-/g,'/'):'-'],
+    ['領牌日期',c.licenseDate?c.licenseDate.replace(/-/g,'/'):'-'],
+    ['交車日期',c.deliveryDate?c.deliveryDate.replace(/-/g,'/'):'-'],
     ['原始車價',fmt(c.basePrice)],['零配件',fmt(c.partsPrice)],
     ['車輛成本',c.costPrice>0?fmt(c.costPrice):'-'],['成交價格',fmt(c.dealPrice)],
     ['折讓',disc>0?fmt(orig-c.dealPrice)+' ('+disc+'%)':'-'],
