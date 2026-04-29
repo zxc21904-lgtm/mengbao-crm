@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>孟寶專屬 · 汽車業務管理系統</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --accent:#1a5fa8;--accent-light:#e6f1fb;--accent-mid:#378ADD;
+  --bg:#f7f8fa;--surface:#fff;--surface2:#f1f4f8;
+  --border:#e2e8f0;--text:#1a202c;--muted:#64748b;--hint:#94a3b8;
+  --success-bg:#eaf3de;--success-text:#3b6d11;
+  --danger-bg:#fcebeb;--danger-text:#a32d2d;
+  --warn-bg:#faeeda;--warn-text:#854f0b;
+  --profit:#0f6e56;
+  --r:8px;--rl:12px;--rxl:16px;
+  --sh:0 1px 3px rgba(0,0,0,0.08);
+  --sh-lg:0 4px 16px rgba(0,0,0,0.12);
+  --sw:240px;
+  --font:'Noto Sans TC',system-ui,sans-serif;
+}
+body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:100vh;}
+
+/* LOCK */
+#lock{position:fixed;inset:0;background:linear-gradient(135deg,#1a3a6b,#1a5fa8 60%,#2980d9);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:9999;padding:32px;}
+.l-title{font-size:18px;font-weight:700;color:#fff;letter-spacing:1px;margin-bottom:4px;text-align:center;}
+.l-sub{font-size:12px;color:rgba(255,255,255,0.5);margin-bottom:36px;}
+.l-card{background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);border-radius:24px;padding:28px 24px;width:100%;max-width:300px;text-align:center;}
+.l-hint{font-size:13px;color:rgba(255,255,255,0.7);margin-bottom:20px;}
+.dots{display:flex;gap:16px;justify-content:center;margin-bottom:28px;}
+.dot{width:14px;height:14px;border-radius:50%;border:2px solid rgba(255,255,255,0.4);background:transparent;transition:all 0.2s;}
+.dot.on{background:#fff;border-color:#fff;}
+.pad{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
+.pb{height:58px;border-radius:14px;border:1px solid rgba(255,255,255,0.2);background:rgba(255,255,255,0.1);color:#fff;font-size:22px;font-weight:500;cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:rgba(255,255,255,0.2);user-select:none;}
+.pb:active{background:rgba(255,255,255,0.3);}
+.pb.del{font-size:18px;color:rgba(255,255,255,0.8);}
+.l-err{font-size:12px;color:#fca5a5;margin-top:14px;min-height:16px;text-align:center;}
+.l-ver{position:absolute;bottom:20px;font-size:11px;color:rgba(255,255,255,0.25);}
+
+/* MAIN */
+#app{display:none;}
+
+/* MOBILE TABS */
+.m-tabs{display:none;position:fixed;bottom:0;left:0;right:0;background:var(--surface);border-top:1px solid var(--border);z-index:100;}
+.m-tabs-row{display:flex;}
+.mt{flex:1;padding:9px 2px 7px;text-align:center;border:none;background:transparent;color:var(--muted);font-size:10px;font-weight:500;cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent;}
+.mt.on{color:var(--accent);}
+.mt-ic{font-size:20px;display:block;margin-bottom:2px;}
+
+/* DESKTOP SIDEBAR */
+.d-layout{display:none;min-height:100vh;}
+.sidebar{width:var(--sw);background:var(--surface);border-right:1px solid var(--border);position:fixed;top:0;bottom:0;left:0;display:flex;flex-direction:column;}
+.sb-logo{padding:24px 20px 16px;}
+.sb-title{font-size:13px;font-weight:700;color:var(--accent);}
+.sb-sub{font-size:11px;color:var(--hint);margin-top:2px;}
+.sb-div{height:1px;background:var(--border);margin:0 20px;}
+.sb-nav{flex:1;padding:14px 10px;}
+.sn{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:var(--r);border:none;background:transparent;color:var(--muted);font-size:13px;font-weight:500;cursor:pointer;width:100%;text-align:left;margin-bottom:2px;transition:all 0.15s;}
+.sn:hover{background:var(--surface2);}
+.sn.on{background:var(--accent-light);color:var(--accent);}
+.sn-ic{font-size:16px;width:20px;text-align:center;}
+.sb-foot{padding:14px 20px;border-top:1px solid var(--border);}
+.lock-btn{width:100%;padding:9px;border-radius:var(--r);border:1px solid var(--border);background:transparent;color:var(--muted);font-size:13px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;}
+.lock-btn:hover{background:var(--surface2);}
+.main{margin-left:var(--sw);padding:28px;min-height:100vh;}
+.ph{margin-bottom:24px;}
+.pt{font-size:22px;font-weight:700;}
+.ps{font-size:13px;color:var(--muted);margin-top:4px;}
+
+/* MOBILE LAYOUT */
+.m-layout{display:block;}
+.m-page{display:none;padding:14px;padding-bottom:80px;}
+.m-page.on{display:block;}
+.m-bar{background:var(--surface);border-bottom:1px solid var(--border);padding:13px 16px;position:sticky;top:0;z-index:50;}
+.m-bar-title{font-size:15px;font-weight:700;color:var(--accent);}
+.m-bar-sub{font-size:11px;color:var(--hint);margin-top:1px;}
+
+/* STATS */
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:20px;}
+.sc{background:var(--surface);border-radius:var(--rl);padding:14px;box-shadow:var(--sh);}
+.sc-lbl{font-size:11px;color:var(--muted);margin-bottom:5px;font-weight:500;text-transform:uppercase;letter-spacing:0.3px;}
+.sc-val{font-size:22px;font-weight:700;color:var(--text);}
+.sc-val.profit{color:var(--profit);}
+.sc-sub{font-size:11px;color:var(--hint);margin-top:3px;}
+
+/* CARDS */
+.slbl{font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:10px;}
+.card{background:var(--surface);border-radius:var(--rl);box-shadow:var(--sh);margin-bottom:12px;overflow:hidden;}
+.cb{padding:14px 16px;}
+.ch{display:flex;align-items:center;gap:12px;margin-bottom:10px;}
+.av{width:38px;height:38px;border-radius:50%;background:var(--accent-light);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:var(--accent);flex-shrink:0;}
+.cn{font-size:14px;font-weight:600;color:var(--text);}
+.cm{font-size:11px;color:var(--hint);margin-top:1px;}
+.cg{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:8px;}
+.cf{font-size:11px;color:var(--muted);}
+.cf span{display:block;color:var(--text);font-size:12px;font-weight:500;margin-top:1px;}
+.cf-footer{display:flex;justify-content:space-between;align-items:center;padding:10px 16px;border-top:1px solid var(--border);background:var(--surface2);}
+.dp{font-size:15px;font-weight:700;color:var(--accent);}
+.pc{font-size:11px;font-weight:600;color:var(--profit);background:var(--success-bg);padding:2px 8px;border-radius:20px;margin-left:6px;}
+.ca{display:flex;gap:6px;padding:10px 16px;border-top:1px solid var(--border);}
+.bs{flex:1;padding:8px 4px;font-size:12px;border-radius:var(--r);border:1px solid var(--border);background:var(--surface);color:var(--muted);cursor:pointer;text-align:center;font-weight:500;touch-action:manipulation;}
+.bs:hover{background:var(--surface2);}
+.bs.pri{background:var(--accent-light);color:var(--accent);border-color:var(--accent-mid);}
+.bs.del{border-color:#f09595;color:var(--danger-text);}
+.pills{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:8px;}
+.pill{font-size:10px;padding:2px 8px;border-radius:20px;font-weight:500;}
+.pill-ok{background:var(--success-bg);color:var(--success-text);}
+.pill-warn{background:var(--warn-bg);color:var(--warn-text);}
+.badge-ok{font-size:10px;padding:2px 7px;border-radius:20px;font-weight:500;background:var(--success-bg);color:var(--success-text);}
+
+/* FORMS */
+.fs{background:var(--surface);border-radius:var(--rl);box-shadow:var(--sh);padding:16px;margin-bottom:14px;}
+.fs-title{font-size:12px;font-weight:600;color:var(--accent);margin-bottom:14px;text-transform:uppercase;letter-spacing:0.3px;}
+.field{margin-bottom:12px;}
+.field label{display:block;font-size:12px;color:var(--muted);font-weight:500;margin-bottom:5px;}
+.field input,.field select,.field textarea{width:100%;font-size:14px;padding:9px 12px;border:1px solid var(--border);border-radius:var(--r);background:var(--surface2);color:var(--text);outline:none;font-family:var(--font);}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--accent-mid);background:#fff;}
+.field textarea{resize:vertical;min-height:64px;}
+.fr{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;}
+.psumm{background:var(--accent-light);border-radius:var(--r);padding:12px;margin-top:8px;display:none;}
+.pr{display:flex;justify-content:space-between;font-size:12px;color:var(--accent);padding:3px 0;}
+.pr.tot{font-size:14px;font-weight:600;border-top:1px solid rgba(55,138,221,0.3);margin-top:6px;padding-top:6px;}
+.pr.pft{font-size:13px;font-weight:600;border-top:1px solid rgba(29,158,117,0.25);margin-top:4px;padding-top:4px;}
+.btn-go{width:100%;padding:13px;background:var(--accent);color:#fff;border:none;border-radius:var(--rl);font-size:15px;font-weight:600;cursor:pointer;margin-top:8px;font-family:var(--font);touch-action:manipulation;}
+.btn-go:hover{opacity:0.9;}
+.btn-go:disabled{opacity:0.6;cursor:not-allowed;}
+.ig{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:12px;}
+.itog{border:1px solid var(--border);border-radius:var(--r);padding:10px;cursor:pointer;touch-action:manipulation;}
+.itog.on{background:var(--accent-light);border-color:var(--accent-mid);}
+.itog-lbl{font-size:12px;color:var(--muted);margin-bottom:2px;font-weight:500;}
+.itog.on .itog-lbl{color:var(--accent);}
+.itog-st{font-size:11px;color:var(--hint);}
+.itog.on .itog-st{color:var(--accent);font-weight:500;}
+.idates{background:var(--surface2);border-radius:var(--r);padding:10px 12px;margin-top:8px;}
+.idr{display:flex;justify-content:space-between;font-size:12px;padding:3px 0;}
+.idl{color:var(--muted);}
+.idv{font-weight:600;color:var(--text);}
+
+/* SEARCH */
+.sw{margin-bottom:14px;}
+.si-wrap{position:relative;margin-bottom:10px;}
+.si-wrap input{width:100%;padding:10px 14px 10px 38px;border:1px solid var(--border);border-radius:var(--rl);background:var(--surface);font-size:14px;color:var(--text);outline:none;font-family:var(--font);}
+.si-wrap input:focus{border-color:var(--accent-mid);}
+.si-ic{position:absolute;left:13px;top:50%;transform:translateY(-50%);color:var(--hint);font-size:16px;pointer-events:none;}
+.fr-row{display:flex;gap:6px;flex-wrap:wrap;}
+.fb{padding:6px 12px;border:1px solid var(--border);border-radius:20px;background:var(--surface);color:var(--muted);font-size:12px;font-weight:500;cursor:pointer;touch-action:manipulation;}
+.fb.on{background:var(--accent-light);color:var(--accent);border-color:var(--accent-mid);}
+.rc{font-size:12px;color:var(--hint);margin-bottom:10px;}
+
+/* OVERLAY */
+.ov{position:fixed;inset:0;background:rgba(0,0,0,0.45);z-index:500;display:none;align-items:flex-end;justify-content:center;}
+.ov.on{display:flex;}
+.sheet{background:var(--surface);border-radius:20px 20px 0 0;padding:20px 16px 32px;width:100%;max-width:640px;max-height:86vh;overflow-y:auto;}
+.sh-handle{width:36px;height:4px;background:var(--border);border-radius:2px;margin:0 auto 16px;}
+.sh-title{font-size:16px;font-weight:700;color:var(--text);margin-bottom:16px;}
+.close-x{float:right;background:var(--surface2);border:none;border-radius:50%;width:30px;height:30px;font-size:18px;cursor:pointer;color:var(--muted);line-height:30px;text-align:center;}
+.dg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:16px;}
+.df-lbl{font-size:11px;color:var(--muted);margin-bottom:2px;}
+.df-val{font-size:13px;font-weight:600;color:var(--text);}
+.df-val.pft{color:var(--profit);}
+.ids{background:var(--surface2);border-radius:var(--r);padding:12px;margin-bottom:16px;}
+.idr2{display:flex;justify-content:space-between;font-size:12px;padding:4px 0;border-bottom:1px solid var(--border);}
+.idr2:last-child{border-bottom:none;}
+.eb{font-size:10px;padding:2px 7px;border-radius:10px;font-weight:500;}
+.eb-soon{background:var(--warn-bg);color:var(--warn-text);}
+.eb-ok{background:var(--success-bg);color:var(--success-text);}
+.sh-acts{display:flex;gap:8px;margin-top:14px;}
+
+/* ALERT */
+.ea{background:var(--warn-bg);border-radius:var(--r);padding:12px;margin-bottom:16px;font-size:12px;color:var(--warn-text);display:none;}
+.ea strong{font-weight:600;display:block;margin-bottom:4px;}
+
+/* RECENT */
+.ri{display:flex;align-items:center;gap:12px;padding:12px 14px;background:var(--surface);border-radius:var(--rl);box-shadow:var(--sh);margin-bottom:8px;}
+.ri-info{flex:1;min-width:0;}
+.ri-name{font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.ri-car{font-size:11px;color:var(--muted);}
+.ri-price{font-size:13px;font-weight:700;color:var(--accent);white-space:nowrap;}
+
+/* STATE */
+.empty{text-align:center;padding:40px 0;color:var(--hint);font-size:14px;}
+.loading{text-align:center;padding:30px 0;color:var(--hint);font-size:13px;}
+@keyframes spin{to{transform:rotate(360deg);}}
+.spinner{display:inline-block;width:18px;height:18px;border:2px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin 0.7s linear infinite;margin-right:6px;vertical-align:middle;}
+
+/* TOAST */
+#toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%);background:#1a3a6b;color:#fff;padding:10px 22px;border-radius:20px;font-size:13px;font-weight:500;opacity:0;transition:opacity 0.3s;z-index:9000;white-space:nowrap;pointer-events:none;box-shadow:var(--sh-lg);}
+#toast.on{opacity:1;}
+
+/* SYNC */
+.sync-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:#ccc;margin-right:5px;}
+.sync-dot.ok{background:#1d9e75;}
+.sync-dot.err{background:#e24b4a;}
+
+@media(min-width:769px){
+  .m-layout{display:none!important;}
+  .m-tabs{display:none!important;}
+  .d-layout{display:flex!important;}
+  .sg{grid-template-columns:repeat(3,1fr);}
+  #toast{bottom:24px;}
+  .ov{align-items:center;}
+  .sheet{border-radius:var(--rxl);max-height:90vh;padding:24px;}
+  .sw{display:flex;gap:12px;align-items:flex-start;}
+  .si-wrap{flex:1;margin-bottom:0;}
+}
+@media(max-width:768px){
+  .m-layout{display:block;}
+  .m-tabs{display:block;}
+  .d-layout{display:none!important;}
+}
+</style>
+</head>
+<body>
+
+<!-- LOCK -->
+<div id="lock">
+  <div class="l-title">孟寶專屬</div>
+  <div class="l-sub">汽車業務管理系統</div>
+  <div class="l-card">
+    <div class="l-hint">請輸入4位數密碼</div>
+    <div class="dots">
+      <div class="dot" id="d0"></div>
+      <div class="dot" id="d1"></div>
+      <div class="dot" id="d2"></div>
+      <div class="dot" id="d3"></div>
+    </div>
+    <div class="pad" id="pad">
+      <button class="pb" data-n="1">1</button>
+      <button class="pb" data-n="2">2</button>
+      <button class="pb" data-n="3">3</button>
+      <button class="pb" data-n="4">4</button>
+      <button class="pb" data-n="5">5</button>
+      <button class="pb" data-n="6">6</button>
+      <button class="pb" data-n="7">7</button>
+      <button class="pb" data-n="8">8</button>
+      <button class="pb" data-n="9">9</button>
+      <button class="pb" data-n=""></button>
+      <button class="pb" data-n="0">0</button>
+      <button class="pb del" id="del">⌫</button>
+    </div>
+    <div class="l-err" id="lerr"></div>
+  </div>
+  <div class="l-ver">v2.0 · Firebase 雲端同步</div>
+</div>
+
+<!-- APP -->
+<div id="app">
+
+  <!-- MOBILE -->
+  <div class="m-layout">
+    <div class="m-bar">
+      <div class="m-bar-title">孟寶專屬管理系統</div>
+      <div class="m-bar-sub" id="m-sync"></div>
+    </div>
+    <div class="m-page on" id="mp-dashboard">
+      <div style="height:12px"></div>
+      <div class="sg">
+        <div class="sc"><div class="sc-lbl">本月成交</div><div class="sc-val" id="ms-month">0</div><div class="sc-sub">台</div></div>
+        <div class="sc"><div class="sc-lbl">總客戶數</div><div class="sc-val" id="ms-total">0</div><div class="sc-sub">位</div></div>
+        <div class="sc"><div class="sc-lbl">本月業績</div><div class="sc-val" id="ms-rev">$0</div><div class="sc-sub">成交總價</div></div>
+        <div class="sc"><div class="sc-lbl">本月總淨利</div><div class="sc-val profit" id="ms-profit">$0</div><div class="sc-sub">成交－成本</div></div>
+        <div class="sc"><div class="sc-lbl">保險到期</div><div class="sc-val" id="ms-ins">0</div><div class="sc-sub">30天內</div></div>
+        <div class="sc"><div class="sc-lbl">平均折讓</div><div class="sc-val" id="ms-disc">0%</div><div class="sc-sub">整體平均</div></div>
+      </div>
+      <div class="ea" id="m-ea"></div>
+      <div class="slbl">最近建檔</div>
+      <div id="m-recent"><div class="loading"><span class="spinner"></span>載入中...</div></div>
+    </div>
+    <div class="m-page" id="mp-new">
+      <div style="height:12px"></div>
+      <div id="m-form"></div>
+      <button class="btn-go" id="m-submit">建立客戶資料</button>
+    </div>
+    <div class="m-page" id="mp-db">
+      <div style="height:12px"></div>
+      <div class="sw">
+        <div class="si-wrap"><span class="si-ic">🔍</span><input id="m-q" type="text" placeholder="搜尋姓名、車款、電話..."></div>
+        <div class="fr-row">
+          <button class="fb on" data-f="all">全部</button>
+          <button class="fb" data-f="month">本月</button>
+          <button class="fb" data-f="ins">保險</button>
+        </div>
+      </div>
+      <div class="rc" id="m-rc"></div>
+      <div id="m-list"><div class="loading"><span class="spinner"></span>載入中...</div></div>
+    </div>
+    <div class="m-tabs">
+      <div class="m-tabs-row">
+        <button class="mt on" data-tab="dashboard"><span class="mt-ic">📊</span>總覽</button>
+        <button class="mt" data-tab="new"><span class="mt-ic">➕</span>新增</button>
+        <button class="mt" data-tab="db"><span class="mt-ic">📋</span>資料庫</button>
+        <button class="mt" data-tab="lock"><span class="mt-ic">🔒</span>鎖定</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- DESKTOP -->
+  <div class="d-layout">
+    <div class="sidebar">
+      <div class="sb-logo"><div class="sb-title">孟寶專屬</div><div class="sb-sub">汽車業務管理系統</div></div>
+      <div class="sb-div"></div>
+      <div class="sb-nav">
+        <button class="sn on" data-tab="dashboard"><span class="sn-ic">📊</span>總覽儀表板</button>
+        <button class="sn" data-tab="new"><span class="sn-ic">➕</span>新增客戶</button>
+        <button class="sn" data-tab="db"><span class="sn-ic">📋</span>客戶資料庫</button>
+      </div>
+      <div class="sb-foot">
+        <div id="d-sync" style="font-size:11px;color:var(--hint);text-align:center;margin-bottom:8px;"></div>
+        <button class="lock-btn" id="d-lock">🔒 鎖定系統</button>
+      </div>
+    </div>
+    <div class="main">
+      <div id="dp-dashboard">
+        <div class="ph"><div class="pt">總覽儀表板</div><div class="ps" id="d-date"></div></div>
+        <div class="sg">
+          <div class="sc"><div class="sc-lbl">本月成交</div><div class="sc-val" id="ds-month">0</div><div class="sc-sub">台</div></div>
+          <div class="sc"><div class="sc-lbl">總客戶數</div><div class="sc-val" id="ds-total">0</div><div class="sc-sub">位</div></div>
+          <div class="sc"><div class="sc-lbl">本月業績</div><div class="sc-val" id="ds-rev">$0</div><div class="sc-sub">成交總價</div></div>
+          <div class="sc"><div class="sc-lbl">本月總淨利</div><div class="sc-val profit" id="ds-profit">$0</div><div class="sc-sub">成交－成本</div></div>
+          <div class="sc"><div class="sc-lbl">保險到期</div><div class="sc-val" id="ds-ins">0</div><div class="sc-sub">30天內</div></div>
+          <div class="sc"><div class="sc-lbl">平均折讓</div><div class="sc-val" id="ds-disc">0%</div><div class="sc-sub">整體平均</div></div>
+        </div>
+        <div class="ea" id="d-ea"></div>
+        <div class="slbl">最近建檔</div>
+        <div id="d-recent"><div class="loading"><span class="spinner"></span>載入中...</div></div>
+      </div>
+      <div id="dp-new" style="display:none;">
+        <div class="ph"><div class="pt">新增客戶</div></div>
+        <div style="max-width:620px;">
+          <div id="d-form"></div>
+          <button class="btn-go" id="d-submit">建立客戶資料</button>
+        </div>
+      </div>
+      <div id="dp-db" style="display:none;">
+        <div class="ph"><div class="pt">客戶資料庫</div></div>
+        <div class="sw">
+          <div class="si-wrap"><span class="si-ic">🔍</span><input id="d-q" type="text" placeholder="搜尋姓名、車款、電話..."></div>
+          <div class="fr-row">
+            <button class="fb on" data-f="all">全部</button>
+            <button class="fb" data-f="month">本月</button>
+            <button class="fb" data-f="ins">保險</button>
+          </div>
+        </div>
+        <div class="rc" id="d-rc"></div>
+        <div id="d-list" style="max-width:700px;"><div class="loading"><span class="spinner"></span>載入中...</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DETAIL OVERLAY -->
+<div class="ov" id="ov-detail">
+  <div class="sheet">
+    <div class="sh-handle"></div>
+    <button class="close-x" id="close-detail">×</button>
+    <div class="sh-title" id="det-name"></div>
+    <div class="dg" id="det-grid"></div>
+    <div class="slbl">保險資料</div>
+    <div class="ids" id="det-ins"></div>
+    <div class="slbl" style="margin-top:12px;">備註</div>
+    <div style="font-size:13px;color:var(--text);margin-bottom:4px;" id="det-note"></div>
+    <div class="sh-acts">
+      <button class="bs pri" style="flex:2;" id="det-edit">✏️ 修改資料</button>
+      <button class="bs del" style="flex:1;" id="det-del">刪除</button>
+    </div>
+  </div>
+</div>
+
+<!-- EDIT OVERLAY -->
+<div class="ov" id="ov-edit">
+  <div class="sheet">
+    <div class="sh-handle"></div>
+    <button class="close-x" id="close-edit">×</button>
+    <div class="sh-title">修改客戶資料</div>
+    <div id="edit-form"></div>
+    <button class="btn-go" id="save-edit">儲存修改</button>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<!-- Firebase compat SDK (works with file:// protocol) -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+<script>
+(function(){
+// ── CONFIG ──
+const FB_CFG = {
+  apiKey:"AIzaSyCUgwK5eY38PEZMlP6SVxOuCAhlWJKJi4Y",
+  authDomain:"jim-world.firebaseapp.com",
+  projectId:"jim-world",
+  storageBucket:"jim-world.firebasestorage.app",
+  messagingSenderId:"1065555129837",
+  appId:"1:1065555129837:web:b5c5243470f79d272ee3e4"
+};
+const PASS = '0303';
+const COL  = 'clients';
+
+firebase.initializeApp(FB_CFG);
+const db = firebase.firestore();
+
+// ── STATE ──
+let pin='', clients=[], filter='all', detIdx=null;
+let newIT={compulsory:false,third:false,body:false,fire:false};
+let editIT={compulsory:false,third:false,body:false,fire:false};
+const INS_LABELS={compulsory:'強制險',third:'第三人責任險',body:'車體險',fire:'竊盜險'};
+
+// ── UTILS ──
+function $(id){return document.getElementById(id);}
+function rocToDate(r){
+  r=(r||'').replace(/\D/g,'');
+  if(r.length!==7)return null;
+  const dt=new Date(parseInt(r.slice(0,3))+1911,parseInt(r.slice(3,5))-1,parseInt(r.slice(5,7)));
+  return isNaN(dt)?null:dt;
+}
+function dateToRoc(dt){return(dt.getFullYear()-1911)+pad(dt.getMonth()+1)+pad(dt.getDate());}
+function pad(n){return String(n).padStart(2,'0');}
+function fmtD(dt){return dt.getFullYear()+'/'+pad(dt.getMonth()+1)+'/'+pad(dt.getDate());}
+function add1y(dt){const d=new Date(dt);d.setFullYear(d.getFullYear()+1);return d;}
+function days(dt){const n=new Date();n.setHours(0,0,0,0);return Math.round((dt-n)/86400000);}
+function fmt(n){return '$'+(parseInt(n)||0).toLocaleString();}
+function ini(s){return(s||'??').slice(0,2);}
+function toast(msg){
+  const t=$('toast');t.textContent=msg;t.classList.add('on');
+  clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('on'),2400);
+}
+function sync(status){
+  const dot=status==='ok'?'<span class="sync-dot ok"></span>雲端同步':
+             status==='err'?'<span class="sync-dot err"></span>連線失敗':
+             '<span class="sync-dot"></span>同步中...';
+  ['m-sync','d-sync'].forEach(id=>{const el=$(id);if(el)el.innerHTML=dot;});
+}
+
+// ── PIN ──
+function updateDots(){for(let i=0;i<4;i++)$('d'+i).classList.toggle('on',i<pin.length);}
+function checkPin(){
+  if(pin===PASS){
+    $('lock').style.display='none';
+    $('app').style.display='block';
+    startSync();
+  } else {
+    $('lerr').textContent='密碼錯誤，請重試';
+    pin='';updateDots();
+    setTimeout(()=>$('lerr').textContent='',2000);
+  }
+}
+function lockApp(){
+  pin='';updateDots();
+  $('lock').style.display='flex';
+  $('app').style.display='none';
+  $('ov-detail').classList.remove('on');
+  $('ov-edit').classList.remove('on');
+}
+
+$('pad').addEventListener('click',function(e){
+  const btn=e.target.closest('.pb');
+  if(!btn)return;
+  e.preventDefault();
+  if(btn.id==='del'){pin=pin.slice(0,-1);$('lerr').textContent='';updateDots();return;}
+  const n=btn.dataset.n;
+  if(n===''||pin.length>=4)return;
+  pin+=n;updateDots();
+  if(pin.length===4)setTimeout(checkPin,150);
+});
+
+$('d-lock').addEventListener('click',lockApp);
+
+// ── FIREBASE ──
+function startSync(){
+  sync('loading');
+  db.collection(COL).orderBy('createdAt','desc').onSnapshot(snap=>{
+    clients=snap.docs.map(d=>({...d.data(),_id:d.id}));
+    sync('ok');
+    renderDash();renderDB();
+  },()=>sync('err'));
+}
+async function addClient(data){
+  try{await db.collection(COL).add({...data,createdAt:new Date().toISOString()});toast('客戶資料已儲存 ☁');}
+  catch(e){toast('儲存失敗：'+e.message);}
+}
+async function updClient(id,data){
+  try{await db.collection(COL).doc(id).update(data);toast('資料已更新 ✓');}
+  catch(e){toast('更新失敗：'+e.message);}
+}
+async function delClient(id){
+  try{await db.collection(COL).doc(id).delete();toast('已刪除客戶資料');}
+  catch(e){toast('刪除失敗：'+e.message);}
+}
+
+// ── TABS ──
+function switchTab(tab){
+  if(tab==='lock'){lockApp();return;}
+  document.querySelectorAll('.mt').forEach(b=>b.classList.toggle('on',b.dataset.tab===tab));
+  document.querySelectorAll('.sn').forEach(b=>b.classList.toggle('on',b.dataset.tab===tab));
+  ['dashboard','new','db'].forEach(t=>{
+    const mp=$('mp-'+t),dp=$('dp-'+t);
+    if(mp)mp.classList.toggle('on',t===tab);
+    if(dp)dp.style.display=t===tab?'block':'none';
+  });
+  if(tab==='new'){buildNewForm();}
+}
+document.querySelectorAll('.mt,.sn').forEach(b=>b.addEventListener('click',()=>switchTab(b.dataset.tab)));
+
+// ── FORM ──
+function insToggleHTML(prefix,types){
+  return ['compulsory','third','body','fire'].map(t=>`
+    <div class="itog${types[t]?' on':''}" data-ins="${t}" data-p="${prefix}">
+      <div class="itog-lbl">${INS_LABELS[t]}</div>
+      <div class="itog-st">${types[t]?'已投保':'未投保'}</div>
+    </div>`).join('');
+}
+function formHTML(prefix,data,types){
+  const ins=data?.insurance;
+  const hasIns=!!(ins?.startDate);
+  return `
+    <div class="fs"><div class="fs-title">客戶基本資料</div>
+      <div class="field"><label>客戶姓名 *</label><input id="${prefix}-name" type="text" placeholder="王小明" value="${data?.name||''}"></div>
+      <div class="fr">
+        <div class="field"><label>身分證字號</label><input id="${prefix}-id" type="text" placeholder="A123456789" value="${data?.idNum||''}"></div>
+        <div class="field"><label>生日</label><input id="${prefix}-bday" type="date" value="${data?.birthday||''}"></div>
+      </div>
+      <div class="fr">
+        <div class="field"><label>聯繫電話</label><input id="${prefix}-phone" type="tel" placeholder="02-XXXX-XXXX" value="${data?.phone||''}"></div>
+        <div class="field"><label>行動電話</label><input id="${prefix}-mobile" type="tel" placeholder="09XX-XXX-XXX" value="${data?.mobile||''}"></div>
+      </div>
+      <div class="field"><label>通訊地址</label><input id="${prefix}-addr" type="text" placeholder="縣市區路段" value="${data?.address||''}"></div>
+    </div>
+    <div class="fs"><div class="fs-title">車輛資訊</div>
+      <div class="field"><label>購買車輛款式 *</label><input id="${prefix}-car" type="text" placeholder="Toyota Camry 2.5豪華版" value="${data?.car||''}"></div>
+      <div class="fr">
+        <div class="field"><label>原始車價</label><input id="${prefix}-base" type="number" placeholder="0" value="${data?.basePrice||''}"></div>
+        <div class="field"><label>零配件總價</label><input id="${prefix}-parts" type="number" placeholder="0" value="${data?.partsPrice||''}"></div>
+      </div>
+      <div class="fr">
+        <div class="field"><label>車輛成本價格</label><input id="${prefix}-cost" type="number" placeholder="0" value="${data?.costPrice||''}"></div>
+        <div class="field"><label>成交價格</label><input id="${prefix}-deal" type="number" placeholder="0" value="${data?.dealPrice||''}"></div>
+      </div>
+      <div class="psumm" id="${prefix}-ps">
+        <div class="pr"><span>原始車價</span><span id="${prefix}-ps-base">-</span></div>
+        <div class="pr"><span>零配件</span><span id="${prefix}-ps-parts">-</span></div>
+        <div class="pr tot"><span>成交價格 <span style="font-size:11px;color:#d85a30;" id="${prefix}-ps-disc"></span></span><span id="${prefix}-ps-deal">-</span></div>
+        <div class="pr pft"><span>淨利（成交－成本）</span><span id="${prefix}-ps-pft">-</span></div>
+      </div>
+    </div>
+    <div class="fs"><div class="fs-title">保險資料</div>
+      <div class="field"><label>是否投保保險</label>
+        <select id="${prefix}-ins-yn"><option value="no"${!hasIns?' selected':''}>否</option><option value="yes"${hasIns?' selected':''}>是</option></select>
+      </div>
+      <div id="${prefix}-ins-wrap" style="display:${hasIns?'block':'none'};">
+        <div class="field"><label>保險起始日（民國7碼，例：1150501）</label>
+          <input id="${prefix}-ins-start" type="text" placeholder="1150501" maxlength="7" value="${ins?.startRoc||''}">
+        </div>
+        <div class="idates" id="${prefix}-ins-dates" style="display:${ins?.startRoc?'block':'none'};">
+          <div class="idr"><span class="idl">到期日（西元）</span><span class="idv" id="${prefix}-ins-end1">${ins?.endDate?fmtD(new Date(ins.endDate)):'-'}</span></div>
+          <div class="idr"><span class="idl">到期日（民國）</span><span class="idv" id="${prefix}-ins-end2">${ins?.endDate?(()=>{const r=dateToRoc(new Date(ins.endDate));return'民國'+r.slice(0,3)+'年'+r.slice(3,5)+'月'+r.slice(5)+'日';})():'-'}</span></div>
+        </div>
+        <div style="font-size:12px;color:var(--muted);margin:10px 0 8px;font-weight:500;">投保險種（點擊切換）</div>
+        <div class="ig">${insToggleHTML(prefix,types)}</div>
+      </div>
+    </div>
+    <div class="fs"><div class="fs-title">額外備註</div>
+      <div class="field"><textarea id="${prefix}-note" placeholder="首購、換購、特殊需求...">${data?.note||''}</textarea></div>
+    </div>`;
+}
+function bindForm(prefix,types){
+  // price calc
+  ['base','parts','cost','deal'].forEach(f=>{
+    const el=$(prefix+'-'+f);
+    if(el)el.addEventListener('input',()=>calcPS(prefix));
+  });
+  // ins yn toggle
+  const yn=$(prefix+'-ins-yn');
+  if(yn)yn.addEventListener('change',function(){
+    const w=$(prefix+'-ins-wrap');
+    if(w)w.style.display=this.value==='yes'?'block':'none';
+  });
+  // ins start date
+  const st=$(prefix+'-ins-start');
+  if(st)st.addEventListener('input',function(){
+    const v=this.value.replace(/\D/g,'');
+    const disp=$(prefix+'-ins-dates');
+    if(v.length===7){
+      const s=rocToDate(v);
+      if(s){
+        const e=add1y(s);
+        const el1=$(prefix+'-ins-end1'),el2=$(prefix+'-ins-end2');
+        if(el1)el1.textContent=fmtD(e);
+        if(el2){const r=dateToRoc(e);el2.textContent='民國'+r.slice(0,3)+'年'+r.slice(3,5)+'月'+r.slice(5)+'日';}
+        if(disp)disp.style.display='block';
+      } else if(disp)disp.style.display='none';
+    } else if(disp)disp.style.display='none';
+  });
+  // ins type toggles (delegated on parent)
+  const ig=document.querySelector(`#${prefix}-ins-wrap .ig`);
+  if(ig)ig.addEventListener('click',function(e){
+    const tog=e.target.closest('.itog');
+    if(!tog)return;
+    const t=tog.dataset.ins;
+    types[t]=!types[t];
+    tog.classList.toggle('on',types[t]);
+    const st=tog.querySelector('.itog-st');
+    if(st)st.textContent=types[t]?'已投保':'未投保';
+  });
+  // calc if editing
+  calcPS(prefix);
+}
+function calcPS(prefix){
+  const base=parseInt($(prefix+'-base')?.value)||0;
+  const parts=parseInt($(prefix+'-parts')?.value)||0;
+  const cost=parseInt($(prefix+'-cost')?.value)||0;
+  const deal=parseInt($(prefix+'-deal')?.value)||0;
+  const ps=$(prefix+'-ps');
+  if(!ps)return;
+  if(base>0||deal>0||cost>0){
+    ps.style.display='block';
+    const b=$(prefix+'-ps-base'),pa=$(prefix+'-ps-parts'),d=$(prefix+'-ps-deal'),di=$(prefix+'-ps-disc'),pf=$(prefix+'-ps-pft');
+    if(b)b.textContent=fmt(base);
+    if(pa)pa.textContent=fmt(parts);
+    if(d)d.textContent=fmt(deal);
+    const orig=base+parts;
+    const pct=orig>0?Math.round((orig-deal)/orig*100):0;
+    if(di)di.textContent=pct>0?'折讓'+pct+'%':'';
+    const profit=deal-cost;
+    if(pf){pf.textContent=cost>0?fmt(profit):'-';pf.style.color=profit<0?'var(--danger-text)':'var(--profit)';}
+  } else ps.style.display='none';
+}
+function getFormData(prefix,types){
+  const hasIns=$(prefix+'-ins-yn')?.value==='yes';
+  let ins=null;
+  if(hasIns){
+    const sr=($(prefix+'-ins-start')?.value||'').replace(/\D/g,'');
+    const sd=rocToDate(sr);
+    const ed=sd?add1y(sd):null;
+    ins={startRoc:sr,startDate:sd?sd.toISOString():null,endDate:ed?ed.toISOString():null,...types};
+  }
+  return{
+    name:$(prefix+'-name')?.value.trim()||'',
+    idNum:$(prefix+'-id')?.value.trim()||'',
+    birthday:$(prefix+'-bday')?.value||'',
+    phone:$(prefix+'-phone')?.value.trim()||'',
+    mobile:$(prefix+'-mobile')?.value.trim()||'',
+    address:$(prefix+'-addr')?.value.trim()||'',
+    car:$(prefix+'-car')?.value.trim()||'',
+    basePrice:parseInt($(prefix+'-base')?.value)||0,
+    partsPrice:parseInt($(prefix+'-parts')?.value)||0,
+    costPrice:parseInt($(prefix+'-cost')?.value)||0,
+    dealPrice:parseInt($(prefix+'-deal')?.value)||0,
+    note:$(prefix+'-note')?.value.trim()||'',
+    insurance:ins
+  };
+}
+
+function buildNewForm(){
+  newIT={compulsory:false,third:false,body:false,fire:false};
+  ['m-form','d-form'].forEach(id=>{
+    const c=$(id);if(!c)return;
+    c.innerHTML=formHTML(id.replace('-form','f'),null,newIT);
+    bindForm(id.replace('-form','f'),newIT);
+  });
+}
+
+// Submit new
+$('m-submit').addEventListener('click',async function(){
+  const data=getFormData('mf',newIT);
+  if(!data.name){toast('請輸入客戶姓名');return;}
+  if(!data.car){toast('請輸入車輛款式');return;}
+  this.disabled=true;this.textContent='儲存中...';
+  await addClient(data);
+  this.disabled=false;this.textContent='建立客戶資料';
+  buildNewForm();switchTab('db');
+});
+$('d-submit').addEventListener('click',async function(){
+  const data=getFormData('df',newIT);
+  if(!data.name){toast('請輸入客戶姓名');return;}
+  if(!data.car){toast('請輸入車輛款式');return;}
+  this.disabled=true;this.textContent='儲存中...';
+  await addClient(data);
+  this.disabled=false;this.textContent='建立客戶資料';
+  buildNewForm();switchTab('db');
+});
+
+// ── RENDER ──
+function renderDash(){
+  const now=new Date();
+  const mc=clients.filter(c=>{const d=new Date(c.createdAt);return d.getMonth()===now.getMonth()&&d.getFullYear()===now.getFullYear();});
+  const rev=mc.reduce((s,c)=>s+(c.dealPrice||0),0);
+  const pft=mc.filter(c=>c.costPrice>0).reduce((s,c)=>s+(c.dealPrice-c.costPrice),0);
+  const exp=clients.filter(c=>c.insurance?.endDate&&days(new Date(c.insurance.endDate))<=30&&days(new Date(c.insurance.endDate))>=0);
+  const discs=clients.filter(c=>c.basePrice>0).map(c=>{const o=c.basePrice+c.partsPrice;return o>0?(o-c.dealPrice)/o*100:0;});
+  const avgD=discs.length?Math.round(discs.reduce((a,b)=>a+b,0)/discs.length):0;
+  const fmtBig=n=>n>=10000?'$'+(n/10000).toFixed(1)+'萬':fmt(n);
+  ['m','d'].forEach(px=>{
+    const g=(id,v)=>{const el=$(px+'s-'+id);if(el)el.textContent=v;};
+    g('month',mc.length);g('total',clients.length);g('rev',fmtBig(rev));
+    const pe=$(px+'s-profit');if(pe){pe.textContent=fmtBig(pft);pe.className='sc-val'+(pft>=0?' profit':'');}
+    g('ins',exp.length);g('disc',avgD+'%');
+    const ea=$(px==='-'?'':'(px===\'m\'?\'m-ea\':\'d-ea\')');
+    const eid=px==='m'?'m-ea':'d-ea';
+    const eael=$(eid);
+    if(eael){
+      if(exp.length){eael.style.display='block';eael.innerHTML='<strong>⚠ 保險即將到期提醒</strong>'+exp.map(c=>`${c.name}（${fmtD(new Date(c.insurance.endDate))} 到期）`).join('<br>');}
+      else eael.style.display='none';
+    }
+  });
+  const recent=clients.slice(0,6);
+  const rHTML=recent.length?recent.map(c=>`<div class="ri"><div class="av">${ini(c.name)}</div><div class="ri-info"><div class="ri-name">${c.name}</div><div class="ri-car">${c.car||'-'}</div></div><div class="ri-price">${fmt(c.dealPrice)}</div></div>`).join(''):'<div class="empty">尚無客戶資料</div>';
+  ['m-recent','d-recent'].forEach(id=>{const el=$(id);if(el)el.innerHTML=rHTML;});
+  const dd=$('d-date');if(dd){const n=new Date();dd.textContent=n.getFullYear()+'年'+(n.getMonth()+1)+'月'+n.getDate()+'日';}
+}
+
+function renderDB(){
+  const mq=($('m-q')?.value||'').toLowerCase();
+  const dq=($('d-q')?.value||'').toLowerCase();
+  const now=new Date();
+  function doRender(q,listId,rcId){
+    const fil=clients.filter(c=>{
+      const m=!q||c.name?.toLowerCase().includes(q)||c.car?.toLowerCase().includes(q)||(c.phone||'').includes(q)||(c.mobile||'').includes(q);
+      if(!m)return false;
+      if(filter==='month'){const d=new Date(c.createdAt);return d.getMonth()===now.getMonth()&&d.getFullYear()===now.getFullYear();}
+      if(filter==='ins')return c.insurance?.startDate;
+      return true;
+    });
+    const rc=$(rcId);if(rc)rc.textContent='共 '+fil.length+' 筆資料';
+    const el=$(listId);if(!el)return;
+    if(!fil.length){el.innerHTML='<div class="empty">查無符合資料</div>';return;}
+    el.innerHTML=fil.map(c=>{
+      const oi=clients.findIndex(x=>x._id===c._id);
+      const orig=c.basePrice+c.partsPrice;
+      const disc=orig>0?Math.round((orig-c.dealPrice)/orig*100):0;
+      const pft=c.costPrice>0?(c.dealPrice-c.costPrice):null;
+      let pills='';
+      if(c.insurance?.startDate){
+        const e=new Date(c.insurance.endDate);const d=days(e);
+        const cl=d<=30?'pill-warn':'pill-ok';
+        if(c.insurance.compulsory)pills+=`<span class="pill ${cl}">強制</span>`;
+        if(c.insurance.third)pills+=`<span class="pill ${cl}">第三人</span>`;
+        if(c.insurance.body)pills+=`<span class="pill ${cl}">車體</span>`;
+        if(c.insurance.fire)pills+=`<span class="pill ${cl}">竊盜</span>`;
+      }
+      return`<div class="card">
+        <div class="cb">
+          <div class="ch">
+            <div class="av">${ini(c.name)}</div>
+            <div>
+              <div class="cn">${c.name}${disc>0?` <span class="badge-ok">折讓${disc}%</span>`:''}</div>
+              <div class="cm">${c.idNum||'無身分證'} · ${new Date(c.createdAt).toLocaleDateString('zh-TW')}</div>
+            </div>
+          </div>
+          <div class="cg">
+            <div class="cf">車款<span>${c.car||'-'}</span></div>
+            <div class="cf">聯絡<span>${c.mobile||c.phone||'-'}</span></div>
+          </div>
+          ${pills?`<div class="pills">${pills}</div>`:''}
+        </div>
+        <div class="cf-footer">
+          <div><span class="dp">${fmt(c.dealPrice)}</span>${pft!==null?`<span class="pc">淨利 ${fmt(pft)}</span>`:''}</div>
+        </div>
+        <div class="ca">
+          <button class="bs pri" onclick="openDetail(${oi})">查看詳情</button>
+          <button class="bs" onclick="openEdit(${oi})">✏️ 修改</button>
+          <button class="bs del" onclick="confirmDel(${oi})">刪除</button>
+        </div>
+      </div>`;
+    }).join('');
+  }
+  doRender(mq,'m-list','m-rc');
+  doRender(dq,'d-list','d-rc');
+}
+
+// Filter & Search
+document.querySelectorAll('.fb').forEach(b=>b.addEventListener('click',function(){
+  filter=this.dataset.f;
+  document.querySelectorAll('.fb').forEach(x=>x.classList.toggle('on',x.dataset.f===filter));
+  renderDB();
+}));
+$('m-q')?.addEventListener('input',renderDB);
+$('d-q')?.addEventListener('input',renderDB);
+
+// ── DETAIL ──
+window.openDetail=function(idx){
+  detIdx=idx;const c=clients[idx];
+  $('det-name').textContent=c.name;
+  $('det-note').textContent=c.note||'無備註';
+  const orig=c.basePrice+c.partsPrice;
+  const disc=orig>0?Math.round((orig-c.dealPrice)/orig*100):0;
+  const pft=c.dealPrice-(c.costPrice||0);
+  const fields=[
+    ['身分證',c.idNum||'-'],['生日',c.birthday?c.birthday.replace(/-/g,'/'):'-'],
+    ['電話',c.phone||'-'],['手機',c.mobile||'-'],
+    ['地址',c.address||'-'],['車款',c.car||'-'],
+    ['原始車價',fmt(c.basePrice)],['零配件',fmt(c.partsPrice)],
+    ['車輛成本',c.costPrice>0?fmt(c.costPrice):'-'],['成交價格',fmt(c.dealPrice)],
+    ['折讓',disc>0?fmt(orig-c.dealPrice)+' ('+disc+'%)':'-'],
+    ['淨利',c.costPrice>0?fmt(pft):'（未填成本）'],
+  ];
+  $('det-grid').innerHTML=fields.map(([l,v])=>{
+    const isP=l==='淨利',cls=isP&&c.costPrice>0?(pft>=0?'df-val pft':'df-val'):'df-val';
+    return`<div><div class="df-lbl">${l}</div><div class="${cls}">${v}</div></div>`;
+  }).join('');
+  const di=$('det-ins');
+  if(c.insurance?.startDate){
+    const s=new Date(c.insurance.startDate),e=new Date(c.insurance.endDate),d=days(e);
+    const eb=d<=30?`<span class="eb eb-soon">${d}天後到期</span>`:`<span class="eb eb-ok">${d}天後到期</span>`;
+    const types=Object.keys(INS_LABELS).filter(k=>c.insurance[k]).map(k=>INS_LABELS[k]).join('、')||'無';
+    di.innerHTML=`<div class="idr2"><span style="color:var(--muted)">投保狀態</span><span style="color:var(--profit);font-weight:600">已投保</span></div>
+      <div class="idr2"><span style="color:var(--muted)">險種</span><span>${types}</span></div>
+      <div class="idr2"><span style="color:var(--muted)">起始日</span><span>${fmtD(s)}</span></div>
+      <div class="idr2"><span style="color:var(--muted)">到期日</span><span>${fmtD(e)} ${eb}</span></div>`;
+  } else di.innerHTML='<div style="font-size:13px;color:var(--hint);padding:6px 0">未投保或未記錄保險資料</div>';
+  $('ov-detail').classList.add('on');
+};
+$('close-detail').addEventListener('click',()=>$('ov-detail').classList.remove('on'));
+$('ov-detail').addEventListener('click',e=>{if(e.target===$('ov-detail'))$('ov-detail').classList.remove('on');});
+$('det-edit').addEventListener('click',()=>{$('ov-detail').classList.remove('on');openEdit(detIdx);});
+$('det-del').addEventListener('click',()=>{if(confirm('確定要刪除此筆客戶資料嗎？')){delClient(clients[detIdx]._id);$('ov-detail').classList.remove('on');}});
+
+// ── EDIT ──
+window.openEdit=function(idx){
+  detIdx=idx;const c=clients[idx];
+  editIT={compulsory:!!(c.insurance?.compulsory),third:!!(c.insurance?.third),body:!!(c.insurance?.body),fire:!!(c.insurance?.fire)};
+  $('edit-form').innerHTML=formHTML('ef',c,editIT);
+  bindForm('ef',editIT);
+  $('ov-edit').classList.add('on');
+};
+$('close-edit').addEventListener('click',()=>$('ov-edit').classList.remove('on'));
+$('ov-edit').addEventListener('click',e=>{if(e.target===$('ov-edit'))$('ov-edit').classList.remove('on');});
+$('save-edit').addEventListener('click',async function(){
+  if(detIdx===null)return;
+  const data=getFormData('ef',editIT);
+  if(!data.name){toast('請輸入客戶姓名');return;}
+  if(!data.car){toast('請輸入車輛款式');return;}
+  this.disabled=true;this.textContent='儲存中...';
+  await updClient(clients[detIdx]._id,data);
+  this.disabled=false;this.textContent='儲存修改';
+  $('ov-edit').classList.remove('on');
+});
+
+window.confirmDel=function(idx){
+  if(confirm('確定要刪除此筆客戶資料嗎？'))delClient(clients[idx]._id);
+};
+
+// ── INIT ──
+buildNewForm();
+})();
+</script>
+</body>
+</html>
