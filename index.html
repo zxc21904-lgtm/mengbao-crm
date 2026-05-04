@@ -192,6 +192,27 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
 .sync-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:#ccc;margin-right:5px;}
 .sync-dot.ok{background:#1d9e75;}
 .sync-dot.err{background:#e24b4a;}
+/* PHOTO UPLOAD */
+.photo-section{margin-top:4px;}
+.photo-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:10px;}
+.photo-slot{position:relative;aspect-ratio:4/3;border-radius:var(--r);overflow:hidden;background:var(--surface2);border:2px dashed var(--border);display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;transition:all 0.15s;}
+.photo-slot:hover{border-color:var(--accent-mid);background:var(--accent-light);}
+.photo-slot.has-photo{border:none;}
+.photo-slot img{width:100%;height:100%;object-fit:cover;}
+.photo-slot-label{font-size:11px;color:var(--hint);margin-top:6px;}
+.photo-slot-icon{font-size:28px;}
+.photo-del-btn{position:absolute;top:6px;right:6px;width:26px;height:26px;border-radius:50%;background:rgba(0,0,0,0.55);border:none;color:#fff;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:2;}
+.photo-uploading{position:absolute;inset:0;background:rgba(255,255,255,0.8);display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--accent);}
+.det-photos{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:16px;}
+.det-photo{position:relative;aspect-ratio:4/3;border-radius:var(--r);overflow:hidden;background:var(--surface2);}
+.det-photo img{width:100%;height:100%;object-fit:cover;cursor:pointer;}
+.det-photo-del{position:absolute;top:6px;right:6px;width:26px;height:26px;border-radius:50%;background:rgba(0,0,0,0.55);border:none;color:#fff;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;}
+.photo-empty{font-size:12px;color:var(--hint);padding:8px 0;}
+#lightbox{position:fixed;inset:0;background:rgba(0,0,0,0.9);z-index:9999;display:none;align-items:center;justify-content:center;}
+#lightbox.on{display:flex;}
+#lightbox img{max-width:94vw;max-height:90vh;border-radius:var(--r);object-fit:contain;}
+#lightbox-close{position:absolute;top:16px;right:20px;color:#fff;font-size:32px;cursor:pointer;background:none;border:none;line-height:1;}
+
 
 @media(min-width:769px){
   .m-layout{display:none!important;}
@@ -241,7 +262,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
     </div>
     <div class="l-err" id="lerr"></div>
   </div>
-  <div class="l-ver">v2.0 · Firebase 雲端同步</div>
+  <div class="l-ver">v3.0 · Firebase + Cloudinary</div>
 </div>
 
 <!-- APP -->
@@ -356,6 +377,8 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
     <button class="close-x" id="close-detail">×</button>
     <div class="sh-title" id="det-name"></div>
     <div class="dg" id="det-grid"></div>
+    <div class="slbl">客戶照片</div>
+    <div class="det-photos" id="det-photos"></div>
     <div class="slbl">保險資料</div>
     <div class="ids" id="det-ins"></div>
     <div class="slbl" style="margin-top:12px;">備註</div>
@@ -378,6 +401,10 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
   </div>
 </div>
 
+<div id="lightbox" onclick="closeLightbox()">
+  <button id="lightbox-close" onclick="closeLightbox()">×</button>
+  <img id="lightbox-img" src="" alt="">
+</div>
 <div id="toast"></div>
 
 <!-- Firebase compat SDK (works with file:// protocol) -->
@@ -564,6 +591,24 @@ function formHTML(prefix,data,types){
         <div class="ig">${insToggleHTML(prefix,types)}</div>
       </div>
     </div>
+
+    <div class="fs"><div class="fs-title">客戶照片（最多2張）</div>
+      <div class="photo-section">
+        <div class="photo-grid">
+          <div class="photo-slot" id="${prefix}-photo-0" onclick="triggerPhotoUpload('${prefix}',0)">
+            <input type="file" id="${prefix}-photo-input-0" accept="image/*" capture="environment" style="display:none">
+            <span class="photo-slot-icon">📷</span>
+            <span class="photo-slot-label">點擊拍照或上傳</span>
+          </div>
+          <div class="photo-slot" id="${prefix}-photo-1" onclick="triggerPhotoUpload('${prefix}',1)">
+            <input type="file" id="${prefix}-photo-input-1" accept="image/*" capture="environment" style="display:none">
+            <span class="photo-slot-icon">📷</span>
+            <span class="photo-slot-label">點擊拍照或上傳</span>
+          </div>
+        </div>
+        <div style="font-size:11px;color:var(--hint);">支援 iPhone 拍照、相簿選取</div>
+      </div>
+    </div>
     <div class="fs"><div class="fs-title">額外備註</div>
       <div class="field"><textarea id="${prefix}-note" placeholder="首購、換購、特殊需求...">${data?.note||''}</textarea></div>
     </div>`;
@@ -609,6 +654,10 @@ function bindForm(prefix,types){
   });
   // calc if editing
   calcPS(prefix);
+  // photo
+  const existingPhotos = (prefix==='ef'&&clients[detIdx])?clients[detIdx].photos:null;
+  initPhotoState(prefix, existingPhotos);
+  setTimeout(()=>bindPhotoInputs(prefix),50);
 }
 function calcPS(prefix){
   const base=parseInt($(prefix+'-base')?.value)||0;
@@ -655,12 +704,15 @@ function getFormData(prefix,types){
     costPrice:parseInt($(prefix+'-cost')?.value)||0,
     dealPrice:parseInt($(prefix+'-deal')?.value)||0,
     note:$(prefix+'-note')?.value.trim()||'',
-    insurance:ins
+    insurance:ins,
+    photos:(photoState[prefix]||[]).filter(Boolean)
   };
 }
 
 function buildNewForm(){
   newIT={compulsory:false,third:false,body:false,fire:false};
+  photoState['mf']=[null,null];
+  photoState['df']=[null,null];
   ['m-form','d-form'].forEach(id=>{
     const c=$(id);if(!c)return;
     c.innerHTML=formHTML(id.replace('-form','f'),null,newIT);
@@ -828,6 +880,7 @@ window.openDetail=function(idx){
       <div class="idr2"><span style="color:var(--muted)">起始日</span><span>${fmtD(s)}</span></div>
       <div class="idr2"><span style="color:var(--muted)">到期日</span><span>${fmtD(e)} ${eb}</span></div>`;
   } else di.innerHTML='<div style="font-size:13px;color:var(--hint);padding:6px 0">未投保或未記錄保險資料</div>';
+  renderDetailPhotos(c.photos);
   $('ov-detail').classList.add('on');
 };
 $('close-detail').addEventListener('click',()=>$('ov-detail').classList.remove('on'));
@@ -858,6 +911,142 @@ $('save-edit').addEventListener('click',async function(){
 
 window.confirmDel=function(idx){
   if(confirm('確定要刪除此筆客戶資料嗎？'))delClient(clients[idx]._id);
+};
+
+
+// ── CLOUDINARY ──
+const CLD = {
+  cloud: 'dkm5nsmrt',
+  preset: 'mengbao_crm'
+};
+
+// photo state: {prefix: [url1, url2]}
+let photoState = {};
+
+function initPhotoState(prefix, photos) {
+  photoState[prefix] = photos ? [...photos] : [null, null];
+  renderPhotoSlots(prefix);
+}
+
+function renderPhotoSlots(prefix) {
+  const urls = photoState[prefix] || [null, null];
+  [0,1].forEach(i => {
+    const slot = document.getElementById(prefix+'-photo-'+i);
+    if(!slot) return;
+    const url = urls[i];
+    if(url) {
+      slot.classList.add('has-photo');
+      slot.innerHTML = `<img src="${url}" alt="客戶照片">
+        <button class="photo-del-btn" onclick="event.stopPropagation();removePhoto('${prefix}',${i})">×</button>`;
+      slot.onclick = () => openLightbox(url);
+    } else {
+      slot.classList.remove('has-photo');
+      slot.innerHTML = `<input type="file" id="${prefix}-photo-input-${i}" accept="image/*" style="display:none">
+        <span class="photo-slot-icon">📷</span>
+        <span class="photo-slot-label">點擊拍照或上傳</span>`;
+      slot.onclick = () => triggerPhotoUpload(prefix, i);
+    }
+  });
+}
+
+window.triggerPhotoUpload = function(prefix, idx) {
+  const inp = document.getElementById(prefix+'-photo-input-'+idx);
+  if(inp) inp.click();
+};
+
+function bindPhotoInputs(prefix) {
+  [0,1].forEach(i => {
+    const wrap = document.getElementById(prefix+'-photo-'+i);
+    if(!wrap) return;
+    wrap.addEventListener('change', async function(e) {
+      const file = e.target?.files?.[0] || (e.detail?.file);
+      if(!file) return;
+      await uploadPhoto(prefix, i, file);
+    });
+    // delegate for dynamically created inputs
+    wrap.addEventListener('click', function(e) {
+      if(e.target.tagName === 'INPUT') return;
+      const inp2 = wrap.querySelector('input[type=file]');
+      if(inp2 && !photoState[prefix]?.[i]) inp2.click();
+    });
+    const inp2 = document.getElementById(prefix+'-photo-input-'+i);
+    if(inp2) inp2.addEventListener('change', async function() {
+      const file = this.files[0];
+      if(file) await uploadPhoto(prefix, i, file);
+    });
+  });
+}
+
+async function uploadPhoto(prefix, idx, file) {
+  const slot = document.getElementById(prefix+'-photo-'+idx);
+  if(!slot) return;
+  // show uploading
+  const orig = slot.innerHTML;
+  slot.innerHTML = '<div class="photo-uploading"><span class="spinner"></span>上傳中...</div>';
+  try {
+    const fd = new FormData();
+    fd.append('file', file);
+    fd.append('upload_preset', CLD.preset);
+    fd.append('folder', 'mengbao_clients');
+    // compress: limit to 800px width
+    fd.append('transformation', 'w_800,c_limit,q_auto');
+    const res = await fetch(`https://api.cloudinary.com/v1_1/${CLD.cloud}/image/upload`, {method:'POST',body:fd});
+    const data = await res.json();
+    if(data.secure_url) {
+      if(!photoState[prefix]) photoState[prefix] = [null,null];
+      photoState[prefix][idx] = data.secure_url;
+      renderPhotoSlots(prefix);
+      bindPhotoInputs(prefix);
+      toast('照片上傳成功 ✓');
+    } else {
+      slot.innerHTML = orig;
+      toast('上傳失敗，請重試');
+    }
+  } catch(err) {
+    slot.innerHTML = orig;
+    toast('上傳失敗：'+err.message);
+  }
+}
+
+window.removePhoto = function(prefix, idx) {
+  if(!confirm('確定要移除這張照片嗎？')) return;
+  if(!photoState[prefix]) photoState[prefix] = [null,null];
+  photoState[prefix][idx] = null;
+  renderPhotoSlots(prefix);
+  bindPhotoInputs(prefix);
+};
+
+function openLightbox(url) {
+  const lb = $('lightbox');
+  const img = $('lightbox-img');
+  if(lb && img) { img.src = url; lb.classList.add('on'); }
+}
+window.closeLightbox = function() {
+  const lb = $('lightbox'); if(lb) lb.classList.remove('on');
+};
+
+// detail photo render
+function renderDetailPhotos(photos) {
+  const cont = $('det-photos');
+  if(!cont) return;
+  const urls = (photos||[]).filter(Boolean);
+  if(!urls.length) { cont.innerHTML = '<div class="photo-empty">無照片記錄</div>'; return; }
+  cont.innerHTML = urls.map((u,i) =>
+    `<div class="det-photo">
+      <img src="${u}" onclick="openLightbox('${u}')" alt="客戶照片">
+      <button class="det-photo-del" onclick="detDelPhoto(${i})">×</button>
+    </div>`
+  ).join('');
+}
+
+window.detDelPhoto = async function(idx) {
+  if(!confirm('確定要刪除這張照片嗎？')) return;
+  const c = clients[detIdx];
+  const photos = [...(c.photos||[])];
+  photos.splice(idx,1);
+  await updClient(c._id, {photos});
+  toast('照片已刪除');
+  $('ov-detail').classList.remove('on');
 };
 
 // ── INIT ──
