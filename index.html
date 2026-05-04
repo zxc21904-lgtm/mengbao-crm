@@ -23,7 +23,7 @@
 body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:100vh;}
 
 /* LOCK */
-#lock{position:fixed;inset:0;background:linear-gradient(135deg,#1a3a6b,#1a5fa8 60%,#2980d9);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:9999;padding:32px;}
+#lock{position:fixed;inset:0;background:linear-gradient(135deg,#1a3a6b,#1a5fa8 60%,#2980d9);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:9999;padding:32px;-webkit-overflow-scrolling:touch;}
 .l-title{font-size:18px;font-weight:700;color:#fff;letter-spacing:1px;margin-bottom:4px;text-align:center;}
 .l-sub{font-size:12px;color:rgba(255,255,255,0.5);margin-bottom:36px;}
 .l-card{background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);border-radius:24px;padding:28px 24px;width:100%;max-width:300px;text-align:center;}
@@ -32,7 +32,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
 .dot{width:14px;height:14px;border-radius:50%;border:2px solid rgba(255,255,255,0.4);background:transparent;transition:all 0.2s;}
 .dot.on{background:#fff;border-color:#fff;}
 .pad{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
-.pb{height:58px;border-radius:14px;border:1px solid rgba(255,255,255,0.2);background:rgba(255,255,255,0.1);color:#fff;font-size:22px;font-weight:500;cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:rgba(255,255,255,0.2);user-select:none;}
+.pb{height:58px;border-radius:14px;border:1px solid rgba(255,255,255,0.2);background:rgba(255,255,255,0.1);color:#fff;font-size:22px;font-weight:500;cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:rgba(255,255,255,0.2);user-select:none;-webkit-user-select:none;position:relative;z-index:1;}
 .pb:active{background:rgba(255,255,255,0.3);}
 .pb.del{font-size:18px;color:rgba(255,255,255,0.8);}
 .l-err{font-size:12px;color:#fca5a5;margin-top:14px;min-height:16px;text-align:center;}
@@ -480,16 +480,30 @@ function lockApp(){
   $('ov-edit').classList.remove('on');
 }
 
-$('pad').addEventListener('click',function(e){
-  const btn=e.target.closest('.pb');
-  if(!btn)return;
-  e.preventDefault();
-  if(btn.id==='del'){pin=pin.slice(0,-1);$('lerr').textContent='';updateDots();return;}
-  const n=btn.dataset.n;
-  if(n===''||pin.length>=4)return;
-  pin+=n;updateDots();
-  if(pin.length===4)setTimeout(checkPin,150);
-});
+// PIN pad - use both click and touchend for iOS
+var padEl = document.getElementById('pad');
+if(padEl) {
+  function handlePadInput(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    var btn = e.target.closest ? e.target.closest('.pb') : null;
+    if(!btn) return;
+    if(btn.id==='del'){
+      pin=pin.slice(0,-1);
+      var lerr=document.getElementById('lerr');
+      if(lerr)lerr.textContent='';
+      updateDots();
+      return;
+    }
+    var n=btn.dataset.n;
+    if(n===''||pin.length>=4)return;
+    pin+=n;
+    updateDots();
+    if(pin.length===4)setTimeout(checkPin,150);
+  }
+  padEl.addEventListener('click', handlePadInput, false);
+  padEl.addEventListener('touchend', handlePadInput, {passive:false});
+}
 
 $('d-lock').addEventListener('click',lockApp);
 
