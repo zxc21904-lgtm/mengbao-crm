@@ -13,28 +13,25 @@
   --success-bg:#eaf3de;--success-text:#3b6d11;
   --danger-bg:#fcebeb;--danger-text:#a32d2d;
   --warn-bg:#faeeda;--warn-text:#854f0b;
-  --profit:#0f6e56;
+  --profit:#0f6e56;--loss:#c0392b;
   --r:8px;--rl:12px;--rxl:16px;
   --sh:0 1px 3px rgba(0,0,0,0.08);--sh-lg:0 4px 16px rgba(0,0,0,0.12);
   --sw:240px;--font:'Noto Sans TC',system-ui,sans-serif;
 }
 body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:100vh;}
-
 /* LOCK */
 #lock-screen{position:fixed;inset:0;background:linear-gradient(135deg,#1a3a6b,#1a5fa8 60%,#2980d9);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:9999;padding:32px;}
 .lk-logo{font-size:20px;font-weight:700;color:#fff;text-align:center;margin-bottom:6px;}
-.lk-sub{font-size:13px;color:rgba(255,255,255,0.5);margin-bottom:40px;}
-.lk-card{background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.25);border-radius:24px;padding:32px 28px;width:100%;max-width:320px;text-align:center;}
-.lk-hint{font-size:14px;color:rgba(255,255,255,0.8);margin-bottom:24px;}
-.lk-input-wrap{position:relative;margin-bottom:20px;}
-.lk-input{width:100%;padding:14px 16px;font-size:24px;letter-spacing:12px;text-align:center;border:2px solid rgba(255,255,255,0.3);border-radius:14px;background:rgba(255,255,255,0.1);color:#fff;outline:none;font-family:monospace;}
+.lk-sub{font-size:12px;color:rgba(255,255,255,0.5);margin-bottom:36px;}
+.lk-card{background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.25);border-radius:24px;padding:28px 24px;width:100%;max-width:300px;text-align:center;}
+.lk-hint{font-size:14px;color:rgba(255,255,255,0.8);margin-bottom:20px;}
+.lk-input{width:100%;padding:13px 16px;font-size:22px;letter-spacing:10px;text-align:center;border:2px solid rgba(255,255,255,0.3);border-radius:12px;background:rgba(255,255,255,0.1);color:#fff;outline:none;font-family:monospace;margin-bottom:16px;}
 .lk-input::placeholder{letter-spacing:4px;font-size:16px;color:rgba(255,255,255,0.4);}
 .lk-input:focus{border-color:rgba(255,255,255,0.7);}
-.lk-btn{width:100%;padding:14px;background:#fff;color:var(--accent);border:none;border-radius:14px;font-size:16px;font-weight:700;cursor:pointer;font-family:var(--font);touch-action:manipulation;}
+.lk-btn{width:100%;padding:13px;background:#fff;color:var(--accent);border:none;border-radius:12px;font-size:16px;font-weight:700;cursor:pointer;font-family:var(--font);touch-action:manipulation;}
 .lk-btn:active{opacity:0.85;}
-.lk-err{font-size:12px;color:#fca5a5;margin-top:14px;min-height:16px;}
+.lk-err{font-size:12px;color:#fca5a5;margin-top:12px;min-height:16px;}
 .lk-ver{position:absolute;bottom:20px;font-size:11px;color:rgba(255,255,255,0.25);}
-
 /* APP */
 #app{display:none;}
 .m-tabs{display:none;position:fixed;bottom:0;left:0;right:0;background:var(--surface);border-top:1px solid var(--border);z-index:100;}
@@ -44,11 +41,11 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
 .mt-ic{font-size:20px;display:block;margin-bottom:2px;}
 .d-layout{display:none;min-height:100vh;}
 .sidebar{width:var(--sw);background:var(--surface);border-right:1px solid var(--border);position:fixed;top:0;bottom:0;left:0;display:flex;flex-direction:column;}
-.sb-logo{padding:24px 20px 16px;}
+.sb-logo{padding:22px 20px 14px;}
 .sb-title{font-size:13px;font-weight:700;color:var(--accent);}
 .sb-sub{font-size:11px;color:var(--hint);margin-top:2px;}
 .sb-div{height:1px;background:var(--border);margin:0 20px;}
-.sb-nav{flex:1;padding:14px 10px;}
+.sb-nav{flex:1;padding:14px 10px;overflow-y:auto;}
 .sn{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:var(--r);border:none;background:transparent;color:var(--muted);font-size:13px;font-weight:500;cursor:pointer;width:100%;text-align:left;margin-bottom:2px;transition:all 0.15s;touch-action:manipulation;}
 .sn:hover{background:var(--surface2);}
 .sn.on{background:var(--accent-light);color:var(--accent);}
@@ -57,7 +54,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
 .lock-btn{width:100%;padding:9px;border-radius:var(--r);border:1px solid var(--border);background:transparent;color:var(--muted);font-size:13px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;touch-action:manipulation;}
 .lock-btn:hover{background:var(--surface2);}
 .main{margin-left:var(--sw);padding:28px;min-height:100vh;}
-.ph{margin-bottom:24px;}
+.ph{margin-bottom:20px;}
 .pt{font-size:22px;font-weight:700;}
 .pst{font-size:13px;color:var(--muted);margin-top:4px;}
 .m-layout{display:block;}
@@ -66,12 +63,35 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
 .m-bar{background:var(--surface);border-bottom:1px solid var(--border);padding:13px 16px;position:sticky;top:0;z-index:50;}
 .m-bar-title{font-size:15px;font-weight:700;color:var(--accent);}
 .m-bar-sub{font-size:11px;color:var(--hint);margin-top:1px;}
-.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:20px;}
+/* STATS */
+.sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:16px;}
 .sc{background:var(--surface);border-radius:var(--rl);padding:14px;box-shadow:var(--sh);}
 .sc-lbl{font-size:11px;color:var(--muted);margin-bottom:5px;font-weight:500;text-transform:uppercase;letter-spacing:0.3px;}
-.sc-val{font-size:22px;font-weight:700;color:var(--text);}
-.sc-val.profit{color:var(--profit);}
+.sc-val{font-size:20px;font-weight:700;color:var(--text);}
+.sc-val.green{color:var(--profit);}
+.sc-val.red{color:var(--loss);}
 .sc-sub{font-size:11px;color:var(--hint);margin-top:3px;}
+/* INSURANCE EXPIRY LIST */
+.ins-exp-section{background:var(--surface);border-radius:var(--rl);box-shadow:var(--sh);margin-bottom:16px;overflow:hidden;}
+.ins-exp-header{padding:12px 16px;background:var(--warn-bg);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;}
+.ins-exp-title{font-size:13px;font-weight:600;color:var(--warn-text);}
+.ins-exp-count{font-size:11px;background:var(--warn-text);color:#fff;padding:2px 8px;border-radius:10px;}
+.ins-exp-item{padding:12px 16px;border-bottom:1px solid var(--border);display:flex;flex-direction:column;gap:8px;}
+.ins-exp-item:last-child{border-bottom:none;}
+.ins-exp-info{display:flex;align-items:center;gap:10px;}
+.ins-exp-av{width:32px;height:32px;border-radius:50%;background:var(--accent-light);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--accent);flex-shrink:0;}
+.ins-exp-name{font-size:13px;font-weight:600;color:var(--text);}
+.ins-exp-date{font-size:11px;color:var(--muted);}
+.ins-exp-days{font-size:11px;padding:2px 8px;border-radius:10px;font-weight:500;}
+.days-urgent{background:#fde8e8;color:#c0392b;}
+.days-soon{background:var(--warn-bg);color:var(--warn-text);}
+.ins-exp-btns{display:flex;gap:6px;}
+.ins-act-btn{flex:1;padding:7px 4px;font-size:11px;font-weight:500;border-radius:var(--r);border:1px solid var(--border);background:var(--surface2);color:var(--muted);cursor:pointer;text-align:center;touch-action:manipulation;}
+.ins-act-btn.renew{background:#e6f7f0;color:var(--profit);border-color:#1d9e75;}
+.ins-act-btn.edit{background:var(--accent-light);color:var(--accent);border-color:var(--accent-mid);}
+.ins-act-btn.stop{background:#fde8e8;color:var(--loss);border-color:#f09595;}
+.ins-exp-empty{padding:20px 16px;font-size:13px;color:var(--hint);text-align:center;}
+/* CARDS */
 .slbl{font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:10px;}
 .card{background:var(--surface);border-radius:var(--rl);box-shadow:var(--sh);margin-bottom:12px;overflow:hidden;}
 .cb{padding:14px 16px;}
@@ -82,9 +102,10 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
 .cg{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:8px;}
 .cf{font-size:11px;color:var(--muted);}
 .cf span{display:block;color:var(--text);font-size:12px;font-weight:500;margin-top:1px;}
-.cf-footer{display:flex;justify-content:space-between;align-items:center;padding:10px 16px;border-top:1px solid var(--border);background:var(--surface2);}
-.dp{font-size:15px;font-weight:700;color:var(--accent);}
-.pc{font-size:11px;font-weight:600;color:var(--profit);background:var(--success-bg);padding:2px 8px;border-radius:20px;margin-left:6px;}
+.cf-footer{display:flex;justify-content:space-between;align-items:center;padding:10px 16px;border-top:1px solid var(--border);background:var(--surface2);flex-wrap:wrap;gap:6px;}
+.dp{font-size:14px;font-weight:700;color:var(--accent);}
+.pc{font-size:11px;font-weight:600;color:var(--profit);background:var(--success-bg);padding:2px 8px;border-radius:20px;}
+.pc-loss{font-size:11px;font-weight:600;color:var(--loss);background:#fde8e8;padding:2px 8px;border-radius:20px;}
 .ca{display:flex;gap:6px;padding:10px 16px;border-top:1px solid var(--border);}
 .bs{flex:1;padding:8px 4px;font-size:12px;border-radius:var(--r);border:1px solid var(--border);background:var(--surface);color:var(--muted);cursor:pointer;text-align:center;font-weight:500;touch-action:manipulation;}
 .bs:hover{background:var(--surface2);}
@@ -95,18 +116,26 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
 .pill-ok{background:var(--success-bg);color:var(--success-text);}
 .pill-warn{background:var(--warn-bg);color:var(--warn-text);}
 .badge-ok{font-size:10px;padding:2px 7px;border-radius:20px;font-weight:500;background:var(--success-bg);color:var(--success-text);}
-.fs{background:var(--surface);border-radius:var(--rl);box-shadow:var(--sh);padding:16px;margin-bottom:14px;}
-.fs-title{font-size:12px;font-weight:600;color:var(--accent);margin-bottom:14px;text-transform:uppercase;letter-spacing:0.3px;}
-.field{margin-bottom:12px;}
-.field label{display:block;font-size:12px;color:var(--muted);font-weight:500;margin-bottom:5px;}
+/* FORMS */
+.fs{background:var(--surface);border-radius:var(--rl);box-shadow:var(--sh);padding:16px;margin-bottom:12px;}
+.fs-title{font-size:12px;font-weight:600;color:var(--accent);margin-bottom:12px;text-transform:uppercase;letter-spacing:0.3px;}
+.field{margin-bottom:11px;}
+.field label{display:block;font-size:12px;color:var(--muted);font-weight:500;margin-bottom:4px;}
 .field input,.field select,.field textarea{width:100%;font-size:14px;padding:9px 12px;border:1px solid var(--border);border-radius:var(--r);background:var(--surface2);color:var(--text);outline:none;font-family:var(--font);}
 .field input:focus,.field select:focus,.field textarea:focus{border-color:var(--accent-mid);background:#fff;}
-.field textarea{resize:vertical;min-height:64px;}
+.field textarea{resize:vertical;min-height:60px;}
 .fr{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;}
-.psumm{background:var(--accent-light);border-radius:var(--r);padding:12px;margin-top:8px;display:none;}
-.pr{display:flex;justify-content:space-between;font-size:12px;color:var(--accent);padding:3px 0;}
-.pr.tot{font-size:14px;font-weight:600;border-top:1px solid rgba(55,138,221,0.3);margin-top:6px;padding-top:6px;}
-.pr.pft{font-size:13px;font-weight:600;border-top:1px solid rgba(29,158,117,0.25);margin-top:4px;padding-top:4px;}
+/* PRICE SUMMARY */
+.psumm{border-radius:var(--r);padding:14px;margin-top:10px;display:none;background:var(--surface2);border:1px solid var(--border);}
+.psumm-title{font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:0.3px;margin-bottom:10px;}
+.prow{display:flex;justify-content:space-between;font-size:13px;padding:5px 0;border-bottom:1px solid var(--border);}
+.prow:last-child{border-bottom:none;}
+.prow-lbl{color:var(--muted);}
+.prow-val{font-weight:600;color:var(--text);}
+.prow-val.green{color:var(--profit);}
+.prow-val.red{color:var(--loss);}
+.prow-val.accent{color:var(--accent);}
+.prow.highlight{background:rgba(26,95,168,0.05);border-radius:4px;padding:6px 4px;margin:2px 0;}
 .btn-go{width:100%;padding:13px;background:var(--accent);color:#fff;border:none;border-radius:var(--rl);font-size:15px;font-weight:600;cursor:pointer;margin-top:8px;font-family:var(--font);touch-action:manipulation;}
 .btn-go:hover{opacity:0.9;}
 .btn-go:disabled{opacity:0.6;cursor:not-allowed;}
@@ -121,6 +150,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
 .idr{display:flex;justify-content:space-between;font-size:12px;padding:3px 0;}
 .idl{color:var(--muted);}
 .idv{font-weight:600;color:var(--text);}
+/* SEARCH */
 .sw-wrap{margin-bottom:14px;}
 .si-wrap{position:relative;margin-bottom:10px;}
 .si-wrap input{width:100%;padding:10px 14px 10px 38px;border:1px solid var(--border);border-radius:var(--rl);background:var(--surface);font-size:14px;color:var(--text);outline:none;font-family:var(--font);}
@@ -130,32 +160,35 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
 .fb{padding:6px 12px;border:1px solid var(--border);border-radius:20px;background:var(--surface);color:var(--muted);font-size:12px;font-weight:500;cursor:pointer;touch-action:manipulation;}
 .fb.on{background:var(--accent-light);color:var(--accent);border-color:var(--accent-mid);}
 .rc{font-size:12px;color:var(--hint);margin-bottom:10px;}
+/* OVERLAY */
 .ov{position:fixed;inset:0;background:rgba(0,0,0,0.45);z-index:500;display:none;align-items:flex-end;justify-content:center;}
 .ov.on{display:flex;}
-.sheet{background:var(--surface);border-radius:20px 20px 0 0;padding:20px 16px 32px;width:100%;max-width:640px;max-height:86vh;overflow-y:auto;}
+.sheet{background:var(--surface);border-radius:20px 20px 0 0;padding:20px 16px 32px;width:100%;max-width:640px;max-height:88vh;overflow-y:auto;}
 .sh-handle{width:36px;height:4px;background:var(--border);border-radius:2px;margin:0 auto 16px;}
 .sh-title{font-size:16px;font-weight:700;color:var(--text);margin-bottom:16px;}
 .close-x{float:right;background:var(--surface2);border:none;border-radius:50%;width:30px;height:30px;font-size:18px;cursor:pointer;color:var(--muted);line-height:30px;text-align:center;}
-.dg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:16px;}
+.dg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:14px;}
 .df-lbl{font-size:11px;color:var(--muted);margin-bottom:2px;}
 .df-val{font-size:13px;font-weight:600;color:var(--text);}
-.df-val.pft{color:var(--profit);}
-.ids{background:var(--surface2);border-radius:var(--r);padding:12px;margin-bottom:16px;}
+.df-val.green{color:var(--profit);}
+.df-val.red{color:var(--loss);}
+.df-val.accent{color:var(--accent);}
+.ids{background:var(--surface2);border-radius:var(--r);padding:12px;margin-bottom:14px;}
 .idr2{display:flex;justify-content:space-between;font-size:12px;padding:4px 0;border-bottom:1px solid var(--border);}
 .idr2:last-child{border-bottom:none;}
 .eb{font-size:10px;padding:2px 7px;border-radius:10px;font-weight:500;}
 .eb-soon{background:var(--warn-bg);color:var(--warn-text);}
 .eb-ok{background:var(--success-bg);color:var(--success-text);}
 .sh-acts{display:flex;gap:8px;margin-top:14px;}
-.ea{background:var(--warn-bg);border-radius:var(--r);padding:12px;margin-bottom:16px;font-size:12px;color:var(--warn-text);display:none;}
+.ea{background:var(--warn-bg);border-radius:var(--r);padding:12px;margin-bottom:14px;font-size:12px;color:var(--warn-text);display:none;}
 .ea strong{font-weight:600;display:block;margin-bottom:4px;}
 .ri{display:flex;align-items:center;gap:12px;padding:12px 14px;background:var(--surface);border-radius:var(--rl);box-shadow:var(--sh);margin-bottom:8px;}
 .ri-info{flex:1;min-width:0;}
 .ri-name{font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .ri-car{font-size:11px;color:var(--muted);}
 .ri-price{font-size:13px;font-weight:700;color:var(--accent);white-space:nowrap;}
-.empty{text-align:center;padding:40px 0;color:var(--hint);font-size:14px;}
-.loading{text-align:center;padding:30px 0;color:var(--hint);font-size:13px;}
+.empty{text-align:center;padding:36px 0;color:var(--hint);font-size:14px;}
+.loading{text-align:center;padding:28px 0;color:var(--hint);font-size:13px;}
 @keyframes spin{to{transform:rotate(360deg);}}
 .spinner{display:inline-block;width:18px;height:18px;border:2px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin 0.7s linear infinite;margin-right:6px;vertical-align:middle;}
 #toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%);background:#1a3a6b;color:#fff;padding:10px 22px;border-radius:20px;font-size:13px;font-weight:500;opacity:0;transition:opacity 0.3s;z-index:9000;white-space:nowrap;pointer-events:none;box-shadow:var(--sh-lg);}
@@ -171,8 +204,8 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
 .photo-slot-icon{font-size:28px;pointer-events:none;}
 .photo-slot-label{font-size:11px;color:var(--hint);margin-top:6px;pointer-events:none;}
 .photo-file-input{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer;z-index:2;}
-.photo-del-btn{position:absolute;top:6px;right:6px;width:26px;height:26px;border-radius:50%;background:rgba(0,0,0,0.6);border:none;color:#fff;font-size:16px;cursor:pointer;z-index:3;display:flex;align-items:center;justify-content:center;line-height:1;touch-action:manipulation;}
-.det-photos{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:16px;}
+.photo-del-btn{position:absolute;top:6px;right:6px;width:26px;height:26px;border-radius:50%;background:rgba(0,0,0,0.6);border:none;color:#fff;font-size:16px;cursor:pointer;z-index:3;display:flex;align-items:center;justify-content:center;touch-action:manipulation;}
+.det-photos{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:14px;}
 .det-photo{position:relative;aspect-ratio:4/3;border-radius:var(--r);overflow:hidden;background:var(--surface2);}
 .det-photo img{width:100%;height:100%;object-fit:cover;cursor:pointer;}
 .det-photo-actions{position:absolute;bottom:6px;right:6px;display:flex;gap:4px;}
@@ -184,9 +217,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
 .lb-bar{display:flex;gap:12px;margin-top:16px;}
 .lb-btn{padding:8px 20px;border-radius:20px;border:1px solid rgba(255,255,255,0.3);background:rgba(255,255,255,0.1);color:#fff;font-size:13px;cursor:pointer;text-decoration:none;display:flex;align-items:center;gap:6px;touch-action:manipulation;}
 @media(min-width:769px){
-  .m-layout{display:none!important;}
-  .m-tabs{display:none!important;}
-  .d-layout{display:flex!important;}
+  .m-layout{display:none!important;}.m-tabs{display:none!important;}.d-layout{display:flex!important;}
   .sg{grid-template-columns:repeat(3,1fr);}
   #toast{bottom:24px;}
   .ov{align-items:center;}
@@ -195,9 +226,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
   .si-wrap{flex:1;margin-bottom:0;}
 }
 @media(max-width:768px){
-  .m-layout{display:block;}
-  .m-tabs{display:block;}
-  .d-layout{display:none!important;}
+  .m-layout{display:block;}.m-tabs{display:block;}.d-layout{display:none!important;}
 }
 </style>
 </head>
@@ -209,13 +238,11 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
   <div class="lk-sub">汽車業務管理系統</div>
   <div class="lk-card">
     <div class="lk-hint">請輸入4位數密碼解鎖</div>
-    <div class="lk-input-wrap">
-      <input class="lk-input" id="lk-input" type="password" maxlength="4" inputmode="numeric" pattern="[0-9]*" placeholder="••••" autocomplete="off">
-    </div>
+    <input class="lk-input" id="lk-input" type="password" maxlength="4" inputmode="numeric" pattern="[0-9]*" placeholder="••••" autocomplete="off">
     <button class="lk-btn" id="lk-btn">解鎖</button>
     <div class="lk-err" id="lk-err"></div>
   </div>
-  <div class="lk-ver">v5.0 · Firebase + Cloudinary</div>
+  <div class="lk-ver">v6.0 · Firebase + Cloudinary</div>
 </div>
 
 <!-- APP -->
@@ -231,12 +258,21 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
       <div class="sg">
         <div class="sc"><div class="sc-lbl">本月成交</div><div class="sc-val" id="ms-month">0</div><div class="sc-sub">台（依領牌）</div></div>
         <div class="sc"><div class="sc-lbl">總客戶數</div><div class="sc-val" id="ms-total">0</div><div class="sc-sub">位</div></div>
-        <div class="sc"><div class="sc-lbl">本月業績</div><div class="sc-val" id="ms-rev">$0</div><div class="sc-sub">成交總價</div></div>
-        <div class="sc"><div class="sc-lbl">本月總淨利</div><div class="sc-val profit" id="ms-profit">$0</div><div class="sc-sub">成交－成本－退獎</div></div>
-        <div class="sc"><div class="sc-lbl">保險到期</div><div class="sc-val" id="ms-ins">0</div><div class="sc-sub">30天內</div></div>
-        <div class="sc"><div class="sc-lbl">平均折讓</div><div class="sc-val" id="ms-disc">0%</div><div class="sc-sub">整體平均</div></div>
+        <div class="sc"><div class="sc-lbl">本月業績</div><div class="sc-val" id="ms-rev">$0</div><div class="sc-sub">客人成交價加總</div></div>
+        <div class="sc"><div class="sc-lbl">本月總淨利</div><div class="sc-val green" id="ms-profit">$0</div><div class="sc-sub">依領牌日加總</div></div>
+        <div class="sc"><div class="sc-lbl">本月折讓損失</div><div class="sc-val red" id="ms-loss">$0</div><div class="sc-sub">依領牌日加總</div></div>
+        <div class="sc"><div class="sc-lbl">保險到期</div><div class="sc-val" id="ms-ins">0</div><div class="sc-sub">60天內</div></div>
       </div>
       <div class="ea" id="m-ea"></div>
+      <!-- Insurance expiry list -->
+      <div class="ins-exp-section" id="m-ins-exp-section">
+        <div class="ins-exp-header">
+          <span>⚠</span>
+          <span class="ins-exp-title">近60天保險到期名單</span>
+          <span class="ins-exp-count" id="m-ins-exp-count">0</span>
+        </div>
+        <div id="m-ins-exp-list"><div class="ins-exp-empty">無即將到期保險</div></div>
+      </div>
       <div class="slbl">最近建檔</div>
       <div id="m-recent"><div class="loading"><span class="spinner"></span>載入中...</div></div>
     </div>
@@ -289,12 +325,20 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
         <div class="sg">
           <div class="sc"><div class="sc-lbl">本月成交</div><div class="sc-val" id="ds-month">0</div><div class="sc-sub">台（依領牌）</div></div>
           <div class="sc"><div class="sc-lbl">總客戶數</div><div class="sc-val" id="ds-total">0</div><div class="sc-sub">位</div></div>
-          <div class="sc"><div class="sc-lbl">本月業績</div><div class="sc-val" id="ds-rev">$0</div><div class="sc-sub">成交總價</div></div>
-          <div class="sc"><div class="sc-lbl">本月總淨利</div><div class="sc-val profit" id="ds-profit">$0</div><div class="sc-sub">成交－成本－退獎</div></div>
-          <div class="sc"><div class="sc-lbl">保險到期</div><div class="sc-val" id="ds-ins">0</div><div class="sc-sub">30天內</div></div>
-          <div class="sc"><div class="sc-lbl">平均折讓</div><div class="sc-val" id="ds-disc">0%</div><div class="sc-sub">整體平均</div></div>
+          <div class="sc"><div class="sc-lbl">本月業績</div><div class="sc-val" id="ds-rev">$0</div><div class="sc-sub">客人成交價加總</div></div>
+          <div class="sc"><div class="sc-lbl">本月總淨利</div><div class="sc-val green" id="ds-profit">$0</div><div class="sc-sub">依領牌日加總</div></div>
+          <div class="sc"><div class="sc-lbl">本月折讓損失</div><div class="sc-val red" id="ds-loss">$0</div><div class="sc-sub">依領牌日加總</div></div>
+          <div class="sc"><div class="sc-lbl">保險到期</div><div class="sc-val" id="ds-ins">0</div><div class="sc-sub">60天內</div></div>
         </div>
-        <div class="ea" id="d-ea"></div>
+        <div class="ea" id="d-ea" style="display:none;"></div>
+        <div class="ins-exp-section" id="d-ins-exp-section" style="max-width:720px;">
+          <div class="ins-exp-header">
+            <span>⚠</span>
+            <span class="ins-exp-title">近60天保險到期名單</span>
+            <span class="ins-exp-count" id="d-ins-exp-count">0</span>
+          </div>
+          <div id="d-ins-exp-list"><div class="ins-exp-empty">無即將到期保險</div></div>
+        </div>
         <div class="slbl">最近建檔</div>
         <div id="d-recent"><div class="loading"><span class="spinner"></span>載入中...</div></div>
       </div>
@@ -319,7 +363,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
   </div>
 </div>
 
-<!-- OVERLAYS -->
+<!-- DETAIL OVERLAY -->
 <div class="ov" id="ov-detail">
   <div class="sheet">
     <div class="sh-handle"></div>
@@ -339,6 +383,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
   </div>
 </div>
 
+<!-- EDIT OVERLAY -->
 <div class="ov" id="ov-edit">
   <div class="sheet">
     <div class="sh-handle"></div>
@@ -349,6 +394,18 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
   </div>
 </div>
 
+<!-- INS EDIT OVERLAY -->
+<div class="ov" id="ov-ins-edit">
+  <div class="sheet">
+    <div class="sh-handle"></div>
+    <button class="close-x" id="btn-close-ins-edit">×</button>
+    <div class="sh-title">修改保險資料</div>
+    <div id="ins-edit-form"></div>
+    <button class="btn-go" id="btn-save-ins-edit">儲存保險資料</button>
+  </div>
+</div>
+
+<!-- LIGHTBOX -->
 <div id="lightbox">
   <img id="lightbox-img" src="" alt="">
   <div class="lb-bar">
@@ -362,399 +419,193 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
 <script>
-// ════ CONFIG ════
-var PASS = '0303';
-var FB_CFG = {
-  apiKey:'AIzaSyCUgwK5eY38PEZMlP6SVxOuCAhlWJKJi4Y',
-  authDomain:'jim-world.firebaseapp.com',
-  projectId:'jim-world',
-  storageBucket:'jim-world.firebasestorage.app',
-  messagingSenderId:'1065555129837',
-  appId:'1:1065555129837:web:b5c5243470f79d272ee3e4'
-};
-var CLD_CLOUD = 'dkm5nsmrt';
-var CLD_PRESET = 'mengbao_crm';
-var COL = 'clients';
-var INS_LABELS = {compulsory:'強制險',third:'第三人責任險',body:'車體險',fire:'竊盜險'};
-
-// ════ STATE ════
-var clients = [];
-var dbFilter = 'all';
-var detIdx = null;
-var newIT = {compulsory:false,third:false,body:false,fire:false};
-var editIT = {compulsory:false,third:false,body:false,fire:false};
-var photoNew = [null,null];
-var photoEdit = [null,null];
-
-// ════ FIREBASE ════
+var PASS='0303';
+var FB_CFG={apiKey:'AIzaSyCUgwK5eY38PEZMlP6SVxOuCAhlWJKJi4Y',authDomain:'jim-world.firebaseapp.com',projectId:'jim-world',storageBucket:'jim-world.firebasestorage.app',messagingSenderId:'1065555129837',appId:'1:1065555129837:web:b5c5243470f79d272ee3e4'};
+var CLD_CLOUD='dkm5nsmrt',CLD_PRESET='mengbao_crm',COL='clients';
+var INS_LABELS={compulsory:'強制險',third:'第三人責任險',body:'車體險',fire:'竊盜險'};
 firebase.initializeApp(FB_CFG);
-var db = firebase.firestore();
+var db=firebase.firestore();
+var clients=[],dbFilter='all',detIdx=null,insEditIdx=null;
+var newIT={compulsory:false,third:false,body:false,fire:false};
+var editIT={compulsory:false,third:false,body:false,fire:false};
+var insEditIT={compulsory:false,third:false,body:false,fire:false};
+var photoNew=[null,null],photoEdit=[null,null];
 
-// ════ UTILS ════
-function gid(id){ return document.getElementById(id); }
-function p2(n){ return String(n).padStart(2,'0'); }
-function rocToDate(r){
-  r=(r||'').replace(/\D/g,'');
-  if(r.length!==7)return null;
-  var dt=new Date(parseInt(r.slice(0,3))+1911,parseInt(r.slice(3,5))-1,parseInt(r.slice(5,7)));
-  return isNaN(dt.getTime())?null:dt;
-}
-function dateToRoc(dt){ return(dt.getFullYear()-1911)+p2(dt.getMonth()+1)+p2(dt.getDate()); }
-function fmtD(dt){ return dt.getFullYear()+'/'+p2(dt.getMonth()+1)+'/'+p2(dt.getDate()); }
-function add1y(dt){ var d=new Date(dt);d.setFullYear(d.getFullYear()+1);return d; }
-function daysLeft(dt){ var n=new Date();n.setHours(0,0,0,0);return Math.round((dt-n)/86400000); }
-function fmtM(n){ return '$'+(parseInt(n)||0).toLocaleString(); }
-function fmtBig(n){ return n>=10000?'$'+(n/10000).toFixed(1)+'萬':fmtM(n); }
-function ini(s){ return (s||'??').slice(0,2); }
-function showToast(msg){
-  var t=gid('toast');
-  t.textContent=msg;t.classList.add('on');
-  clearTimeout(t._t);t._t=setTimeout(function(){t.classList.remove('on');},2400);
-}
-function setSyncStatus(s){
-  var dot=s==='ok'?'<span class="sync-dot ok"></span>雲端同步':
-           s==='err'?'<span class="sync-dot err"></span>連線失敗':
-           '<span class="sync-dot"></span>同步中...';
-  var ms=gid('m-sync'),ds=gid('d-sync');
-  if(ms)ms.innerHTML=dot;
-  if(ds)ds.innerHTML=dot;
-}
+function gid(id){return document.getElementById(id);}
+function p2(n){return String(n).padStart(2,'0');}
+function rocToDate(r){r=(r||'').replace(/\D/g,'');if(r.length!==7)return null;var dt=new Date(parseInt(r.slice(0,3))+1911,parseInt(r.slice(3,5))-1,parseInt(r.slice(5,7)));return isNaN(dt.getTime())?null:dt;}
+function dateToRoc(dt){return(dt.getFullYear()-1911)+p2(dt.getMonth()+1)+p2(dt.getDate());}
+function fmtD(dt){return dt.getFullYear()+'/'+p2(dt.getMonth()+1)+'/'+p2(dt.getDate());}
+function add1y(dt){var d=new Date(dt);d.setFullYear(d.getFullYear()+1);return d;}
+function daysLeft(dt){var n=new Date();n.setHours(0,0,0,0);return Math.round((dt-n)/86400000);}
+function fmtM(n){return '$'+(parseInt(n)||0).toLocaleString();}
+function fmtBig(n){return Math.abs(n)>=10000?(n<0?'-$':' $')+(Math.abs(n)/10000).toFixed(1)+'萬':fmtM(n);}
+function ini(s){return(s||'??').slice(0,2);}
+function showToast(msg){var t=gid('toast');t.textContent=msg;t.classList.add('on');clearTimeout(t._t);t._t=setTimeout(function(){t.classList.remove('on');},2400);}
+function setSyncStatus(s){var dot=s==='ok'?'<span class="sync-dot ok"></span>雲端同步':s==='err'?'<span class="sync-dot err"></span>連線失敗':'<span class="sync-dot"></span>同步中...';['m-sync','d-sync'].forEach(function(id){var el=gid(id);if(el)el.innerHTML=dot;});}
 
-// ════ LOCK ════
-function doLock(){
-  gid('lk-input').value='';
-  gid('lk-err').textContent='';
-  gid('lock-screen').style.display='flex';
-  gid('app').style.display='none';
-  gid('ov-detail').classList.remove('on');
-  gid('ov-edit').classList.remove('on');
-}
-function tryUnlock(){
-  var val = gid('lk-input').value.trim();
-  if(val === PASS){
-    gid('lock-screen').style.display='none';
-    gid('app').style.display='block';
-    startSync();
-  } else {
-    gid('lk-err').textContent='密碼錯誤，請重試';
-    gid('lk-input').value='';
-    setTimeout(function(){gid('lk-err').textContent='';},2000);
-  }
-}
-gid('lk-btn').addEventListener('click', tryUnlock);
-gid('lk-input').addEventListener('keydown', function(e){ if(e.key==='Enter') tryUnlock(); });
+// ── CALC HELPERS ──
+function calcDeal(c){return(c.origPrice||0)-(c.coDiscount||0)+(c.custParts||0);}
+function calcCost(c){return(c.origPrice||0)-(c.coDiscount||0)+(c.myDiscount||0)+(c.myParts||0);}
+function calcLoss(c){return(c.myDiscount||0)+(c.myParts||0)-(c.custParts||0);}
+function calcProfit(c){return calcDeal(c)-calcCost(c);}
 
-// ════ FIREBASE OPS ════
-function startSync(){
-  setSyncStatus('loading');
-  db.collection(COL).orderBy('createdAt','desc').onSnapshot(function(snap){
-    clients = snap.docs.map(function(d){ return Object.assign({},d.data(),{_id:d.id}); });
-    setSyncStatus('ok');
-    renderDash();
-    renderDB();
-  }, function(){ setSyncStatus('err'); });
-}
-function addClient(data){
-  return db.collection(COL).add(Object.assign({},data,{createdAt:new Date().toISOString()}))
-    .then(function(){ showToast('客戶資料已儲存 ☁'); })
-    .catch(function(e){ showToast('儲存失敗：'+e.message); });
-}
-function updClient(id, data){
-  return db.collection(COL).doc(id).update(data)
-    .then(function(){ showToast('資料已更新 ✓'); })
-    .catch(function(e){ showToast('更新失敗：'+e.message); });
-}
-function delClient(id){
-  return db.collection(COL).doc(id).delete()
-    .then(function(){ showToast('已刪除客戶資料'); })
-    .catch(function(e){ showToast('刪除失敗：'+e.message); });
-}
+// ── LOCK ──
+function doLock(){gid('lk-input').value='';gid('lk-err').textContent='';gid('lock-screen').style.display='flex';gid('app').style.display='none';['ov-detail','ov-edit','ov-ins-edit'].forEach(function(id){gid(id).classList.remove('on');});}
+function tryUnlock(){var val=gid('lk-input').value.trim();if(val===PASS){gid('lock-screen').style.display='none';gid('app').style.display='block';startSync();}else{gid('lk-err').textContent='密碼錯誤，請重試';gid('lk-input').value='';setTimeout(function(){gid('lk-err').textContent='';},2000);}}
+gid('lk-btn').addEventListener('click',tryUnlock);
+gid('lk-input').addEventListener('keydown',function(e){if(e.key==='Enter')tryUnlock();});
+gid('d-lock-btn').addEventListener('click',doLock);
 
-// ════ TABS ════
+// ── FIREBASE ──
+function startSync(){setSyncStatus('loading');db.collection(COL).orderBy('createdAt','desc').onSnapshot(function(snap){clients=snap.docs.map(function(d){return Object.assign({},d.data(),{_id:d.id});});setSyncStatus('ok');renderDash();renderDB();},function(){setSyncStatus('err');});}
+function addClient(data){return db.collection(COL).add(Object.assign({},data,{createdAt:new Date().toISOString()})).then(function(){showToast('客戶資料已儲存 ☁');}).catch(function(e){showToast('儲存失敗：'+e.message);});}
+function updClient(id,data){return db.collection(COL).doc(id).update(data).then(function(){showToast('資料已更新 ✓');}).catch(function(e){showToast('更新失敗：'+e.message);});}
+function delClient(id){return db.collection(COL).doc(id).delete().then(function(){showToast('已刪除客戶資料');}).catch(function(e){showToast('刪除失敗：'+e.message);});}
+
+// ── TABS ──
 function switchTab(t){
-  if(t==='lock'){ doLock(); return; }
+  if(t==='lock'){doLock();return;}
   ['dashboard','new','db'].forEach(function(name){
-    var mt=gid('mt-'+name), sn=gid('sn-'+name);
-    var mp=gid('mp-'+name), dp=gid('dp-'+name);
-    if(mt) mt.classList.toggle('on', name===t);
-    if(sn) sn.classList.toggle('on', name===t);
-    if(mp) mp.classList.toggle('on', name===t);
-    if(dp) dp.style.display = name===t ? 'block' : 'none';
+    var mt=gid('mt-'+name),sn=gid('sn-'+name),mp=gid('mp-'+name),dp=gid('dp-'+name);
+    if(mt)mt.classList.toggle('on',name===t);
+    if(sn)sn.classList.toggle('on',name===t);
+    if(mp)mp.classList.toggle('on',name===t);
+    if(dp)dp.style.display=name===t?'block':'none';
   });
-  if(t==='new') buildNewForm();
+  if(t==='new')buildNewForm();
 }
 ['dashboard','new','db','lock'].forEach(function(name){
-  var mt=gid('mt-'+name);
-  if(mt) mt.addEventListener('click', function(){ switchTab(name); });
-  var sn=gid('sn-'+name);
-  if(sn) sn.addEventListener('click', function(){ switchTab(name); });
+  var mt=gid('mt-'+name),sn=gid('sn-'+name);
+  if(mt)mt.addEventListener('click',function(){switchTab(name);});
+  if(sn)sn.addEventListener('click',function(){switchTab(name);});
 });
-gid('d-lock-btn').addEventListener('click', doLock);
 
-// ════ PRICE CALC ════
-function calcPS(pre){
-  var base = parseInt(gid(pre+'-base')&&gid(pre+'-base').value)||0;
-  var parts = parseInt(gid(pre+'-parts')&&gid(pre+'-parts').value)||0;
-  var cost = parseInt(gid(pre+'-cost')&&gid(pre+'-cost').value)||0;
-  var deal = parseInt(gid(pre+'-deal')&&gid(pre+'-deal').value)||0;
-  var bonus = parseInt(gid(pre+'-bonus')&&gid(pre+'-bonus').value)||0;
-  var ps = gid(pre+'-ps');
-  if(!ps) return;
-  if(base>0||deal>0||cost>0){
-    ps.style.display='block';
-    if(gid(pre+'-psbase')) gid(pre+'-psbase').textContent=fmtM(base);
-    if(gid(pre+'-psparts')) gid(pre+'-psparts').textContent=fmtM(parts);
-    if(gid(pre+'-psdeal')) gid(pre+'-psdeal').textContent=fmtM(deal);
-    var orig=base+parts;
-    var pct=orig>0?Math.round((orig-deal)/orig*100):0;
-    if(gid(pre+'-psdisc')) gid(pre+'-psdisc').textContent=pct>0?'折讓'+pct+'%':'';
-    var pft=deal-cost-bonus;
-    var pel=gid(pre+'-pspft');
-    if(pel){ pel.textContent=cost>0?fmtM(pft):'-'; pel.style.color=pft<0?'var(--danger-text)':'var(--profit)'; }
-  } else ps.style.display='none';
-}
-
-// ════ INSURANCE ════
-function toggleInsType(pre, k){
-  var types = pre==='ef' ? editIT : newIT;
-  types[k] = !types[k];
-  var el = gid(pre+'-ins-'+k+'-s');
-  if(el) el.textContent = types[k]?'已投保':'未投保';
-  var tog = gid(pre+'-ins-tog-'+k);
-  if(tog) tog.classList.toggle('on', types[k]);
-}
-function toggleInsForm(pre){
-  var yn=gid(pre+'-ins-yn'), wrap=gid(pre+'-ins-wrap');
-  if(wrap) wrap.style.display=(yn&&yn.value==='yes')?'block':'none';
-}
-function calcInsDate(pre){
-  var inp=gid(pre+'-ins-start');
-  if(!inp)return;
-  var v=inp.value.replace(/\D/g,'');
-  var disp=gid(pre+'-ins-dates');
-  if(v.length===7){
-    var s=rocToDate(v);
-    if(s){
-      var e=add1y(s);
-      var e1=gid(pre+'-ins-end1'),e2=gid(pre+'-ins-end2');
-      if(e1)e1.textContent=fmtD(e);
-      if(e2){var rr=dateToRoc(e);e2.textContent='民國'+rr.slice(0,3)+'年'+rr.slice(3,5)+'月'+rr.slice(5)+'日';}
-      if(disp)disp.style.display='block';
-    } else if(disp)disp.style.display='none';
-  } else if(disp)disp.style.display='none';
-}
-
-// ════ FORM BUILDER ════
+// ── INSURANCE FORM ──
 function insToggleHTML(pre,types){
   return ['compulsory','third','body','fire'].map(function(k){
-    return '<div class="itog'+(types[k]?' on':'')+'" id="'+pre+'-ins-tog-'+k+'" data-pre="'+pre+'" data-k="'+k+'">'+
-      '<div class="itog-lbl">'+INS_LABELS[k]+'</div>'+
-      '<div class="itog-st" id="'+pre+'-ins-'+k+'-s">'+(types[k]?'已投保':'未投保')+'</div></div>';
+    return '<div class="itog'+(types[k]?' on':'')+'" id="'+pre+'-ins-tog-'+k+'" data-pre="'+pre+'" data-k="'+k+'"><div class="itog-lbl">'+INS_LABELS[k]+'</div><div class="itog-st" id="'+pre+'-ins-'+k+'-s">'+(types[k]?'已投保':'未投保')+'</div></div>';
   }).join('');
 }
-function photoSlotsHTML(pre, photos){
-  var urls=photos||[null,null];
-  var html='<div class="photo-grid">';
-  for(var i=0;i<2;i++){
-    var url=urls[i]||null;
-    if(url){
-      html+='<div class="photo-slot has-photo" id="'+pre+'-ps-'+i+'" data-pre="'+pre+'" data-idx="'+i+'">'+
-        '<img src="'+url+'" data-url="'+url+'" alt="">'+
-        '<button class="photo-del-btn" data-pre="'+pre+'" data-idx="'+i+'">×</button></div>';
-    } else {
-      html+='<div class="photo-slot" id="'+pre+'-ps-'+i+'" data-pre="'+pre+'" data-idx="'+i+'">'+
-        '<input class="photo-file-input" type="file" accept="image/*" data-pre="'+pre+'" data-idx="'+i+'">'+
-        '<span class="photo-slot-icon">📷</span>'+
-        '<span class="photo-slot-label">點擊拍照或選取</span></div>';
-    }
-  }
-  html+='</div><div style="font-size:11px;color:var(--hint)">支援 iPhone 拍照、相簿選取</div>';
-  return html;
-}
-function buildFormHTML(pre, data, types, photos){
-  var ins=data&&data.insurance?data.insurance:null;
+function insFormHTML(pre,ins,types){
   var hasIns=!!(ins&&ins.startDate);
+  return '<div class="field"><label>是否投保保險</label><select id="'+pre+'-ins-yn"><option value="no"'+(hasIns?'':' selected')+'>否</option><option value="yes"'+(hasIns?' selected':'')+'>是</option></select></div>'+
+    '<div id="'+pre+'-ins-wrap" style="display:'+(hasIns?'block':'none')+'">'+
+    '<div class="field"><label>保險起始日（民國7碼，例：1150501）</label><input id="'+pre+'-ins-start" type="text" placeholder="1150501" maxlength="7" value="'+(ins&&ins.startRoc||'')+'"></div>'+
+    '<div class="idates" id="'+pre+'-ins-dates" style="display:'+(ins&&ins.startRoc?'block':'none')+'">'+
+    '<div class="idr"><span class="idl">到期日（西元）</span><span class="idv" id="'+pre+'-ins-end1">'+(ins&&ins.endDate?fmtD(new Date(ins.endDate)):'-')+'</span></div>'+
+    '<div class="idr"><span class="idl">到期日（民國）</span><span class="idv" id="'+pre+'-ins-end2">'+(ins&&ins.endDate?(function(){var rr=dateToRoc(new Date(ins.endDate));return'民國'+rr.slice(0,3)+'年'+rr.slice(3,5)+'月'+rr.slice(5)+'日';})():'-')+'</span></div></div>'+
+    '<div style="font-size:12px;color:var(--muted);margin:10px 0 8px;font-weight:500;">投保險種（點擊切換）</div>'+
+    '<div class="ig">'+insToggleHTML(pre,types)+'</div></div>';
+}
+
+// ── PHOTO SLOTS ──
+function photoSlotsHTML(pre,photos){
+  var urls=photos||[null,null];var html='<div class="photo-grid">';
+  for(var i=0;i<2;i++){var url=urls[i]||null;
+    if(url){html+='<div class="photo-slot has-photo" id="'+pre+'-ps-'+i+'"><img src="'+url+'" data-url="'+url+'" alt=""><button class="photo-del-btn" data-pre="'+pre+'" data-idx="'+i+'">×</button></div>';}
+    else{html+='<div class="photo-slot" id="'+pre+'-ps-'+i+'"><input class="photo-file-input" type="file" accept="image/*" data-pre="'+pre+'" data-idx="'+i+'"><span class="photo-slot-icon">📷</span><span class="photo-slot-label">點擊拍照或選取</span></div>';}
+  }
+  return html+'</div><div style="font-size:11px;color:var(--hint)">支援 iPhone 拍照、相簿選取</div>';
+}
+
+// ── PRICE SUMMARY ──
+function calcPriceFields(pre){
+  var orig=parseInt(gid(pre+'-orig')&&gid(pre+'-orig').value)||0;
+  var coDis=parseInt(gid(pre+'-co-dis')&&gid(pre+'-co-dis').value)||0;
+  var custParts=parseInt(gid(pre+'-cust-parts')&&gid(pre+'-cust-parts').value)||0;
+  var myDis=parseInt(gid(pre+'-my-dis')&&gid(pre+'-my-dis').value)||0;
+  var myParts=parseInt(gid(pre+'-my-parts')&&gid(pre+'-my-parts').value)||0;
+  var deal=orig-coDis+custParts;
+  var cost=orig-coDis+myDis+myParts;
+  var loss=(myDis+myParts)-custParts;
+  var profit=deal-cost;
+  var ps=gid(pre+'-ps');
+  if(ps&&(orig>0||coDis>0||custParts>0||myDis>0||myParts>0)){
+    ps.style.display='block';
+    if(gid(pre+'-ps-deal'))gid(pre+'-ps-deal').textContent=fmtM(deal);
+    if(gid(pre+'-ps-cost'))gid(pre+'-ps-cost').textContent=fmtM(cost);
+    if(gid(pre+'-ps-loss')){gid(pre+'-ps-loss').textContent=fmtM(loss);gid(pre+'-ps-loss').className='prow-val '+(loss>0?'red':'green');}
+    if(gid(pre+'-ps-profit')){gid(pre+'-ps-profit').textContent=fmtM(profit);gid(pre+'-ps-profit').className='prow-val '+(profit>=0?'green':'red');}
+  } else if(ps) ps.style.display='none';
+}
+function priceSummHTML(pre){
+  return '<div class="psumm" id="'+pre+'-ps">'+
+    '<div class="psumm-title">即時計算結果</div>'+
+    '<div class="prow"><span class="prow-lbl">客人成交價格</span><span class="prow-val accent" id="'+pre+'-ps-deal">-</span></div>'+
+    '<div class="prow"><span class="prow-lbl">我的成本價格</span><span class="prow-val" id="'+pre+'-ps-cost">-</span></div>'+
+    '<div class="prow"><span class="prow-lbl">折讓損失</span><span class="prow-val" id="'+pre+'-ps-loss">-</span></div>'+
+    '<div class="prow highlight"><span class="prow-lbl" style="font-weight:600">淨利</span><span class="prow-val" id="'+pre+'-ps-profit">-</span></div>'+
+  '</div>';
+}
+
+// ── FORM BUILDER ──
+function buildFormHTML(pre,data,types,photos){
+  var ins=data&&data.insurance?data.insurance:null;
   return '<div class="fs"><div class="fs-title">客戶基本資料</div>'+
     '<div class="field"><label>客戶姓名 *</label><input id="'+pre+'-name" type="text" placeholder="王小明" value="'+(data&&data.name||'')+'"></div>'+
-    '<div class="fr"><div class="field"><label>身分證字號</label><input id="'+pre+'-id" type="text" placeholder="A123456789" value="'+(data&&data.idNum||'')+'"></div>'+
+    '<div class="fr"><div class="field"><label>身分證字號</label><input id="'+pre+'-id" type="text" value="'+(data&&data.idNum||'')+'"></div>'+
     '<div class="field"><label>生日</label><input id="'+pre+'-bday" type="date" value="'+(data&&data.birthday||'')+'"></div></div>'+
-    '<div class="fr"><div class="field"><label>聯繫電話</label><input id="'+pre+'-phone" type="tel" placeholder="02-XXXX-XXXX" value="'+(data&&data.phone||'')+'"></div>'+
-    '<div class="field"><label>行動電話</label><input id="'+pre+'-mobile" type="tel" placeholder="09XX-XXX-XXX" value="'+(data&&data.mobile||'')+'"></div></div>'+
-    '<div class="field"><label>通訊地址</label><input id="'+pre+'-addr" type="text" placeholder="縣市區路段" value="'+(data&&data.address||'')+'"></div>'+
+    '<div class="fr"><div class="field"><label>聯繫電話</label><input id="'+pre+'-phone" type="tel" value="'+(data&&data.phone||'')+'"></div>'+
+    '<div class="field"><label>行動電話</label><input id="'+pre+'-mobile" type="tel" value="'+(data&&data.mobile||'')+'"></div></div>'+
+    '<div class="field"><label>通訊地址</label><input id="'+pre+'-addr" type="text" value="'+(data&&data.address||'')+'"></div>'+
     '</div>'+
     '<div class="fs"><div class="fs-title">車輛資訊</div>'+
     '<div class="field"><label>購買車輛款式 *</label><input id="'+pre+'-car" type="text" placeholder="Toyota Camry 2.5豪華版" value="'+(data&&data.car||'')+'"></div>'+
     '<div class="fr"><div class="field"><label>訂車日期</label><input id="'+pre+'-order-date" type="date" value="'+(data&&data.orderDate||'')+'"></div>'+
     '<div class="field"><label>領牌日期</label><input id="'+pre+'-license-date" type="date" value="'+(data&&data.licenseDate||'')+'"></div></div>'+
     '<div class="field"><label>交車日期</label><input id="'+pre+'-delivery-date" type="date" value="'+(data&&data.deliveryDate||'')+'"></div>'+
-    '<div class="fr"><div class="field"><label>原始車價</label><input id="'+pre+'-base" type="number" placeholder="0" value="'+(data&&data.basePrice||'')+'"></div>'+
-    '<div class="field"><label>零配件總價</label><input id="'+pre+'-parts" type="number" placeholder="0" value="'+(data&&data.partsPrice||'')+'"></div></div>'+
-    '<div class="fr"><div class="field"><label>車輛成本價格</label><input id="'+pre+'-cost" type="number" placeholder="0" value="'+(data&&data.costPrice||'')+'"></div>'+
-    '<div class="field"><label>成交價格</label><input id="'+pre+'-deal" type="number" placeholder="0" value="'+(data&&data.dealPrice||'')+'"></div></div>'+
-    '<div class="field"><label>退客戶獎金</label><input id="'+pre+'-bonus" type="number" placeholder="0" value="'+(data&&data.bonus||'')+'"></div>'+
-    '<div class="psumm" id="'+pre+'-ps">'+
-      '<div class="pr"><span>原始車價</span><span id="'+pre+'-psbase">-</span></div>'+
-      '<div class="pr"><span>零配件</span><span id="'+pre+'-psparts">-</span></div>'+
-      '<div class="pr tot"><span>成交價格 <span style="font-size:11px;color:#d85a30;" id="'+pre+'-psdisc"></span></span><span id="'+pre+'-psdeal">-</span></div>'+
-      '<div class="pr pft"><span>淨利（成交－成本－退獎）</span><span id="'+pre+'-pspft">-</span></div>'+
-    '</div></div>'+
-    '<div class="fs"><div class="fs-title">保險資料</div>'+
-    '<div class="field"><label>是否投保保險</label>'+
-    '<select id="'+pre+'-ins-yn"><option value="no"'+(hasIns?'':' selected')+'>否</option><option value="yes"'+(hasIns?' selected':'')+'>是</option></select></div>'+
-    '<div id="'+pre+'-ins-wrap" style="display:'+(hasIns?'block':'none')+'">'+
-    '<div class="field"><label>保險起始日（民國7碼，例：1150501）</label>'+
-    '<input id="'+pre+'-ins-start" type="text" placeholder="1150501" maxlength="7" value="'+(ins&&ins.startRoc||'')+'"></div>'+
-    '<div class="idates" id="'+pre+'-ins-dates" style="display:'+(ins&&ins.startRoc?'block':'none')+'">'+
-    '<div class="idr"><span class="idl">到期日（西元）</span><span class="idv" id="'+pre+'-ins-end1">'+(ins&&ins.endDate?fmtD(new Date(ins.endDate)):'-')+'</span></div>'+
-    '<div class="idr"><span class="idl">到期日（民國）</span><span class="idv" id="'+pre+'-ins-end2">'+(ins&&ins.endDate?(function(){var rr=dateToRoc(new Date(ins.endDate));return'民國'+rr.slice(0,3)+'年'+rr.slice(3,5)+'月'+rr.slice(5)+'日';})():'-')+'</span></div></div>'+
-    '<div style="font-size:12px;color:var(--muted);margin:10px 0 8px;font-weight:500;">投保險種（點擊切換）</div>'+
-    '<div class="ig">'+insToggleHTML(pre,types)+'</div></div></div>'+
+    '</div>'+
+    '<div class="fs"><div class="fs-title">車輛買賣資訊</div>'+
+    '<div class="field"><label>① 原始車價</label><input id="'+pre+'-orig" type="number" placeholder="0" value="'+(data&&data.origPrice||'')+'"></div>'+
+    '<div class="field"><label>② 公司折扣金</label><input id="'+pre+'-co-dis" type="number" placeholder="0" value="'+(data&&data.coDiscount||'')+'"></div>'+
+    '<div class="field"><label>③ 客人選配件價格</label><input id="'+pre+'-cust-parts" type="number" placeholder="0" value="'+(data&&data.custParts||'')+'"></div>'+
+    '<div class="field"><label>④ 我給客戶折扣金</label><input id="'+pre+'-my-dis" type="number" placeholder="0" value="'+(data&&data.myDiscount||'')+'"></div>'+
+    '<div class="field"><label>⑤ 我給的配件價</label><input id="'+pre+'-my-parts" type="number" placeholder="0" value="'+(data&&data.myParts||'')+'"></div>'+
+    priceSummHTML(pre)+
+    '</div>'+
+    '<div class="fs"><div class="fs-title">保險資料</div>'+insFormHTML(pre,ins,types)+'</div>'+
     '<div class="fs"><div class="fs-title">客戶照片（最多2張）</div>'+photoSlotsHTML(pre,photos)+'</div>'+
-    '<div class="fs"><div class="fs-title">額外備註</div>'+
-    '<div class="field"><textarea id="'+pre+'-note" placeholder="首購、換購、特殊需求...">'+(data&&data.note||'')+'</textarea></div></div>';
+    '<div class="fs"><div class="fs-title">額外備註</div><div class="field"><textarea id="'+pre+'-note" placeholder="首購、換購、特殊需求...">'+(data&&data.note||'')+'</textarea></div></div>';
 }
-function bindFormEvents(pre, types, photosRef){
-  // price fields
-  ['base','parts','cost','deal','bonus'].forEach(function(f){
-    var el=gid(pre+'-'+f);
-    if(el) el.addEventListener('input', function(){ calcPS(pre); });
-  });
-  // ins yn
-  var yn=gid(pre+'-ins-yn');
-  if(yn) yn.addEventListener('change', function(){ toggleInsForm(pre); });
-  // ins start
-  var st=gid(pre+'-ins-start');
-  if(st) st.addEventListener('input', function(){ calcInsDate(pre); });
-  // ins toggles
+
+function bindFormEvents(pre,types){
+  ['orig','co-dis','cust-parts','my-dis','my-parts'].forEach(function(f){var el=gid(pre+'-'+f);if(el)el.addEventListener('input',function(){calcPriceFields(pre);});});
+  var yn=gid(pre+'-ins-yn');if(yn)yn.addEventListener('change',function(){toggleInsForm(pre);});
+  var st=gid(pre+'-ins-start');if(st)st.addEventListener('input',function(){calcInsDate(pre);});
   var ig=gid(pre+'-ins-wrap');
-  if(ig){
-    var togs=ig.querySelectorAll('.itog');
-    togs.forEach(function(tog){
-      tog.addEventListener('click', function(){
-        toggleInsType(this.dataset.pre, this.dataset.k);
-      });
-    });
-  }
-  // photo file inputs
-  var container=gid('m-form')||gid('d-form')||gid('edit-form');
-  // delegate photo events on document
-  calcPS(pre);
+  if(ig){ig.querySelectorAll('.itog').forEach(function(tog){tog.addEventListener('click',function(){toggleInsType(this.dataset.pre,this.dataset.k);});});}
+  if(pre!=='ie')calcPriceFields(pre);
 }
 
-// photo upload
-function uploadPhoto(pre, idx, file){
-  var photosRef = pre==='ef'?photoEdit:photoNew;
-  var slot=gid(pre+'-ps-'+idx);
-  if(!slot)return;
-  slot.innerHTML='<div style="width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--surface2)">'+
-    '<span class="spinner"></span>'+
-    '<div style="font-size:12px;color:var(--accent);margin-top:8px">上傳中...</div>'+
-    '<div style="width:80%;background:var(--border);border-radius:4px;height:6px;margin-top:10px;overflow:hidden">'+
-      '<div id="'+pre+'-prog-'+idx+'" style="height:100%;background:var(--accent);border-radius:4px;width:0;transition:width 0.2s"></div>'+
-    '</div><div id="'+pre+'-pct-'+idx+'" style="font-size:11px;color:var(--muted);margin-top:4px">0%</div></div>';
-  var xhr=new XMLHttpRequest();
-  var fd=new FormData();
-  fd.append('file',file);
-  fd.append('upload_preset',CLD_PRESET);
-  fd.append('folder','mengbao_clients');
-  xhr.upload.onprogress=function(e){
-    if(e.lengthComputable){
-      var pct=Math.round(e.loaded/e.total*100);
-      var bar=gid(pre+'-prog-'+idx),lbl=gid(pre+'-pct-'+idx);
-      if(bar)bar.style.width=pct+'%';
-      if(lbl)lbl.textContent=pct+'%';
-    }
-  };
-  xhr.onload=function(){
-    try{
-      var data=JSON.parse(xhr.responseText);
-      if(data.secure_url){
-        photosRef[idx]=data.secure_url;
-        refreshSlot(pre,idx,photosRef);
-        showToast('照片上傳成功 ✓');
-      } else {
-        refreshSlot(pre,idx,photosRef);
-        showToast('上傳失敗：'+(data.error&&data.error.message||'請重試'));
-      }
-    }catch(e){ refreshSlot(pre,idx,photosRef); showToast('上傳失敗'); }
-  };
-  xhr.onerror=function(){ refreshSlot(pre,idx,photosRef); showToast('網路錯誤，請重試'); };
-  xhr.open('POST','https://api.cloudinary.com/v1_1/'+CLD_CLOUD+'/image/upload');
-  xhr.send(fd);
+function toggleInsType(pre,k){
+  var types=pre==='ef'?editIT:(pre==='ie'?insEditIT:newIT);
+  types[k]=!types[k];
+  var el=gid(pre+'-ins-'+k+'-s');if(el)el.textContent=types[k]?'已投保':'未投保';
+  var tog=gid(pre+'-ins-tog-'+k);if(tog)tog.classList.toggle('on',types[k]);
 }
-function refreshSlot(pre,idx,photosRef){
-  var slot=gid(pre+'-ps-'+idx);if(!slot)return;
-  var url=photosRef[idx];
-  if(url){
-    slot.className='photo-slot has-photo';
-    slot.innerHTML='<img src="'+url+'" data-url="'+url+'" alt="">'+
-      '<button class="photo-del-btn" data-pre="'+pre+'" data-idx="'+idx+'">×</button>';
-  } else {
-    slot.className='photo-slot';
-    slot.innerHTML='<input class="photo-file-input" type="file" accept="image/*" data-pre="'+pre+'" data-idx="'+idx+'">'+
-      '<span class="photo-slot-icon">📷</span><span class="photo-slot-label">點擊拍照或選取</span>';
-  }
+function toggleInsForm(pre){var yn=gid(pre+'-ins-yn'),wrap=gid(pre+'-ins-wrap');if(wrap)wrap.style.display=(yn&&yn.value==='yes')?'block':'none';}
+function calcInsDate(pre){
+  var inp=gid(pre+'-ins-start');if(!inp)return;
+  var v=inp.value.replace(/\D/g,'');var disp=gid(pre+'-ins-dates');
+  if(v.length===7){var s=rocToDate(v);if(s){var e=add1y(s);var e1=gid(pre+'-ins-end1'),e2=gid(pre+'-ins-end2');if(e1)e1.textContent=fmtD(e);if(e2){var rr=dateToRoc(e);e2.textContent='民國'+rr.slice(0,3)+'年'+rr.slice(3,5)+'月'+rr.slice(5)+'日';}if(disp)disp.style.display='block';}else if(disp)disp.style.display='none';}else if(disp)disp.style.display='none';
 }
 
-// Global document delegation for photos
-document.addEventListener('change', function(e){
-  var inp=e.target;
-  if(inp.classList.contains('photo-file-input')){
-    var file=inp.files[0];
-    if(file) uploadPhoto(inp.dataset.pre, parseInt(inp.dataset.idx), file);
-  }
-});
-document.addEventListener('click', function(e){
-  // photo delete btn
-  var delBtn=e.target.closest('.photo-del-btn');
-  if(delBtn){
-    var pre=delBtn.dataset.pre, idx=parseInt(delBtn.dataset.idx);
-    if(confirm('確定要移除這張照片嗎？')){
-      var ref=pre==='ef'?photoEdit:photoNew;
-      ref[idx]=null;
-      refreshSlot(pre,idx,ref);
-    }
-    return;
-  }
-  // photo img lightbox
-  var img=e.target.closest('.photo-slot.has-photo img');
-  if(img && img.dataset.url){
-    openLightbox(img.dataset.url);
-    return;
-  }
-  // det photo img lightbox
-  var dimg=e.target.closest('.det-photo img');
-  if(dimg && dimg.dataset.url){
-    openLightbox(dimg.dataset.url);
-    return;
-  }
-});
-
-// lightbox
-function openLightbox(url){
-  var lb=gid('lightbox'),img=gid('lightbox-img'),dl=gid('lb-dl');
-  if(lb&&img){img.src=url;if(dl)dl.href=url+'?fl_attachment=1';lb.classList.add('on');}
-}
-gid('btn-lb-close').addEventListener('click', function(){ gid('lightbox').classList.remove('on'); });
-gid('lightbox').addEventListener('click', function(e){ if(e.target===this) this.classList.remove('on'); });
-
-// ════ BUILD FORMS ════
 function buildNewForm(){
   newIT={compulsory:false,third:false,body:false,fire:false};
   photoNew=[null,null];
-  var mf=gid('m-form'), df=gid('d-form');
-  if(mf){ mf.innerHTML=buildFormHTML('mf',null,newIT,photoNew); bindFormEvents('mf',newIT,photoNew); }
-  if(df){ df.innerHTML=buildFormHTML('df',null,newIT,photoNew); bindFormEvents('df',newIT,photoNew); }
+  ['m-form','d-form'].forEach(function(id){
+    var c=gid(id);if(!c)return;
+    var pre=id==='m-form'?'mf':'df';
+    c.innerHTML=buildFormHTML(pre,null,newIT,photoNew);
+    bindFormEvents(pre,newIT);
+  });
 }
+
 function getFormData(pre,types,photos){
   var hasIns=gid(pre+'-ins-yn')&&gid(pre+'-ins-yn').value==='yes';
   var ins=null;
-  if(hasIns){
-    var sr=(gid(pre+'-ins-start')&&gid(pre+'-ins-start').value||'').replace(/\D/g,'');
-    var sd=rocToDate(sr);
-    var ed=sd?add1y(sd):null;
-    ins=Object.assign({startRoc:sr,startDate:sd?sd.toISOString():null,endDate:ed?ed.toISOString():null},types);
-  }
+  if(hasIns){var sr=(gid(pre+'-ins-start')&&gid(pre+'-ins-start').value||'').replace(/\D/g,'');var sd=rocToDate(sr);var ed=sd?add1y(sd):null;ins=Object.assign({startRoc:sr,startDate:sd?sd.toISOString():null,endDate:ed?ed.toISOString():null},types);}
   return{
     name:gid(pre+'-name')&&gid(pre+'-name').value.trim()||'',
     idNum:gid(pre+'-id')&&gid(pre+'-id').value.trim()||'',
@@ -766,69 +617,154 @@ function getFormData(pre,types,photos){
     orderDate:gid(pre+'-order-date')&&gid(pre+'-order-date').value||'',
     licenseDate:gid(pre+'-license-date')&&gid(pre+'-license-date').value||'',
     deliveryDate:gid(pre+'-delivery-date')&&gid(pre+'-delivery-date').value||'',
-    basePrice:parseInt(gid(pre+'-base')&&gid(pre+'-base').value)||0,
-    partsPrice:parseInt(gid(pre+'-parts')&&gid(pre+'-parts').value)||0,
-    costPrice:parseInt(gid(pre+'-cost')&&gid(pre+'-cost').value)||0,
-    dealPrice:parseInt(gid(pre+'-deal')&&gid(pre+'-deal').value)||0,
-    bonus:parseInt(gid(pre+'-bonus')&&gid(pre+'-bonus').value)||0,
+    origPrice:parseInt(gid(pre+'-orig')&&gid(pre+'-orig').value)||0,
+    coDiscount:parseInt(gid(pre+'-co-dis')&&gid(pre+'-co-dis').value)||0,
+    custParts:parseInt(gid(pre+'-cust-parts')&&gid(pre+'-cust-parts').value)||0,
+    myDiscount:parseInt(gid(pre+'-my-dis')&&gid(pre+'-my-dis').value)||0,
+    myParts:parseInt(gid(pre+'-my-parts')&&gid(pre+'-my-parts').value)||0,
     note:gid(pre+'-note')&&gid(pre+'-note').value.trim()||'',
     insurance:ins,
     photos:(photos||[]).filter(Boolean)
   };
 }
 
-// submit new
-function submitNew(pre, photosRef){
+// ── PHOTO UPLOAD ──
+function uploadPhoto(pre,idx,file){
+  var photosRef=pre==='ef'?photoEdit:photoNew;
+  var slot=gid(pre+'-ps-'+idx);if(!slot)return;
+  slot.innerHTML='<div style="width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--surface2)"><span class="spinner"></span><div style="font-size:12px;color:var(--accent);margin-top:8px">上傳中...</div><div style="width:80%;background:var(--border);border-radius:4px;height:6px;margin-top:10px;overflow:hidden"><div id="'+pre+'-prog-'+idx+'" style="height:100%;background:var(--accent);border-radius:4px;width:0;transition:width 0.2s"></div></div><div id="'+pre+'-pct-'+idx+'" style="font-size:11px;color:var(--muted);margin-top:4px">0%</div></div>';
+  var xhr=new XMLHttpRequest();var fd=new FormData();fd.append('file',file);fd.append('upload_preset',CLD_PRESET);fd.append('folder','mengbao_clients');
+  xhr.upload.onprogress=function(e){if(e.lengthComputable){var pct=Math.round(e.loaded/e.total*100);var bar=gid(pre+'-prog-'+idx),lbl=gid(pre+'-pct-'+idx);if(bar)bar.style.width=pct+'%';if(lbl)lbl.textContent=pct+'%';}};
+  xhr.onload=function(){try{var data=JSON.parse(xhr.responseText);if(data.secure_url){photosRef[idx]=data.secure_url;refreshSlot(pre,idx,photosRef);showToast('照片上傳成功 ✓');}else{refreshSlot(pre,idx,photosRef);showToast('上傳失敗：'+(data.error&&data.error.message||'請重試'));}}catch(e){refreshSlot(pre,idx,photosRef);showToast('上傳失敗');}};
+  xhr.onerror=function(){refreshSlot(pre,idx,photosRef);showToast('網路錯誤，請重試');};
+  xhr.open('POST','https://api.cloudinary.com/v1_1/'+CLD_CLOUD+'/image/upload');xhr.send(fd);
+}
+function refreshSlot(pre,idx,photosRef){
+  var slot=gid(pre+'-ps-'+idx);if(!slot)return;
+  var url=photosRef[idx];
+  if(url){slot.className='photo-slot has-photo';slot.innerHTML='<img src="'+url+'" data-url="'+url+'" alt=""><button class="photo-del-btn" data-pre="'+pre+'" data-idx="'+idx+'">×</button>';}
+  else{slot.className='photo-slot';slot.innerHTML='<input class="photo-file-input" type="file" accept="image/*" data-pre="'+pre+'" data-idx="'+idx+'"><span class="photo-slot-icon">📷</span><span class="photo-slot-label">點擊拍照或選取</span>';}
+}
+document.addEventListener('change',function(e){var inp=e.target;if(inp.classList.contains('photo-file-input')){var file=inp.files[0];if(file)uploadPhoto(inp.dataset.pre,parseInt(inp.dataset.idx),file);}});
+document.addEventListener('click',function(e){
+  var delBtn=e.target.closest('.photo-del-btn');
+  if(delBtn&&!delBtn.dataset.detDel){var pre=delBtn.dataset.pre,idx=parseInt(delBtn.dataset.idx);if(confirm('確定要移除這張照片嗎？')){var ref=pre==='ef'?photoEdit:photoNew;ref[idx]=null;refreshSlot(pre,idx,ref);}return;}
+  var img=e.target.closest('.photo-slot.has-photo img');if(img&&img.dataset.url){openLightbox(img.dataset.url);return;}
+  var dimg=e.target.closest('.det-photo img');if(dimg&&dimg.dataset.url){openLightbox(dimg.dataset.url);return;}
+});
+function openLightbox(url){var lb=gid('lightbox'),img=gid('lightbox-img'),dl=gid('lb-dl');if(lb&&img){img.src=url;if(dl)dl.href=url+'?fl_attachment=1';lb.classList.add('on');}}
+gid('btn-lb-close').addEventListener('click',function(){gid('lightbox').classList.remove('on');});
+gid('lightbox').addEventListener('click',function(e){if(e.target===this)this.classList.remove('on');});
+
+// ── SUBMIT NEW ──
+function submitNew(pre,photosRef){
   var data=getFormData(pre,newIT,photosRef);
   if(!data.name){showToast('請輸入客戶姓名');return;}
   if(!data.car){showToast('請輸入車輛款式');return;}
   var btn=gid(pre==='mf'?'m-submit':'d-submit');
   if(btn){btn.disabled=true;btn.textContent='儲存中...';}
-  addClient(data).then(function(){
-    buildNewForm(); switchTab('db');
-  }).finally(function(){if(btn){btn.disabled=false;btn.textContent='建立客戶資料';}});
+  addClient(data).then(function(){buildNewForm();switchTab('db');}).finally(function(){if(btn){btn.disabled=false;btn.textContent='建立客戶資料';}});
 }
-gid('m-submit').addEventListener('click', function(){ submitNew('mf',photoNew); });
-gid('d-submit').addEventListener('click', function(){ submitNew('df',photoNew); });
+gid('m-submit').addEventListener('click',function(){submitNew('mf',photoNew);});
+gid('d-submit').addEventListener('click',function(){submitNew('df',photoNew);});
 
-// ════ RENDER DASHBOARD ════
+// ── RENDER DASHBOARD ──
 function renderDash(){
   var now=new Date();
-  var mc=clients.filter(function(c){
-    var ref=c.licenseDate?new Date(c.licenseDate):new Date(c.createdAt);
-    return ref.getMonth()===now.getMonth()&&ref.getFullYear()===now.getFullYear();
-  });
-  var rev=mc.reduce(function(s,c){return s+(c.dealPrice||0);},0);
-  var pft=mc.filter(function(c){return c.costPrice>0;}).reduce(function(s,c){
-    return s+(c.dealPrice-(c.costPrice||0)-(c.bonus||0));
-  },0);
-  var expSoon=clients.filter(function(c){
-    return c.insurance&&c.insurance.endDate&&daysLeft(new Date(c.insurance.endDate))<=30&&daysLeft(new Date(c.insurance.endDate))>=0;
-  });
-  var discs=clients.filter(function(c){return c.basePrice>0;}).map(function(c){
-    var o=c.basePrice+c.partsPrice;return o>0?(o-c.dealPrice)/o*100:0;
-  });
-  var avgD=discs.length?Math.round(discs.reduce(function(a,b){return a+b;},0)/discs.length):0;
+  var mc=clients.filter(function(c){var ref=c.licenseDate?new Date(c.licenseDate):new Date(c.createdAt);return ref.getMonth()===now.getMonth()&&ref.getFullYear()===now.getFullYear();});
+  var rev=mc.reduce(function(s,c){return s+calcDeal(c);},0);
+  var profit=mc.reduce(function(s,c){return s+calcProfit(c);},0);
+  var loss=mc.reduce(function(s,c){return s+calcLoss(c);},0);
+  var expSoon=clients.filter(function(c){return c.insurance&&c.insurance.startDate&&c.insurance.endDate&&daysLeft(new Date(c.insurance.endDate))<=60&&daysLeft(new Date(c.insurance.endDate))>=0;});
   ['m','d'].forEach(function(px){
     function set(id,v){var el=gid(px+'s-'+id);if(el)el.textContent=v;}
     set('month',mc.length);set('total',clients.length);set('rev',fmtBig(rev));
-    var pe=gid(px+'s-profit');
-    if(pe){pe.textContent=fmtBig(pft);pe.className='sc-val'+(pft>=0?' profit':'');}
-    set('ins',expSoon.length);set('disc',avgD+'%');
-    var ea=gid(px==='m'?'m-ea':'d-ea');
-    if(ea){
-      if(expSoon.length){ea.style.display='block';ea.innerHTML='<strong>⚠ 保險即將到期提醒</strong>'+expSoon.map(function(c){return c.name+'（'+fmtD(new Date(c.insurance.endDate))+' 到期）';}).join('<br>');}
-      else ea.style.display='none';
-    }
+    var pe=gid(px+'s-profit');if(pe){pe.textContent=fmtBig(profit);pe.className='sc-val '+(profit>=0?'green':'red');}
+    var le=gid(px+'s-loss');if(le){le.textContent=fmtBig(loss);le.className='sc-val '+(loss>0?'red':'green');}
+    set('ins',expSoon.length);
+    var ec=gid(px+'-ins-exp-count');if(ec)ec.textContent=expSoon.length;
   });
-  var rHTML=clients.slice(0,6).map(function(c){
-    return '<div class="ri"><div class="av">'+ini(c.name)+'</div><div class="ri-info"><div class="ri-name">'+c.name+'</div><div class="ri-car">'+(c.car||'-')+'</div></div><div class="ri-price">'+fmtM(c.dealPrice)+'</div></div>';
-  }).join('')||'<div class="empty">尚無客戶資料</div>';
+  renderInsExpList(expSoon);
+  var rHTML=clients.slice(0,6).map(function(c){return '<div class="ri"><div class="av">'+ini(c.name)+'</div><div class="ri-info"><div class="ri-name">'+c.name+'</div><div class="ri-car">'+(c.car||'-')+'</div></div><div class="ri-price">'+fmtM(calcDeal(c))+'</div></div>';}).join('')||'<div class="empty">尚無客戶資料</div>';
   ['m-recent','d-recent'].forEach(function(id){var el=gid(id);if(el)el.innerHTML=rHTML;});
   var dd=gid('d-date');if(dd){var n=new Date();dd.textContent=n.getFullYear()+'年'+(n.getMonth()+1)+'月'+n.getDate()+'日';}
 }
 
-// ════ RENDER DB ════
+// ── INSURANCE EXPIRY LIST ──
+function renderInsExpList(expSoon){
+  ['m','d'].forEach(function(px){
+    var el=gid(px+'-ins-exp-list');if(!el)return;
+    if(!expSoon.length){el.innerHTML='<div class="ins-exp-empty">近60天無保險到期</div>';return;}
+    el.innerHTML=expSoon.map(function(c){
+      var idx=clients.findIndex(function(x){return x._id===c._id;});
+      var d=daysLeft(new Date(c.insurance.endDate));
+      var dcls=d<=14?'days-urgent':'days-soon';
+      return '<div class="ins-exp-item">'+
+        '<div class="ins-exp-info">'+
+          '<div class="ins-exp-av">'+ini(c.name)+'</div>'+
+          '<div>'+
+            '<div class="ins-exp-name">'+c.name+'</div>'+
+            '<div class="ins-exp-date">'+c.car+' · 到期：'+fmtD(new Date(c.insurance.endDate))+'</div>'+
+          '</div>'+
+          '<span class="ins-exp-days '+dcls+'">'+d+'天</span>'+
+        '</div>'+
+        '<div class="ins-exp-btns">'+
+          '<button class="ins-act-btn renew" data-ins-action="renew" data-idx="'+idx+'">✓ 完成續保</button>'+
+          '<button class="ins-act-btn edit" data-ins-action="edit" data-idx="'+idx+'">✏ 修改續保</button>'+
+          '<button class="ins-act-btn stop" data-ins-action="stop" data-idx="'+idx+'">✕ 不續保</button>'+
+        '</div>'+
+      '</div>';
+    }).join('');
+  });
+}
+
+// insurance action delegation
+document.addEventListener('click',function(e){
+  var btn=e.target.closest('[data-ins-action]');
+  if(!btn)return;
+  var idx=parseInt(btn.dataset.idx);
+  var action=btn.dataset.insAction;
+  var c=clients[idx];
+  if(action==='renew'){
+    if(!confirm('確定完成續保？保險起始日將自動往後延一年。'))return;
+    var oldStart=new Date(c.insurance.startDate);
+    var newStart=add1y(oldStart);
+    var newEnd=add1y(newStart);
+    var newRoc=dateToRoc(newStart);
+    var newIns=Object.assign({},c.insurance,{startRoc:newRoc,startDate:newStart.toISOString(),endDate:newEnd.toISOString()});
+    updClient(c._id,{insurance:newIns});
+  } else if(action==='stop'){
+    if(!confirm('確定不續保？此客戶將從到期提醒中移除，投保狀態改為未投保。'))return;
+    updClient(c._id,{insurance:null});
+  } else if(action==='edit'){
+    openInsEdit(idx);
+  }
+});
+
+// ── INS EDIT ──
+function openInsEdit(idx){
+  insEditIdx=idx;var c=clients[idx];
+  var ins=c.insurance||null;
+  insEditIT={compulsory:!!(ins&&ins.compulsory),third:!!(ins&&ins.third),body:!!(ins&&ins.body),fire:!!(ins&&ins.fire)};
+  gid('ins-edit-form').innerHTML='<div class="fs" style="box-shadow:none;padding:0;">'+insFormHTML('ie',ins,insEditIT)+'</div>';
+  var yn=gid('ie-ins-yn');if(yn)yn.addEventListener('change',function(){toggleInsForm('ie');});
+  var st=gid('ie-ins-start');if(st)st.addEventListener('input',function(){calcInsDate('ie');});
+  var ig=gid('ie-ins-wrap');
+  if(ig){ig.querySelectorAll('.itog').forEach(function(tog){tog.addEventListener('click',function(){toggleInsType('ie',this.dataset.k);});});}
+  gid('ov-ins-edit').classList.add('on');
+}
+gid('btn-close-ins-edit').addEventListener('click',function(){gid('ov-ins-edit').classList.remove('on');});
+gid('ov-ins-edit').addEventListener('click',function(e){if(e.target===this)this.classList.remove('on');});
+gid('btn-save-ins-edit').addEventListener('click',function(){
+  if(insEditIdx===null)return;
+  var hasIns=gid('ie-ins-yn')&&gid('ie-ins-yn').value==='yes';
+  var ins=null;
+  if(hasIns){var sr=(gid('ie-ins-start')&&gid('ie-ins-start').value||'').replace(/\D/g,'');var sd=rocToDate(sr);var ed=sd?add1y(sd):null;ins=Object.assign({startRoc:sr,startDate:sd?sd.toISOString():null,endDate:ed?ed.toISOString():null},insEditIT);}
+  var btn=this;btn.disabled=true;btn.textContent='儲存中...';
+  updClient(clients[insEditIdx]._id,{insurance:ins}).then(function(){gid('ov-ins-edit').classList.remove('on');}).finally(function(){btn.disabled=false;btn.textContent='儲存保險資料';});
+});
+
+// ── RENDER DB ──
 function renderDB(){
   var mq=(gid('m-q')&&gid('m-q').value||'').toLowerCase();
   var dq=(gid('d-q')&&gid('d-q').value||'').toLowerCase();
@@ -846,9 +782,7 @@ function renderDB(){
     if(!fil.length){el.innerHTML='<div class="empty">查無符合資料</div>';return;}
     el.innerHTML=fil.map(function(c){
       var oi=clients.findIndex(function(x){return x._id===c._id;});
-      var orig=c.basePrice+c.partsPrice;
-      var disc=orig>0?Math.round((orig-c.dealPrice)/orig*100):0;
-      var pft=c.costPrice>0?(c.dealPrice-(c.costPrice||0)-(c.bonus||0)):null;
+      var deal=calcDeal(c),profit=calcProfit(c),loss=calcLoss(c);
       var pills='';
       if(c.insurance&&c.insurance.startDate){
         var e=new Date(c.insurance.endDate);var d=daysLeft(e);
@@ -860,7 +794,7 @@ function renderDB(){
       }
       return '<div class="card"><div class="cb">'+
         '<div class="ch"><div class="av">'+ini(c.name)+'</div>'+
-        '<div><div class="cn">'+c.name+(disc>0?' <span class="badge-ok">折讓'+disc+'%</span>':'')+'</div>'+
+        '<div><div class="cn">'+c.name+'</div>'+
         '<div class="cm">'+(c.idNum||'無身分證')+' · '+new Date(c.createdAt).toLocaleDateString('zh-TW')+'</div></div></div>'+
         '<div class="cg">'+
           '<div class="cf">車款<span>'+(c.car||'-')+'</span></div>'+
@@ -868,10 +802,12 @@ function renderDB(){
           (c.licenseDate?'<div class="cf">領牌日期<span>'+c.licenseDate.replace(/-/g,'/')+'</span></div>':'')+
           (c.deliveryDate?'<div class="cf">交車日期<span>'+c.deliveryDate.replace(/-/g,'/')+'</span></div>':'')+
         '</div>'+(pills?'<div class="pills">'+pills+'</div>':'')+
-        '</div><div class="cf-footer"><div>'+
-          '<span class="dp">'+fmtM(c.dealPrice)+'</span>'+
-          (pft!==null?'<span class="pc">淨利 '+fmtM(pft)+'</span>':'')+
-        '</div></div>'+
+        '</div>'+
+        '<div class="cf-footer">'+
+          '<span class="dp">成交 '+fmtM(deal)+'</span>'+
+          '<span class="'+(profit>=0?'pc':'pc-loss')+'">淨利 '+fmtM(profit)+'</span>'+
+          (loss>0?'<span class="pc-loss">損失 '+fmtM(loss)+'</span>':'')+
+        '</div>'+
         '<div class="ca">'+
           '<button class="bs pri" data-action="detail" data-idx="'+oi+'">查看詳情</button>'+
           '<button class="bs" data-action="edit" data-idx="'+oi+'">✏️ 修改</button>'+
@@ -882,39 +818,25 @@ function renderDB(){
   doRender(mq,'m-list','m-rc');
   doRender(dq,'d-list','d-rc');
 }
-
-// DB card delegation
 ['m-list','d-list'].forEach(function(listId){
   gid(listId).addEventListener('click',function(e){
-    var btn=e.target.closest('[data-action]');
-    if(!btn)return;
-    var idx=parseInt(btn.dataset.idx);
-    var action=btn.dataset.action;
-    if(action==='detail') openDetail(idx);
-    else if(action==='edit') openEdit(idx);
-    else if(action==='del'){ if(confirm('確定要刪除此筆客戶資料嗎？')) delClient(clients[idx]._id); }
+    var btn=e.target.closest('[data-action]');if(!btn)return;
+    var idx=parseInt(btn.dataset.idx),action=btn.dataset.action;
+    if(action==='detail')openDetail(idx);
+    else if(action==='edit')openEdit(idx);
+    else if(action==='del'){if(confirm('確定要刪除此筆客戶資料嗎？'))delClient(clients[idx]._id);}
   });
 });
-
-// filter buttons
-document.querySelectorAll('.fb').forEach(function(b){
-  b.addEventListener('click',function(){
-    dbFilter=this.dataset.f;
-    document.querySelectorAll('.fb').forEach(function(x){x.classList.toggle('on',x.dataset.f===dbFilter);});
-    renderDB();
-  });
-});
+document.querySelectorAll('.fb').forEach(function(b){b.addEventListener('click',function(){dbFilter=this.dataset.f;document.querySelectorAll('.fb').forEach(function(x){x.classList.toggle('on',x.dataset.f===dbFilter);});renderDB();});});
 gid('m-q').addEventListener('input',renderDB);
 gid('d-q').addEventListener('input',renderDB);
 
-// ════ DETAIL ════
+// ── DETAIL ──
 function openDetail(idx){
   detIdx=idx;var c=clients[idx];
   gid('det-name').textContent=c.name;
   gid('det-note').textContent=c.note||'無備註';
-  var orig=c.basePrice+c.partsPrice;
-  var disc=orig>0?Math.round((orig-c.dealPrice)/orig*100):0;
-  var pft=c.dealPrice-(c.costPrice||0)-(c.bonus||0);
+  var deal=calcDeal(c),cost=calcCost(c),loss=calcLoss(c),profit=calcProfit(c);
   var fields=[
     ['身分證',c.idNum||'-'],['生日',c.birthday?c.birthday.replace(/-/g,'/'):'-'],
     ['電話',c.phone||'-'],['手機',c.mobile||'-'],
@@ -922,28 +844,32 @@ function openDetail(idx){
     ['訂車日期',c.orderDate?c.orderDate.replace(/-/g,'/'):'-'],
     ['領牌日期',c.licenseDate?c.licenseDate.replace(/-/g,'/'):'-'],
     ['交車日期',c.deliveryDate?c.deliveryDate.replace(/-/g,'/'):'-'],
-    ['原始車價',fmtM(c.basePrice)],['零配件',fmtM(c.partsPrice)],
-    ['車輛成本',c.costPrice>0?fmtM(c.costPrice):'-'],['成交價格',fmtM(c.dealPrice)],
-    ['退客戶獎金',c.bonus>0?fmtM(c.bonus):'-'],
-    ['折讓',disc>0?fmtM(orig-c.dealPrice)+' ('+disc+'%)':'-'],
-    ['淨利',c.costPrice>0?fmtM(pft):'（未填成本）'],
+    ['原始車價',fmtM(c.origPrice||0)],['公司折扣金',fmtM(c.coDiscount||0)],
+    ['客人選配件',fmtM(c.custParts||0)],['我給折扣金',fmtM(c.myDiscount||0)],
+    ['我給配件價',fmtM(c.myParts||0)],
+    ['客人成交價','accent'],['我的成本',''],
+    ['折讓損失','red'],['淨利',profit>=0?'green':'red'],
   ];
-  gid('det-grid').innerHTML=fields.map(function(f){
-    var isP=f[0]==='淨利';
-    var cls=isP&&c.costPrice>0?(pft>=0?'df-val pft':'df-val'):'df-val';
-    return '<div><div class="df-lbl">'+f[0]+'</div><div class="'+cls+'">'+f[1]+'</div></div>';
-  }).join('');
+  // rebuild fields with calculated values
+  var f2=[
+    ['身分證',c.idNum||'-',''],['生日',c.birthday?c.birthday.replace(/-/g,'/'):'-',''],
+    ['電話',c.phone||'-',''],['手機',c.mobile||'-',''],
+    ['地址',c.address||'-',''],['車款',c.car||'-',''],
+    ['訂車日期',c.orderDate?c.orderDate.replace(/-/g,'/'):'-',''],
+    ['領牌日期',c.licenseDate?c.licenseDate.replace(/-/g,'/'):'-',''],
+    ['交車日期',c.deliveryDate?c.deliveryDate.replace(/-/g,'/'):'-',''],
+    ['原始車價',fmtM(c.origPrice||0),''],['公司折扣金',fmtM(c.coDiscount||0),''],
+    ['客人選配件',fmtM(c.custParts||0),''],['我給折扣金',fmtM(c.myDiscount||0),''],
+    ['我給配件價',fmtM(c.myParts||0),''],
+    ['客人成交價',fmtM(deal),'accent'],['我的成本',fmtM(cost),''],
+    ['折讓損失',fmtM(loss),loss>0?'red':'green'],
+    ['淨利',fmtM(profit),profit>=0?'green':'red'],
+  ];
+  gid('det-grid').innerHTML=f2.map(function(f){return'<div><div class="df-lbl">'+f[0]+'</div><div class="df-val'+(f[2]?' '+f[2]:'')+'">'+f[1]+'</div></div>';}).join('');
   // photos
-  var dp=gid('det-photos');
-  var urls=(c.photos||[]).filter(Boolean);
+  var dp=gid('det-photos');var urls=(c.photos||[]).filter(Boolean);
   if(!urls.length){dp.innerHTML='<div class="photo-empty">無照片記錄</div>';}
-  else{dp.innerHTML=urls.map(function(u,i){
-    return '<div class="det-photo"><img src="'+u+'" data-url="'+u+'" alt="">'+
-      '<div class="det-photo-actions">'+
-        '<a class="det-photo-btn" href="'+u+'?fl_attachment=1" target="_blank" download title="下載">⬇</a>'+
-        '<button class="det-photo-btn" data-det-del="'+i+'" title="刪除">×</button>'+
-      '</div></div>';
-  }).join('');}
+  else{dp.innerHTML=urls.map(function(u,i){return'<div class="det-photo"><img src="'+u+'" data-url="'+u+'" alt=""><div class="det-photo-actions"><a class="det-photo-btn" href="'+u+'?fl_attachment=1" target="_blank" download>⬇</a><button class="det-photo-btn" data-det-del="'+i+'">×</button></div></div>';}).join('');}
   // insurance
   var di=gid('det-ins');
   if(c.insurance&&c.insurance.startDate){
@@ -957,48 +883,38 @@ function openDetail(idx){
   } else di.innerHTML='<div style="font-size:13px;color:var(--hint);padding:6px 0">未投保或未記錄保險資料</div>';
   gid('ov-detail').classList.add('on');
 }
-gid('btn-close-detail').addEventListener('click',function(){ gid('ov-detail').classList.remove('on'); });
-gid('ov-detail').addEventListener('click',function(e){ if(e.target===this) this.classList.remove('on'); });
-gid('btn-det-edit').addEventListener('click',function(){ gid('ov-detail').classList.remove('on'); openEdit(detIdx); });
-gid('btn-det-del').addEventListener('click',function(){
-  if(confirm('確定要刪除此筆客戶資料嗎？')){ delClient(clients[detIdx]._id); gid('ov-detail').classList.remove('on'); }
-});
-// det photo delete delegation
+gid('btn-close-detail').addEventListener('click',function(){gid('ov-detail').classList.remove('on');});
+gid('ov-detail').addEventListener('click',function(e){if(e.target===this)this.classList.remove('on');});
+gid('btn-det-edit').addEventListener('click',function(){gid('ov-detail').classList.remove('on');openEdit(detIdx);});
+gid('btn-det-del').addEventListener('click',function(){if(confirm('確定要刪除此筆客戶資料嗎？')){delClient(clients[detIdx]._id);gid('ov-detail').classList.remove('on');}});
 gid('det-photos').addEventListener('click',function(e){
-  var btn=e.target.closest('[data-det-del]');
-  if(!btn)return;
+  var btn=e.target.closest('[data-det-del]');if(!btn)return;
   var idx=parseInt(btn.dataset.detDel);
-  if(confirm('確定要刪除這張照片嗎？')){
-    var c=clients[detIdx];
-    var photos=(c.photos||[]).filter(Boolean);
-    photos.splice(idx,1);
-    updClient(c._id,{photos:photos}).then(function(){ gid('ov-detail').classList.remove('on'); });
-  }
+  if(confirm('確定要刪除這張照片嗎？')){var c=clients[detIdx];var photos=(c.photos||[]).filter(Boolean);photos.splice(idx,1);updClient(c._id,{photos:photos}).then(function(){gid('ov-detail').classList.remove('on');});}
 });
 
-// ════ EDIT ════
+// ── EDIT ──
 function openEdit(idx){
   detIdx=idx;var c=clients[idx];
   editIT={compulsory:!!(c.insurance&&c.insurance.compulsory),third:!!(c.insurance&&c.insurance.third),body:!!(c.insurance&&c.insurance.body),fire:!!(c.insurance&&c.insurance.fire)};
   photoEdit=[(c.photos&&c.photos[0])||null,(c.photos&&c.photos[1])||null];
   gid('edit-form').innerHTML=buildFormHTML('ef',c,editIT,photoEdit);
-  bindFormEvents('ef',editIT,photoEdit);
+  bindFormEvents('ef',editIT);
+  calcPriceFields('ef');
   gid('ov-edit').classList.add('on');
 }
-gid('btn-close-edit').addEventListener('click',function(){ gid('ov-edit').classList.remove('on'); });
-gid('ov-edit').addEventListener('click',function(e){ if(e.target===this) this.classList.remove('on'); });
+gid('btn-close-edit').addEventListener('click',function(){gid('ov-edit').classList.remove('on');});
+gid('ov-edit').addEventListener('click',function(e){if(e.target===this)this.classList.remove('on');});
 gid('btn-save-edit').addEventListener('click',function(){
   if(detIdx===null)return;
   var data=getFormData('ef',editIT,photoEdit);
   if(!data.name){showToast('請輸入客戶姓名');return;}
   if(!data.car){showToast('請輸入車輛款式');return;}
   var btn=this;btn.disabled=true;btn.textContent='儲存中...';
-  updClient(clients[detIdx]._id,data).then(function(){
-    gid('ov-edit').classList.remove('on');
-  }).finally(function(){btn.disabled=false;btn.textContent='儲存修改';});
+  updClient(clients[detIdx]._id,data).then(function(){gid('ov-edit').classList.remove('on');}).finally(function(){btn.disabled=false;btn.textContent='儲存修改';});
 });
 
-// ════ INIT ════
+// INIT
 buildNewForm();
 </script>
 </body>
