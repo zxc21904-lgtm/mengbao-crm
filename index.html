@@ -19,7 +19,6 @@
   --sw:240px;--font:'Noto Sans TC',system-ui,sans-serif;
 }
 body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:100vh;}
-/* LOCK */
 #lock-screen{position:fixed;inset:0;background:linear-gradient(135deg,#1a3a6b,#1a5fa8 60%,#2980d9);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:9999;padding:32px;}
 .lk-logo{font-size:20px;font-weight:700;color:#fff;text-align:center;margin-bottom:6px;}
 .lk-sub{font-size:12px;color:rgba(255,255,255,0.5);margin-bottom:36px;}
@@ -32,13 +31,12 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
 .lk-btn:active{opacity:0.85;}
 .lk-err{font-size:12px;color:#fca5a5;margin-top:12px;min-height:16px;}
 .lk-ver{position:absolute;bottom:20px;font-size:11px;color:rgba(255,255,255,0.25);}
-/* APP */
 #app{display:none;}
 .m-tabs{display:none;position:fixed;bottom:0;left:0;right:0;background:var(--surface);border-top:1px solid var(--border);z-index:100;}
 .m-tabs-row{display:flex;}
-.mt{flex:1;padding:9px 2px 7px;text-align:center;border:none;background:transparent;color:var(--muted);font-size:10px;font-weight:500;cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent;}
+.mt{flex:1;padding:8px 2px 6px;text-align:center;border:none;background:transparent;color:var(--muted);font-size:9px;font-weight:500;cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent;}
 .mt.on{color:var(--accent);}
-.mt-ic{font-size:20px;display:block;margin-bottom:2px;}
+.mt-ic{font-size:18px;display:block;margin-bottom:2px;}
 .d-layout{display:none;min-height:100vh;}
 .sidebar{width:var(--sw);background:var(--surface);border-right:1px solid var(--border);position:fixed;top:0;bottom:0;left:0;display:flex;flex-direction:column;}
 .sb-logo{padding:22px 20px 14px;}
@@ -58,12 +56,11 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
 .pt{font-size:22px;font-weight:700;}
 .pst{font-size:13px;color:var(--muted);margin-top:4px;}
 .m-layout{display:block;}
-.m-page{display:none;padding:14px;padding-bottom:80px;}
+.m-page{display:none;padding:14px;padding-bottom:90px;}
 .m-page.on{display:block;}
 .m-bar{background:var(--surface);border-bottom:1px solid var(--border);padding:13px 16px;position:sticky;top:0;z-index:50;}
 .m-bar-title{font-size:15px;font-weight:700;color:var(--accent);}
 .m-bar-sub{font-size:11px;color:var(--hint);margin-top:1px;}
-/* STATS */
 .sg{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:16px;}
 .sc{background:var(--surface);border-radius:var(--rl);padding:14px;box-shadow:var(--sh);}
 .sc-lbl{font-size:11px;color:var(--muted);margin-bottom:5px;font-weight:500;text-transform:uppercase;letter-spacing:0.3px;}
@@ -71,7 +68,6 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
 .sc-val.green{color:var(--profit);}
 .sc-val.red{color:var(--loss);}
 .sc-sub{font-size:11px;color:var(--hint);margin-top:3px;}
-/* INSURANCE EXPIRY LIST */
 .ins-exp-section{background:var(--surface);border-radius:var(--rl);box-shadow:var(--sh);margin-bottom:16px;overflow:hidden;}
 .ins-exp-header{padding:12px 16px;background:var(--warn-bg);border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px;}
 .ins-exp-title{font-size:13px;font-weight:600;color:var(--warn-text);}
@@ -82,16 +78,15 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
 .ins-exp-av{width:32px;height:32px;border-radius:50%;background:var(--accent-light);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:var(--accent);flex-shrink:0;}
 .ins-exp-name{font-size:13px;font-weight:600;color:var(--text);}
 .ins-exp-date{font-size:11px;color:var(--muted);}
-.ins-exp-days{font-size:11px;padding:2px 8px;border-radius:10px;font-weight:500;}
+.ins-exp-days{font-size:11px;padding:2px 8px;border-radius:10px;font-weight:500;margin-left:auto;flex-shrink:0;}
 .days-urgent{background:#fde8e8;color:#c0392b;}
 .days-soon{background:var(--warn-bg);color:var(--warn-text);}
 .ins-exp-btns{display:flex;gap:6px;}
 .ins-act-btn{flex:1;padding:7px 4px;font-size:11px;font-weight:500;border-radius:var(--r);border:1px solid var(--border);background:var(--surface2);color:var(--muted);cursor:pointer;text-align:center;touch-action:manipulation;}
 .ins-act-btn.renew{background:#e6f7f0;color:var(--profit);border-color:#1d9e75;}
-.ins-act-btn.edit{background:var(--accent-light);color:var(--accent);border-color:var(--accent-mid);}
+.ins-act-btn.edit-ins{background:var(--accent-light);color:var(--accent);border-color:var(--accent-mid);}
 .ins-act-btn.stop{background:#fde8e8;color:var(--loss);border-color:#f09595;}
 .ins-exp-empty{padding:20px 16px;font-size:13px;color:var(--hint);text-align:center;}
-/* CARDS */
 .slbl{font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:10px;}
 .card{background:var(--surface);border-radius:var(--rl);box-shadow:var(--sh);margin-bottom:12px;overflow:hidden;}
 .cb{padding:14px 16px;}
@@ -116,6 +111,12 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
 .pill-ok{background:var(--success-bg);color:var(--success-text);}
 .pill-warn{background:var(--warn-bg);color:var(--warn-text);}
 .badge-ok{font-size:10px;padding:2px 7px;border-radius:20px;font-weight:500;background:var(--success-bg);color:var(--success-text);}
+/* STATUS BADGES */
+.status-badge{font-size:10px;padding:3px 9px;border-radius:20px;font-weight:600;display:inline-block;}
+.st-pending{background:#fff3cd;color:#856404;}
+.st-booked{background:#d1fae5;color:#065f46;}
+.st-waiting{background:#dbeafe;color:#1e40af;}
+.st-invalid{background:#f3f4f6;color:#6b7280;}
 /* FORMS */
 .fs{background:var(--surface);border-radius:var(--rl);box-shadow:var(--sh);padding:16px;margin-bottom:12px;}
 .fs-title{font-size:12px;font-weight:600;color:var(--accent);margin-bottom:12px;text-transform:uppercase;letter-spacing:0.3px;}
@@ -125,7 +126,6 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
 .field input:focus,.field select:focus,.field textarea:focus{border-color:var(--accent-mid);background:#fff;}
 .field textarea{resize:vertical;min-height:60px;}
 .fr{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;}
-/* PRICE SUMMARY */
 .psumm{border-radius:var(--r);padding:14px;margin-top:10px;display:none;background:var(--surface2);border:1px solid var(--border);}
 .psumm-title{font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:0.3px;margin-bottom:10px;}
 .prow{display:flex;justify-content:space-between;font-size:13px;padding:5px 0;border-bottom:1px solid var(--border);}
@@ -150,7 +150,6 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
 .idr{display:flex;justify-content:space-between;font-size:12px;padding:3px 0;}
 .idl{color:var(--muted);}
 .idv{font-weight:600;color:var(--text);}
-/* SEARCH */
 .sw-wrap{margin-bottom:14px;}
 .si-wrap{position:relative;margin-bottom:10px;}
 .si-wrap input{width:100%;padding:10px 14px 10px 38px;border:1px solid var(--border);border-radius:var(--rl);background:var(--surface);font-size:14px;color:var(--text);outline:none;font-family:var(--font);}
@@ -160,7 +159,6 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
 .fb{padding:6px 12px;border:1px solid var(--border);border-radius:20px;background:var(--surface);color:var(--muted);font-size:12px;font-weight:500;cursor:pointer;touch-action:manipulation;}
 .fb.on{background:var(--accent-light);color:var(--accent);border-color:var(--accent-mid);}
 .rc{font-size:12px;color:var(--hint);margin-bottom:10px;}
-/* OVERLAY */
 .ov{position:fixed;inset:0;background:rgba(0,0,0,0.45);z-index:500;display:none;align-items:flex-end;justify-content:center;}
 .ov.on{display:flex;}
 .sheet{background:var(--surface);border-radius:20px 20px 0 0;padding:20px 16px 32px;width:100%;max-width:640px;max-height:88vh;overflow-y:auto;}
@@ -191,13 +189,13 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
 .loading{text-align:center;padding:28px 0;color:var(--hint);font-size:13px;}
 @keyframes spin{to{transform:rotate(360deg);}}
 .spinner{display:inline-block;width:18px;height:18px;border:2px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin 0.7s linear infinite;margin-right:6px;vertical-align:middle;}
-#toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%);background:#1a3a6b;color:#fff;padding:10px 22px;border-radius:20px;font-size:13px;font-weight:500;opacity:0;transition:opacity 0.3s;z-index:9000;white-space:nowrap;pointer-events:none;box-shadow:var(--sh-lg);}
+#toast{position:fixed;bottom:96px;left:50%;transform:translateX(-50%);background:#1a3a6b;color:#fff;padding:10px 22px;border-radius:20px;font-size:13px;font-weight:500;opacity:0;transition:opacity 0.3s;z-index:9000;white-space:nowrap;pointer-events:none;box-shadow:var(--sh-lg);}
 #toast.on{opacity:1;}
 .sync-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:#ccc;margin-right:5px;}
 .sync-dot.ok{background:#1d9e75;}
 .sync-dot.err{background:#e24b4a;}
-/* PHOTO */
 .photo-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:8px;}
+.photo-grid-1{display:grid;grid-template-columns:1fr;gap:10px;margin-bottom:8px;}
 .photo-slot{position:relative;aspect-ratio:4/3;border-radius:var(--r);overflow:hidden;background:var(--surface2);border:2px dashed var(--border);display:flex;flex-direction:column;align-items:center;justify-content:center;}
 .photo-slot.has-photo{border:none;}
 .photo-slot img{width:100%;height:100%;object-fit:cover;}
@@ -216,6 +214,16 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
 #lightbox-img{max-width:94vw;max-height:78vh;border-radius:var(--r);object-fit:contain;}
 .lb-bar{display:flex;gap:12px;margin-top:16px;}
 .lb-btn{padding:8px 20px;border-radius:20px;border:1px solid rgba(255,255,255,0.3);background:rgba(255,255,255,0.1);color:#fff;font-size:13px;cursor:pointer;text-decoration:none;display:flex;align-items:center;gap:6px;touch-action:manipulation;}
+/* PROSPECT CARD */
+.prospect-card{background:var(--surface);border-radius:var(--rl);box-shadow:var(--sh);margin-bottom:12px;overflow:hidden;}
+.prospect-cb{padding:14px 16px;}
+.prospect-header{display:flex;align-items:center;gap:10px;margin-bottom:8px;}
+.prospect-name{font-size:14px;font-weight:600;color:var(--text);}
+.prospect-meta{font-size:11px;color:var(--hint);margin-top:1px;}
+.prospect-info{font-size:12px;color:var(--muted);margin-bottom:8px;}
+.prospect-info span{color:var(--text);font-weight:500;}
+.prospect-footer{display:flex;justify-content:space-between;align-items:center;padding:8px 16px;border-top:1px solid var(--border);background:var(--surface2);}
+.prospect-actions{display:flex;gap:6px;padding:8px 16px;border-top:1px solid var(--border);}
 @media(min-width:769px){
   .m-layout{display:none!important;}.m-tabs{display:none!important;}.d-layout{display:flex!important;}
   .sg{grid-template-columns:repeat(3,1fr);}
@@ -242,7 +250,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
     <button class="lk-btn" id="lk-btn">解鎖</button>
     <div class="lk-err" id="lk-err"></div>
   </div>
-  <div class="lk-ver">v6.0 · Firebase + Cloudinary</div>
+  <div class="lk-ver">v7.0 · Firebase + Cloudinary</div>
 </div>
 
 <!-- APP -->
@@ -253,6 +261,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
       <div class="m-bar-title">孟寶專屬管理系統</div>
       <div class="m-bar-sub" id="m-sync"></div>
     </div>
+    <!-- Dashboard -->
     <div class="m-page on" id="mp-dashboard">
       <div style="height:12px"></div>
       <div class="sg">
@@ -263,24 +272,20 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
         <div class="sc"><div class="sc-lbl">本月折讓損失</div><div class="sc-val red" id="ms-loss">$0</div><div class="sc-sub">依領牌日加總</div></div>
         <div class="sc"><div class="sc-lbl">保險到期</div><div class="sc-val" id="ms-ins">0</div><div class="sc-sub">60天內</div></div>
       </div>
-      <div class="ea" id="m-ea"></div>
-      <!-- Insurance expiry list -->
       <div class="ins-exp-section" id="m-ins-exp-section">
-        <div class="ins-exp-header">
-          <span>⚠</span>
-          <span class="ins-exp-title">近60天保險到期名單</span>
-          <span class="ins-exp-count" id="m-ins-exp-count">0</span>
-        </div>
+        <div class="ins-exp-header"><span>⚠</span><span class="ins-exp-title">近60天保險到期名單</span><span class="ins-exp-count" id="m-ins-exp-count">0</span></div>
         <div id="m-ins-exp-list"><div class="ins-exp-empty">無即將到期保險</div></div>
       </div>
       <div class="slbl">最近建檔</div>
       <div id="m-recent"><div class="loading"><span class="spinner"></span>載入中...</div></div>
     </div>
+    <!-- New Client -->
     <div class="m-page" id="mp-new">
       <div style="height:12px"></div>
       <div id="m-form"></div>
       <button class="btn-go" id="m-submit">建立客戶資料</button>
     </div>
+    <!-- DB -->
     <div class="m-page" id="mp-db">
       <div style="height:12px"></div>
       <div class="sw-wrap">
@@ -294,11 +299,29 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
       <div class="rc" id="m-rc"></div>
       <div id="m-list"><div class="loading"><span class="spinner"></span>載入中...</div></div>
     </div>
+    <!-- Prospects -->
+    <div class="m-page" id="mp-prospect">
+      <div style="height:12px"></div>
+      <button class="btn-go" id="m-add-prospect" style="margin-bottom:14px;">＋ 新增預約資料</button>
+      <div class="sw-wrap">
+        <div class="si-wrap"><span class="si-ic">🔍</span><input id="m-pq" type="text" placeholder="搜尋姓名、電話、車款..."></div>
+        <div class="fr-row" id="m-status-filters">
+          <button class="fb on" data-sf="all">全部</button>
+          <button class="fb on" data-sf="pending">未回覆</button>
+          <button class="fb on" data-sf="waiting">待約時間</button>
+          <button class="fb on" data-sf="booked">已訂車</button>
+          <button class="fb on" data-sf="invalid">無效</button>
+        </div>
+      </div>
+      <div class="rc" id="m-prc"></div>
+      <div id="m-prospect-list"><div class="loading"><span class="spinner"></span>載入中...</div></div>
+    </div>
     <div class="m-tabs">
       <div class="m-tabs-row">
         <button class="mt on" id="mt-dashboard"><span class="mt-ic">📊</span>總覽</button>
         <button class="mt" id="mt-new"><span class="mt-ic">➕</span>新增</button>
         <button class="mt" id="mt-db"><span class="mt-ic">📋</span>資料庫</button>
+        <button class="mt" id="mt-prospect"><span class="mt-ic">📞</span>預約</button>
         <button class="mt" id="mt-lock"><span class="mt-ic">🔒</span>鎖定</button>
       </div>
     </div>
@@ -313,6 +336,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
         <button class="sn on" id="sn-dashboard"><span class="sn-ic">📊</span>總覽儀表板</button>
         <button class="sn" id="sn-new"><span class="sn-ic">➕</span>新增客戶</button>
         <button class="sn" id="sn-db"><span class="sn-ic">📋</span>客戶資料庫</button>
+        <button class="sn" id="sn-prospect"><span class="sn-ic">📞</span>預約留資料</button>
       </div>
       <div class="sb-foot">
         <div id="d-sync" style="font-size:11px;color:var(--hint);text-align:center;margin-bottom:8px;"></div>
@@ -320,6 +344,7 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
       </div>
     </div>
     <div class="main">
+      <!-- Desktop Dashboard -->
       <div id="dp-dashboard">
         <div class="ph"><div class="pt">總覽儀表板</div><div class="pst" id="d-date"></div></div>
         <div class="sg">
@@ -330,22 +355,19 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
           <div class="sc"><div class="sc-lbl">本月折讓損失</div><div class="sc-val red" id="ds-loss">$0</div><div class="sc-sub">依領牌日加總</div></div>
           <div class="sc"><div class="sc-lbl">保險到期</div><div class="sc-val" id="ds-ins">0</div><div class="sc-sub">60天內</div></div>
         </div>
-        <div class="ea" id="d-ea" style="display:none;"></div>
-        <div class="ins-exp-section" id="d-ins-exp-section" style="max-width:720px;">
-          <div class="ins-exp-header">
-            <span>⚠</span>
-            <span class="ins-exp-title">近60天保險到期名單</span>
-            <span class="ins-exp-count" id="d-ins-exp-count">0</span>
-          </div>
+        <div class="ins-exp-section" style="max-width:720px;">
+          <div class="ins-exp-header"><span>⚠</span><span class="ins-exp-title">近60天保險到期名單</span><span class="ins-exp-count" id="d-ins-exp-count">0</span></div>
           <div id="d-ins-exp-list"><div class="ins-exp-empty">無即將到期保險</div></div>
         </div>
         <div class="slbl">最近建檔</div>
         <div id="d-recent"><div class="loading"><span class="spinner"></span>載入中...</div></div>
       </div>
+      <!-- Desktop New -->
       <div id="dp-new" style="display:none;">
         <div class="ph"><div class="pt">新增客戶</div></div>
         <div style="max-width:620px;"><div id="d-form"></div><button class="btn-go" id="d-submit">建立客戶資料</button></div>
       </div>
+      <!-- Desktop DB -->
       <div id="dp-db" style="display:none;">
         <div class="ph"><div class="pt">客戶資料庫</div></div>
         <div class="sw-wrap">
@@ -358,6 +380,23 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
         </div>
         <div class="rc" id="d-rc"></div>
         <div id="d-list" style="max-width:700px;"><div class="loading"><span class="spinner"></span>載入中...</div></div>
+      </div>
+      <!-- Desktop Prospect -->
+      <div id="dp-prospect" style="display:none;">
+        <div class="ph"><div class="pt">預約留資料</div></div>
+        <button class="btn-go" id="d-add-prospect" style="max-width:200px;margin-bottom:14px;">＋ 新增預約資料</button>
+        <div class="sw-wrap" style="max-width:700px;">
+          <div class="si-wrap"><span class="si-ic">🔍</span><input id="d-pq" type="text" placeholder="搜尋姓名、電話、車款..."></div>
+          <div class="fr-row" id="d-status-filters">
+            <button class="fb on" data-sf="all">全部</button>
+            <button class="fb on" data-sf="pending">未回覆</button>
+            <button class="fb on" data-sf="waiting">待約時間</button>
+            <button class="fb on" data-sf="booked">已訂車</button>
+            <button class="fb on" data-sf="invalid">無效</button>
+          </div>
+        </div>
+        <div class="rc" id="d-prc"></div>
+        <div id="d-prospect-list" style="max-width:700px;"><div class="loading"><span class="spinner"></span>載入中...</div></div>
       </div>
     </div>
   </div>
@@ -405,6 +444,47 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
   </div>
 </div>
 
+<!-- PROSPECT FORM OVERLAY -->
+<div class="ov" id="ov-prospect-form">
+  <div class="sheet">
+    <div class="sh-handle"></div>
+    <button class="close-x" id="btn-close-prospect-form">×</button>
+    <div class="sh-title" id="prospect-form-title">新增預約資料</div>
+    <div id="prospect-form-body"></div>
+    <button class="btn-go" id="btn-save-prospect">儲存</button>
+  </div>
+</div>
+
+<!-- PROSPECT DETAIL OVERLAY -->
+<div class="ov" id="ov-prospect-detail">
+  <div class="sheet">
+    <div class="sh-handle"></div>
+    <button class="close-x" id="btn-close-prospect-detail">×</button>
+    <div class="sh-title" id="pd-name"></div>
+    <div class="dg" id="pd-grid"></div>
+    <div class="slbl">照片</div>
+    <div class="det-photos" id="pd-photo"></div>
+    <div class="slbl" style="margin-top:12px;">備註</div>
+    <div style="font-size:13px;color:var(--text);margin-bottom:16px;" id="pd-note"></div>
+    <div class="sh-acts">
+      <button class="bs pri" style="flex:2;" id="btn-pd-edit">✏️ 修改</button>
+      <button class="bs del" style="flex:1;" id="btn-pd-del">刪除</button>
+    </div>
+  </div>
+</div>
+
+<!-- TRANSFER TO DB OVERLAY -->
+<div class="ov" id="ov-transfer">
+  <div class="sheet">
+    <div class="sh-handle"></div>
+    <button class="close-x" id="btn-close-transfer">×</button>
+    <div class="sh-title">轉入客戶資料庫</div>
+    <div style="font-size:13px;color:var(--muted);margin-bottom:16px;">已帶入基本資料，請補充其他資訊後儲存。</div>
+    <div id="transfer-form"></div>
+    <button class="btn-go" id="btn-save-transfer">儲存至客戶資料庫</button>
+  </div>
+</div>
+
 <!-- LIGHTBOX -->
 <div id="lightbox">
   <img id="lightbox-img" src="" alt="">
@@ -413,7 +493,6 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
     <a class="lb-btn" id="lb-dl" href="#" target="_blank" download>⬇ 下載</a>
   </div>
 </div>
-
 <div id="toast"></div>
 
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
@@ -421,15 +500,20 @@ body{font-family:var(--font);background:var(--bg);color:var(--text);min-height:1
 <script>
 var PASS='0303';
 var FB_CFG={apiKey:'AIzaSyCUgwK5eY38PEZMlP6SVxOuCAhlWJKJi4Y',authDomain:'jim-world.firebaseapp.com',projectId:'jim-world',storageBucket:'jim-world.firebasestorage.app',messagingSenderId:'1065555129837',appId:'1:1065555129837:web:b5c5243470f79d272ee3e4'};
-var CLD_CLOUD='dkm5nsmrt',CLD_PRESET='mengbao_crm',COL='clients';
+var CLD_CLOUD='dkm5nsmrt',CLD_PRESET='mengbao_crm';
+var COL_CLIENTS='clients',COL_PROSPECTS='prospects';
+var CAR_MODELS=['INSTER','VENUE','MUFASA','TUCSON L','TUCSON L Turbo Hybrid','CUSTIN','IONIQ 5','SANTA FE','IONIQ 5 N','PORTER II','STARIA','QT500','新增其他車款'];
+var STATUS_MAP={pending:{label:'尚未回覆',cls:'st-pending'},booked:{label:'已訂車',cls:'st-booked'},waiting:{label:'待約時間',cls:'st-waiting'},invalid:{label:'無效客戶',cls:'st-invalid'}};
 var INS_LABELS={compulsory:'強制險',third:'第三人責任險',body:'車體險',fire:'竊盜險'};
 firebase.initializeApp(FB_CFG);
 var db=firebase.firestore();
-var clients=[],dbFilter='all',detIdx=null,insEditIdx=null;
+var clients=[],prospects=[],dbFilter='all',detIdx=null,insEditIdx=null,prospectDetIdx=null,transferIdx=null;
 var newIT={compulsory:false,third:false,body:false,fire:false};
 var editIT={compulsory:false,third:false,body:false,fire:false};
 var insEditIT={compulsory:false,third:false,body:false,fire:false};
 var photoNew=[null,null],photoEdit=[null,null];
+var photoProspectNew=[null],photoProspectEdit=[null];
+var activeStatusFilters={all:true,pending:true,waiting:true,booked:true,invalid:true};
 
 function gid(id){return document.getElementById(id);}
 function p2(n){return String(n).padStart(2,'0');}
@@ -439,34 +523,39 @@ function fmtD(dt){return dt.getFullYear()+'/'+p2(dt.getMonth()+1)+'/'+p2(dt.getD
 function add1y(dt){var d=new Date(dt);d.setFullYear(d.getFullYear()+1);return d;}
 function daysLeft(dt){var n=new Date();n.setHours(0,0,0,0);return Math.round((dt-n)/86400000);}
 function fmtM(n){return '$'+(parseInt(n)||0).toLocaleString();}
-function fmtBig(n){return Math.abs(n)>=10000?(n<0?'-$':' $')+(Math.abs(n)/10000).toFixed(1)+'萬':fmtM(n);}
+function fmtBig(n){return Math.abs(n)>=10000?(n<0?'-$':'$')+(Math.abs(n)/10000).toFixed(1)+'萬':fmtM(n);}
 function ini(s){return(s||'??').slice(0,2);}
 function showToast(msg){var t=gid('toast');t.textContent=msg;t.classList.add('on');clearTimeout(t._t);t._t=setTimeout(function(){t.classList.remove('on');},2400);}
 function setSyncStatus(s){var dot=s==='ok'?'<span class="sync-dot ok"></span>雲端同步':s==='err'?'<span class="sync-dot err"></span>連線失敗':'<span class="sync-dot"></span>同步中...';['m-sync','d-sync'].forEach(function(id){var el=gid(id);if(el)el.innerHTML=dot;});}
-
-// ── CALC HELPERS ──
 function calcDeal(c){return(c.origPrice||0)-(c.coDiscount||0)+(c.custParts||0);}
 function calcCost(c){return(c.origPrice||0)-(c.coDiscount||0)+(c.myDiscount||0)+(c.myParts||0);}
 function calcLoss(c){return(c.myDiscount||0)+(c.myParts||0)-(c.custParts||0);}
-function calcProfit(c){return calcDeal(c)-calcCost(c);}
+function calcProfit(c){return calcDeal(c)-calcCost(c)+(c.myBonus||0);}
 
 // ── LOCK ──
-function doLock(){gid('lk-input').value='';gid('lk-err').textContent='';gid('lock-screen').style.display='flex';gid('app').style.display='none';['ov-detail','ov-edit','ov-ins-edit'].forEach(function(id){gid(id).classList.remove('on');});}
+function doLock(){gid('lk-input').value='';gid('lk-err').textContent='';gid('lock-screen').style.display='flex';gid('app').style.display='none';['ov-detail','ov-edit','ov-ins-edit','ov-prospect-form','ov-prospect-detail','ov-transfer'].forEach(function(id){gid(id).classList.remove('on');});}
 function tryUnlock(){var val=gid('lk-input').value.trim();if(val===PASS){gid('lock-screen').style.display='none';gid('app').style.display='block';startSync();}else{gid('lk-err').textContent='密碼錯誤，請重試';gid('lk-input').value='';setTimeout(function(){gid('lk-err').textContent='';},2000);}}
 gid('lk-btn').addEventListener('click',tryUnlock);
 gid('lk-input').addEventListener('keydown',function(e){if(e.key==='Enter')tryUnlock();});
 gid('d-lock-btn').addEventListener('click',doLock);
 
 // ── FIREBASE ──
-function startSync(){setSyncStatus('loading');db.collection(COL).orderBy('createdAt','desc').onSnapshot(function(snap){clients=snap.docs.map(function(d){return Object.assign({},d.data(),{_id:d.id});});setSyncStatus('ok');renderDash();renderDB();},function(){setSyncStatus('err');});}
-function addClient(data){return db.collection(COL).add(Object.assign({},data,{createdAt:new Date().toISOString()})).then(function(){showToast('客戶資料已儲存 ☁');}).catch(function(e){showToast('儲存失敗：'+e.message);});}
-function updClient(id,data){return db.collection(COL).doc(id).update(data).then(function(){showToast('資料已更新 ✓');}).catch(function(e){showToast('更新失敗：'+e.message);});}
-function delClient(id){return db.collection(COL).doc(id).delete().then(function(){showToast('已刪除客戶資料');}).catch(function(e){showToast('刪除失敗：'+e.message);});}
+function startSync(){
+  setSyncStatus('loading');
+  db.collection(COL_CLIENTS).orderBy('createdAt','desc').onSnapshot(function(snap){clients=snap.docs.map(function(d){return Object.assign({},d.data(),{_id:d.id});});setSyncStatus('ok');renderDash();renderDB();},function(){setSyncStatus('err');});
+  db.collection(COL_PROSPECTS).orderBy('createdAt','desc').onSnapshot(function(snap){prospects=snap.docs.map(function(d){return Object.assign({},d.data(),{_id:d.id});});renderProspects();},function(){});
+}
+function addClient(data){return db.collection(COL_CLIENTS).add(Object.assign({},data,{createdAt:new Date().toISOString()})).then(function(){showToast('客戶資料已儲存 ☁');}).catch(function(e){showToast('儲存失敗：'+e.message);});}
+function updClient(id,data){return db.collection(COL_CLIENTS).doc(id).update(data).then(function(){showToast('資料已更新 ✓');}).catch(function(e){showToast('更新失敗：'+e.message);});}
+function delClient(id){return db.collection(COL_CLIENTS).doc(id).delete().then(function(){showToast('已刪除客戶資料');}).catch(function(e){showToast('刪除失敗：'+e.message);});}
+function addProspect(data){return db.collection(COL_PROSPECTS).add(Object.assign({},data,{createdAt:new Date().toISOString()})).then(function(){showToast('預約資料已儲存 ☁');}).catch(function(e){showToast('儲存失敗：'+e.message);});}
+function updProspect(id,data){return db.collection(COL_PROSPECTS).doc(id).update(data).then(function(){showToast('資料已更新 ✓');}).catch(function(e){showToast('更新失敗：'+e.message);});}
+function delProspect(id){return db.collection(COL_PROSPECTS).doc(id).delete().then(function(){showToast('已刪除預約資料');}).catch(function(e){showToast('刪除失敗：'+e.message);});}
 
 // ── TABS ──
 function switchTab(t){
   if(t==='lock'){doLock();return;}
-  ['dashboard','new','db'].forEach(function(name){
+  ['dashboard','new','db','prospect'].forEach(function(name){
     var mt=gid('mt-'+name),sn=gid('sn-'+name),mp=gid('mp-'+name),dp=gid('dp-'+name);
     if(mt)mt.classList.toggle('on',name===t);
     if(sn)sn.classList.toggle('on',name===t);
@@ -475,21 +564,27 @@ function switchTab(t){
   });
   if(t==='new')buildNewForm();
 }
-['dashboard','new','db','lock'].forEach(function(name){
+['dashboard','new','db','prospect','lock'].forEach(function(name){
   var mt=gid('mt-'+name),sn=gid('sn-'+name);
   if(mt)mt.addEventListener('click',function(){switchTab(name);});
   if(sn)sn.addEventListener('click',function(){switchTab(name);});
 });
 
-// ── INSURANCE FORM ──
+// ── CAR MODEL SELECT HTML ──
+function carModelSelectHTML(id,val){
+  var opts=CAR_MODELS.map(function(m){return'<option value="'+m+'"'+(val===m?' selected':'')+'>'+m+'</option>';}).join('');
+  return '<select id="'+id+'">'+opts+'</select>';
+}
+
+// ── INSURANCE HELPERS ──
 function insToggleHTML(pre,types){
-  return ['compulsory','third','body','fire'].map(function(k){
-    return '<div class="itog'+(types[k]?' on':'')+'" id="'+pre+'-ins-tog-'+k+'" data-pre="'+pre+'" data-k="'+k+'"><div class="itog-lbl">'+INS_LABELS[k]+'</div><div class="itog-st" id="'+pre+'-ins-'+k+'-s">'+(types[k]?'已投保':'未投保')+'</div></div>';
+  return['compulsory','third','body','fire'].map(function(k){
+    return'<div class="itog'+(types[k]?' on':'')+'" id="'+pre+'-ins-tog-'+k+'" data-pre="'+pre+'" data-k="'+k+'"><div class="itog-lbl">'+INS_LABELS[k]+'</div><div class="itog-st" id="'+pre+'-ins-'+k+'-s">'+(types[k]?'已投保':'未投保')+'</div></div>';
   }).join('');
 }
 function insFormHTML(pre,ins,types){
   var hasIns=!!(ins&&ins.startDate);
-  return '<div class="field"><label>是否投保保險</label><select id="'+pre+'-ins-yn"><option value="no"'+(hasIns?'':' selected')+'>否</option><option value="yes"'+(hasIns?' selected':'')+'>是</option></select></div>'+
+  return'<div class="field"><label>是否投保保險</label><select id="'+pre+'-ins-yn"><option value="no"'+(hasIns?'':' selected')+'>否</option><option value="yes"'+(hasIns?' selected':'')+'>是</option></select></div>'+
     '<div id="'+pre+'-ins-wrap" style="display:'+(hasIns?'block':'none')+'">'+
     '<div class="field"><label>保險起始日（民國7碼，例：1150501）</label><input id="'+pre+'-ins-start" type="text" placeholder="1150501" maxlength="7" value="'+(ins&&ins.startRoc||'')+'"></div>'+
     '<div class="idates" id="'+pre+'-ins-dates" style="display:'+(ins&&ins.startRoc?'block':'none')+'">'+
@@ -498,86 +593,6 @@ function insFormHTML(pre,ins,types){
     '<div style="font-size:12px;color:var(--muted);margin:10px 0 8px;font-weight:500;">投保險種（點擊切換）</div>'+
     '<div class="ig">'+insToggleHTML(pre,types)+'</div></div>';
 }
-
-// ── PHOTO SLOTS ──
-function photoSlotsHTML(pre,photos){
-  var urls=photos||[null,null];var html='<div class="photo-grid">';
-  for(var i=0;i<2;i++){var url=urls[i]||null;
-    if(url){html+='<div class="photo-slot has-photo" id="'+pre+'-ps-'+i+'"><img src="'+url+'" data-url="'+url+'" alt=""><button class="photo-del-btn" data-pre="'+pre+'" data-idx="'+i+'">×</button></div>';}
-    else{html+='<div class="photo-slot" id="'+pre+'-ps-'+i+'"><input class="photo-file-input" type="file" accept="image/*" data-pre="'+pre+'" data-idx="'+i+'"><span class="photo-slot-icon">📷</span><span class="photo-slot-label">點擊拍照或選取</span></div>';}
-  }
-  return html+'</div><div style="font-size:11px;color:var(--hint)">支援 iPhone 拍照、相簿選取</div>';
-}
-
-// ── PRICE SUMMARY ──
-function calcPriceFields(pre){
-  var orig=parseInt(gid(pre+'-orig')&&gid(pre+'-orig').value)||0;
-  var coDis=parseInt(gid(pre+'-co-dis')&&gid(pre+'-co-dis').value)||0;
-  var custParts=parseInt(gid(pre+'-cust-parts')&&gid(pre+'-cust-parts').value)||0;
-  var myDis=parseInt(gid(pre+'-my-dis')&&gid(pre+'-my-dis').value)||0;
-  var myParts=parseInt(gid(pre+'-my-parts')&&gid(pre+'-my-parts').value)||0;
-  var deal=orig-coDis+custParts;
-  var cost=orig-coDis+myDis+myParts;
-  var loss=(myDis+myParts)-custParts;
-  var profit=deal-cost;
-  var ps=gid(pre+'-ps');
-  if(ps&&(orig>0||coDis>0||custParts>0||myDis>0||myParts>0)){
-    ps.style.display='block';
-    if(gid(pre+'-ps-deal'))gid(pre+'-ps-deal').textContent=fmtM(deal);
-    if(gid(pre+'-ps-cost'))gid(pre+'-ps-cost').textContent=fmtM(cost);
-    if(gid(pre+'-ps-loss')){gid(pre+'-ps-loss').textContent=fmtM(loss);gid(pre+'-ps-loss').className='prow-val '+(loss>0?'red':'green');}
-    if(gid(pre+'-ps-profit')){gid(pre+'-ps-profit').textContent=fmtM(profit);gid(pre+'-ps-profit').className='prow-val '+(profit>=0?'green':'red');}
-  } else if(ps) ps.style.display='none';
-}
-function priceSummHTML(pre){
-  return '<div class="psumm" id="'+pre+'-ps">'+
-    '<div class="psumm-title">即時計算結果</div>'+
-    '<div class="prow"><span class="prow-lbl">客人成交價格</span><span class="prow-val accent" id="'+pre+'-ps-deal">-</span></div>'+
-    '<div class="prow"><span class="prow-lbl">我的成本價格</span><span class="prow-val" id="'+pre+'-ps-cost">-</span></div>'+
-    '<div class="prow"><span class="prow-lbl">折讓損失</span><span class="prow-val" id="'+pre+'-ps-loss">-</span></div>'+
-    '<div class="prow highlight"><span class="prow-lbl" style="font-weight:600">淨利</span><span class="prow-val" id="'+pre+'-ps-profit">-</span></div>'+
-  '</div>';
-}
-
-// ── FORM BUILDER ──
-function buildFormHTML(pre,data,types,photos){
-  var ins=data&&data.insurance?data.insurance:null;
-  return '<div class="fs"><div class="fs-title">客戶基本資料</div>'+
-    '<div class="field"><label>客戶姓名 *</label><input id="'+pre+'-name" type="text" placeholder="王小明" value="'+(data&&data.name||'')+'"></div>'+
-    '<div class="fr"><div class="field"><label>身分證字號</label><input id="'+pre+'-id" type="text" value="'+(data&&data.idNum||'')+'"></div>'+
-    '<div class="field"><label>生日</label><input id="'+pre+'-bday" type="date" value="'+(data&&data.birthday||'')+'"></div></div>'+
-    '<div class="fr"><div class="field"><label>聯繫電話</label><input id="'+pre+'-phone" type="tel" value="'+(data&&data.phone||'')+'"></div>'+
-    '<div class="field"><label>行動電話</label><input id="'+pre+'-mobile" type="tel" value="'+(data&&data.mobile||'')+'"></div></div>'+
-    '<div class="field"><label>通訊地址</label><input id="'+pre+'-addr" type="text" value="'+(data&&data.address||'')+'"></div>'+
-    '</div>'+
-    '<div class="fs"><div class="fs-title">車輛資訊</div>'+
-    '<div class="field"><label>購買車輛款式 *</label><input id="'+pre+'-car" type="text" placeholder="Toyota Camry 2.5豪華版" value="'+(data&&data.car||'')+'"></div>'+
-    '<div class="fr"><div class="field"><label>訂車日期</label><input id="'+pre+'-order-date" type="date" value="'+(data&&data.orderDate||'')+'"></div>'+
-    '<div class="field"><label>領牌日期</label><input id="'+pre+'-license-date" type="date" value="'+(data&&data.licenseDate||'')+'"></div></div>'+
-    '<div class="field"><label>交車日期</label><input id="'+pre+'-delivery-date" type="date" value="'+(data&&data.deliveryDate||'')+'"></div>'+
-    '</div>'+
-    '<div class="fs"><div class="fs-title">車輛買賣資訊</div>'+
-    '<div class="field"><label>① 原始車價</label><input id="'+pre+'-orig" type="number" placeholder="0" value="'+(data&&data.origPrice||'')+'"></div>'+
-    '<div class="field"><label>② 公司折扣金</label><input id="'+pre+'-co-dis" type="number" placeholder="0" value="'+(data&&data.coDiscount||'')+'"></div>'+
-    '<div class="field"><label>③ 客人選配件價格</label><input id="'+pre+'-cust-parts" type="number" placeholder="0" value="'+(data&&data.custParts||'')+'"></div>'+
-    '<div class="field"><label>④ 我給客戶折扣金</label><input id="'+pre+'-my-dis" type="number" placeholder="0" value="'+(data&&data.myDiscount||'')+'"></div>'+
-    '<div class="field"><label>⑤ 我給的配件價</label><input id="'+pre+'-my-parts" type="number" placeholder="0" value="'+(data&&data.myParts||'')+'"></div>'+
-    priceSummHTML(pre)+
-    '</div>'+
-    '<div class="fs"><div class="fs-title">保險資料</div>'+insFormHTML(pre,ins,types)+'</div>'+
-    '<div class="fs"><div class="fs-title">客戶照片（最多2張）</div>'+photoSlotsHTML(pre,photos)+'</div>'+
-    '<div class="fs"><div class="fs-title">額外備註</div><div class="field"><textarea id="'+pre+'-note" placeholder="首購、換購、特殊需求...">'+(data&&data.note||'')+'</textarea></div></div>';
-}
-
-function bindFormEvents(pre,types){
-  ['orig','co-dis','cust-parts','my-dis','my-parts'].forEach(function(f){var el=gid(pre+'-'+f);if(el)el.addEventListener('input',function(){calcPriceFields(pre);});});
-  var yn=gid(pre+'-ins-yn');if(yn)yn.addEventListener('change',function(){toggleInsForm(pre);});
-  var st=gid(pre+'-ins-start');if(st)st.addEventListener('input',function(){calcInsDate(pre);});
-  var ig=gid(pre+'-ins-wrap');
-  if(ig){ig.querySelectorAll('.itog').forEach(function(tog){tog.addEventListener('click',function(){toggleInsType(this.dataset.pre,this.dataset.k);});});}
-  if(pre!=='ie')calcPriceFields(pre);
-}
-
 function toggleInsType(pre,k){
   var types=pre==='ef'?editIT:(pre==='ie'?insEditIT:newIT);
   types[k]=!types[k];
@@ -589,6 +604,130 @@ function calcInsDate(pre){
   var inp=gid(pre+'-ins-start');if(!inp)return;
   var v=inp.value.replace(/\D/g,'');var disp=gid(pre+'-ins-dates');
   if(v.length===7){var s=rocToDate(v);if(s){var e=add1y(s);var e1=gid(pre+'-ins-end1'),e2=gid(pre+'-ins-end2');if(e1)e1.textContent=fmtD(e);if(e2){var rr=dateToRoc(e);e2.textContent='民國'+rr.slice(0,3)+'年'+rr.slice(3,5)+'月'+rr.slice(5)+'日';}if(disp)disp.style.display='block';}else if(disp)disp.style.display='none';}else if(disp)disp.style.display='none';
+}
+
+// ── PHOTO HELPERS ──
+function photoSlotsHTML(pre,photos,count){
+  count=count||2;var urls=photos||[];var gridCls=count===1?'photo-grid-1':'photo-grid';
+  var html='<div class="'+gridCls+'">';
+  for(var i=0;i<count;i++){var url=urls[i]||null;
+    if(url){html+='<div class="photo-slot has-photo" id="'+pre+'-ps-'+i+'"><img src="'+url+'" data-url="'+url+'" alt=""><button class="photo-del-btn" data-pre="'+pre+'" data-idx="'+i+'">×</button></div>';}
+    else{html+='<div class="photo-slot" id="'+pre+'-ps-'+i+'"><input class="photo-file-input" type="file" accept="image/*" data-pre="'+pre+'" data-idx="'+i+'"><span class="photo-slot-icon">📷</span><span class="photo-slot-label">點擊拍照或選取</span></div>';}
+  }
+  return html+'</div><div style="font-size:11px;color:var(--hint)">支援 iPhone 拍照、相簿選取</div>';
+}
+function refreshSlot(pre,idx,photosRef){
+  var slot=gid(pre+'-ps-'+idx);if(!slot)return;
+  var url=photosRef[idx];
+  if(url){slot.className='photo-slot has-photo';slot.innerHTML='<img src="'+url+'" data-url="'+url+'" alt=""><button class="photo-del-btn" data-pre="'+pre+'" data-idx="'+idx+'">×</button>';}
+  else{slot.className='photo-slot';slot.innerHTML='<input class="photo-file-input" type="file" accept="image/*" data-pre="'+pre+'" data-idx="'+idx+'"><span class="photo-slot-icon">📷</span><span class="photo-slot-label">點擊拍照或選取</span>';}
+}
+function uploadPhoto(pre,idx,file){
+  var photosRef=pre==='ef'?photoEdit:(pre==='pe'?photoProspectEdit:pre==='pn'?photoProspectNew:photoNew);
+  var slot=gid(pre+'-ps-'+idx);if(!slot)return;
+  slot.innerHTML='<div style="width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--surface2)"><span class="spinner"></span><div style="font-size:12px;color:var(--accent);margin-top:8px">上傳中...</div><div style="width:80%;background:var(--border);border-radius:4px;height:6px;margin-top:10px;overflow:hidden"><div id="'+pre+'-prog-'+idx+'" style="height:100%;background:var(--accent);border-radius:4px;width:0;transition:width 0.2s"></div></div><div id="'+pre+'-pct-'+idx+'" style="font-size:11px;color:var(--muted);margin-top:4px">0%</div></div>';
+  var xhr=new XMLHttpRequest();var fd=new FormData();fd.append('file',file);fd.append('upload_preset',CLD_PRESET);fd.append('folder','mengbao_clients');
+  xhr.upload.onprogress=function(e){if(e.lengthComputable){var pct=Math.round(e.loaded/e.total*100);var bar=gid(pre+'-prog-'+idx),lbl=gid(pre+'-pct-'+idx);if(bar)bar.style.width=pct+'%';if(lbl)lbl.textContent=pct+'%';}};
+  xhr.onload=function(){try{var data=JSON.parse(xhr.responseText);if(data.secure_url){photosRef[idx]=data.secure_url;refreshSlot(pre,idx,photosRef);showToast('照片上傳成功 ✓');}else{refreshSlot(pre,idx,photosRef);showToast('上傳失敗');}}catch(e){refreshSlot(pre,idx,photosRef);showToast('上傳失敗');}};
+  xhr.onerror=function(){refreshSlot(pre,idx,photosRef);showToast('網路錯誤，請重試');};
+  xhr.open('POST','https://api.cloudinary.com/v1_1/'+CLD_CLOUD+'/image/upload');xhr.send(fd);
+}
+document.addEventListener('change',function(e){var inp=e.target;if(inp.classList.contains('photo-file-input')){var file=inp.files[0];if(file)uploadPhoto(inp.dataset.pre,parseInt(inp.dataset.idx),file);}});
+document.addEventListener('click',function(e){
+  var delBtn=e.target.closest('.photo-del-btn[data-pre]');
+  if(delBtn&&!delBtn.dataset.detDel){
+    var pre=delBtn.dataset.pre,idx=parseInt(delBtn.dataset.idx);
+    if(confirm('確定要移除這張照片嗎？')){
+      var ref=pre==='ef'?photoEdit:(pre==='pe'?photoProspectEdit:pre==='pn'?photoProspectNew:photoNew);
+      ref[idx]=null;refreshSlot(pre,idx,ref);
+    }return;
+  }
+  var img=e.target.closest('.photo-slot.has-photo img');if(img&&img.dataset.url){openLightbox(img.dataset.url);return;}
+  var dimg=e.target.closest('.det-photo img');if(dimg&&dimg.dataset.url){openLightbox(dimg.dataset.url);return;}
+});
+function openLightbox(url){var lb=gid('lightbox'),img=gid('lightbox-img'),dl=gid('lb-dl');if(lb&&img){img.src=url;if(dl)dl.href=url+'?fl_attachment=1';lb.classList.add('on');}}
+gid('btn-lb-close').addEventListener('click',function(){gid('lightbox').classList.remove('on');});
+gid('lightbox').addEventListener('click',function(e){if(e.target===this)this.classList.remove('on');});
+
+// ── PRICE CALC ──
+function calcPriceFields(pre){
+  var orig=parseInt(gid(pre+'-orig')&&gid(pre+'-orig').value)||0;
+  var coDis=parseInt(gid(pre+'-co-dis')&&gid(pre+'-co-dis').value)||0;
+  var custParts=parseInt(gid(pre+'-cust-parts')&&gid(pre+'-cust-parts').value)||0;
+  var myDis=parseInt(gid(pre+'-my-dis')&&gid(pre+'-my-dis').value)||0;
+  var myParts=parseInt(gid(pre+'-my-parts')&&gid(pre+'-my-parts').value)||0;
+  var myBonus=parseInt(gid(pre+'-my-bonus')&&gid(pre+'-my-bonus').value)||0;
+  var deal=orig-coDis+custParts;
+  var cost=orig-coDis+myDis+myParts;
+  var loss=(myDis+myParts)-custParts;
+  var profit=deal-cost+myBonus;
+  var ps=gid(pre+'-ps');
+  if(ps&&(orig>0||coDis>0||custParts>0||myDis>0||myParts>0||myBonus>0)){
+    ps.style.display='block';
+    if(gid(pre+'-ps-deal'))gid(pre+'-ps-deal').textContent=fmtM(deal);
+    if(gid(pre+'-ps-cost'))gid(pre+'-ps-cost').textContent=fmtM(cost);
+    if(gid(pre+'-ps-loss')){gid(pre+'-ps-loss').textContent=fmtM(loss);gid(pre+'-ps-loss').className='prow-val '+(loss>0?'red':'green');}
+    if(gid(pre+'-ps-profit')){gid(pre+'-ps-profit').textContent=fmtM(profit);gid(pre+'-ps-profit').className='prow-val '+(profit>=0?'green':'red');}
+  } else if(ps) ps.style.display='none';
+}
+function priceSummHTML(pre){
+  return'<div class="psumm" id="'+pre+'-ps">'+
+    '<div class="psumm-title">即時計算結果</div>'+
+    '<div class="prow"><span class="prow-lbl">客人成交價格</span><span class="prow-val accent" id="'+pre+'-ps-deal">-</span></div>'+
+    '<div class="prow"><span class="prow-lbl">我的成本價格</span><span class="prow-val" id="'+pre+'-ps-cost">-</span></div>'+
+    '<div class="prow"><span class="prow-lbl">折讓損失</span><span class="prow-val" id="'+pre+'-ps-loss">-</span></div>'+
+    '<div class="prow highlight"><span class="prow-lbl" style="font-weight:600">淨利（含獎金）</span><span class="prow-val" id="'+pre+'-ps-profit">-</span></div>'+
+  '</div>';
+}
+
+// ── MAIN FORM BUILDER ──
+function buildFormHTML(pre,data,types,photos){
+  var ins=data&&data.insurance?data.insurance:null;
+  var carVal=data&&data.carModel||'';
+  var isOther=carVal&&CAR_MODELS.indexOf(carVal)===-1&&carVal!=='';
+  return'<div class="fs"><div class="fs-title">客戶基本資料</div>'+
+    '<div class="field"><label>客戶姓名 *</label><input id="'+pre+'-name" type="text" placeholder="王小明" value="'+(data&&data.name||'')+'"></div>'+
+    '<div class="fr"><div class="field"><label>身分證字號</label><input id="'+pre+'-id" type="text" value="'+(data&&data.idNum||'')+'"></div>'+
+    '<div class="field"><label>生日</label><input id="'+pre+'-bday" type="date" value="'+(data&&data.birthday||'')+'"></div></div>'+
+    '<div class="fr"><div class="field"><label>聯繫電話</label><input id="'+pre+'-phone" type="tel" value="'+(data&&data.phone||'')+'"></div>'+
+    '<div class="field"><label>行動電話</label><input id="'+pre+'-mobile" type="tel" value="'+(data&&data.mobile||'')+'"></div></div>'+
+    '<div class="field"><label>通訊地址</label><input id="'+pre+'-addr" type="text" value="'+(data&&data.address||'')+'"></div>'+
+    '</div>'+
+    '<div class="fs"><div class="fs-title">車輛資訊</div>'+
+    '<div class="fr"><div class="field"><label>車牌號碼</label><input id="'+pre+'-plate" type="text" placeholder="ABC-1234" value="'+(data&&data.plate||'')+'"></div>'+
+    '<div class="field"><label>車輛款式</label>'+carModelSelectHTML(pre+'-car-model',isOther?'新增其他車款':(carVal||''))+'</div></div>'+
+    '<div class="field" id="'+pre+'-other-wrap" style="display:'+(isOther?'block':'none')+'"><label>其他車款名稱</label><input id="'+pre+'-car-other" type="text" placeholder="請輸入車款名稱" value="'+(isOther?carVal:'')+'"></div>'+
+    '<div class="field"><label>車輛型式</label><input id="'+pre+'-car" type="text" placeholder="例：2.5豪華版、EV長程版" value="'+(data&&data.car||'')+'"></div>'+
+    '<div class="fr"><div class="field"><label>訂車日期</label><input id="'+pre+'-order-date" type="date" value="'+(data&&data.orderDate||'')+'"></div>'+
+    '<div class="field"><label>領牌日期</label><input id="'+pre+'-license-date" type="date" value="'+(data&&data.licenseDate||'')+'"></div></div>'+
+    '<div class="field"><label>交車日期</label><input id="'+pre+'-delivery-date" type="date" value="'+(data&&data.deliveryDate||'')+'"></div>'+
+    '</div>'+
+    '<div class="fs"><div class="fs-title">車輛買賣資訊</div>'+
+    '<div class="field"><label>① 原始車價</label><input id="'+pre+'-orig" type="number" placeholder="0" value="'+(data&&data.origPrice||'')+'"></div>'+
+    '<div class="field"><label>② 公司折扣金</label><input id="'+pre+'-co-dis" type="number" placeholder="0" value="'+(data&&data.coDiscount||'')+'"></div>'+
+    '<div class="field"><label>③ 客人選配件價格</label><input id="'+pre+'-cust-parts" type="number" placeholder="0" value="'+(data&&data.custParts||'')+'"></div>'+
+    '<div class="field"><label>④ 我給客戶折扣金</label><input id="'+pre+'-my-dis" type="number" placeholder="0" value="'+(data&&data.myDiscount||'')+'"></div>'+
+    '<div class="field"><label>⑤ 我給的配件價</label><input id="'+pre+'-my-parts" type="number" placeholder="0" value="'+(data&&data.myParts||'')+'"></div>'+
+    '<div class="field"><label>⑥ 我的獎金</label><input id="'+pre+'-my-bonus" type="number" placeholder="0" value="'+(data&&data.myBonus||'')+'"></div>'+
+    priceSummHTML(pre)+
+    '</div>'+
+    '<div class="fs"><div class="fs-title">保險資料</div>'+insFormHTML(pre,ins,types)+'</div>'+
+    '<div class="fs"><div class="fs-title">客戶照片（最多2張）</div>'+photoSlotsHTML(pre,photos,2)+'</div>'+
+    '<div class="fs"><div class="fs-title">額外備註</div><div class="field"><textarea id="'+pre+'-note" placeholder="首購、換購、特殊需求...">'+(data&&data.note||'')+'</textarea></div></div>';
+}
+
+function bindFormEvents(pre,types){
+  var carSel=gid(pre+'-car-model');
+  if(carSel)carSel.addEventListener('change',function(){
+    var wrap=gid(pre+'-other-wrap');
+    if(wrap)wrap.style.display=this.value==='新增其他車款'?'block':'none';
+  });
+  ['orig','co-dis','cust-parts','my-dis','my-parts','my-bonus'].forEach(function(f){var el=gid(pre+'-'+f);if(el)el.addEventListener('input',function(){calcPriceFields(pre);});});
+  var yn=gid(pre+'-ins-yn');if(yn)yn.addEventListener('change',function(){toggleInsForm(pre);});
+  var st=gid(pre+'-ins-start');if(st)st.addEventListener('input',function(){calcInsDate(pre);});
+  var ig=gid(pre+'-ins-wrap');
+  if(ig)ig.querySelectorAll('.itog').forEach(function(tog){tog.addEventListener('click',function(){toggleInsType(this.dataset.pre,this.dataset.k);});});
+  calcPriceFields(pre);
 }
 
 function buildNewForm(){
@@ -606,6 +745,9 @@ function getFormData(pre,types,photos){
   var hasIns=gid(pre+'-ins-yn')&&gid(pre+'-ins-yn').value==='yes';
   var ins=null;
   if(hasIns){var sr=(gid(pre+'-ins-start')&&gid(pre+'-ins-start').value||'').replace(/\D/g,'');var sd=rocToDate(sr);var ed=sd?add1y(sd):null;ins=Object.assign({startRoc:sr,startDate:sd?sd.toISOString():null,endDate:ed?ed.toISOString():null},types);}
+  var carModelSel=gid(pre+'-car-model');
+  var carModel=carModelSel?carModelSel.value:'';
+  if(carModel==='新增其他車款'){var oth=gid(pre+'-car-other');carModel=oth?oth.value.trim():'';}
   return{
     name:gid(pre+'-name')&&gid(pre+'-name').value.trim()||'',
     idNum:gid(pre+'-id')&&gid(pre+'-id').value.trim()||'',
@@ -613,6 +755,8 @@ function getFormData(pre,types,photos){
     phone:gid(pre+'-phone')&&gid(pre+'-phone').value.trim()||'',
     mobile:gid(pre+'-mobile')&&gid(pre+'-mobile').value.trim()||'',
     address:gid(pre+'-addr')&&gid(pre+'-addr').value.trim()||'',
+    plate:gid(pre+'-plate')&&gid(pre+'-plate').value.trim()||'',
+    carModel:carModel,
     car:gid(pre+'-car')&&gid(pre+'-car').value.trim()||'',
     orderDate:gid(pre+'-order-date')&&gid(pre+'-order-date').value||'',
     licenseDate:gid(pre+'-license-date')&&gid(pre+'-license-date').value||'',
@@ -622,45 +766,17 @@ function getFormData(pre,types,photos){
     custParts:parseInt(gid(pre+'-cust-parts')&&gid(pre+'-cust-parts').value)||0,
     myDiscount:parseInt(gid(pre+'-my-dis')&&gid(pre+'-my-dis').value)||0,
     myParts:parseInt(gid(pre+'-my-parts')&&gid(pre+'-my-parts').value)||0,
+    myBonus:parseInt(gid(pre+'-my-bonus')&&gid(pre+'-my-bonus').value)||0,
     note:gid(pre+'-note')&&gid(pre+'-note').value.trim()||'',
     insurance:ins,
     photos:(photos||[]).filter(Boolean)
   };
 }
 
-// ── PHOTO UPLOAD ──
-function uploadPhoto(pre,idx,file){
-  var photosRef=pre==='ef'?photoEdit:photoNew;
-  var slot=gid(pre+'-ps-'+idx);if(!slot)return;
-  slot.innerHTML='<div style="width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--surface2)"><span class="spinner"></span><div style="font-size:12px;color:var(--accent);margin-top:8px">上傳中...</div><div style="width:80%;background:var(--border);border-radius:4px;height:6px;margin-top:10px;overflow:hidden"><div id="'+pre+'-prog-'+idx+'" style="height:100%;background:var(--accent);border-radius:4px;width:0;transition:width 0.2s"></div></div><div id="'+pre+'-pct-'+idx+'" style="font-size:11px;color:var(--muted);margin-top:4px">0%</div></div>';
-  var xhr=new XMLHttpRequest();var fd=new FormData();fd.append('file',file);fd.append('upload_preset',CLD_PRESET);fd.append('folder','mengbao_clients');
-  xhr.upload.onprogress=function(e){if(e.lengthComputable){var pct=Math.round(e.loaded/e.total*100);var bar=gid(pre+'-prog-'+idx),lbl=gid(pre+'-pct-'+idx);if(bar)bar.style.width=pct+'%';if(lbl)lbl.textContent=pct+'%';}};
-  xhr.onload=function(){try{var data=JSON.parse(xhr.responseText);if(data.secure_url){photosRef[idx]=data.secure_url;refreshSlot(pre,idx,photosRef);showToast('照片上傳成功 ✓');}else{refreshSlot(pre,idx,photosRef);showToast('上傳失敗：'+(data.error&&data.error.message||'請重試'));}}catch(e){refreshSlot(pre,idx,photosRef);showToast('上傳失敗');}};
-  xhr.onerror=function(){refreshSlot(pre,idx,photosRef);showToast('網路錯誤，請重試');};
-  xhr.open('POST','https://api.cloudinary.com/v1_1/'+CLD_CLOUD+'/image/upload');xhr.send(fd);
-}
-function refreshSlot(pre,idx,photosRef){
-  var slot=gid(pre+'-ps-'+idx);if(!slot)return;
-  var url=photosRef[idx];
-  if(url){slot.className='photo-slot has-photo';slot.innerHTML='<img src="'+url+'" data-url="'+url+'" alt=""><button class="photo-del-btn" data-pre="'+pre+'" data-idx="'+idx+'">×</button>';}
-  else{slot.className='photo-slot';slot.innerHTML='<input class="photo-file-input" type="file" accept="image/*" data-pre="'+pre+'" data-idx="'+idx+'"><span class="photo-slot-icon">📷</span><span class="photo-slot-label">點擊拍照或選取</span>';}
-}
-document.addEventListener('change',function(e){var inp=e.target;if(inp.classList.contains('photo-file-input')){var file=inp.files[0];if(file)uploadPhoto(inp.dataset.pre,parseInt(inp.dataset.idx),file);}});
-document.addEventListener('click',function(e){
-  var delBtn=e.target.closest('.photo-del-btn');
-  if(delBtn&&!delBtn.dataset.detDel){var pre=delBtn.dataset.pre,idx=parseInt(delBtn.dataset.idx);if(confirm('確定要移除這張照片嗎？')){var ref=pre==='ef'?photoEdit:photoNew;ref[idx]=null;refreshSlot(pre,idx,ref);}return;}
-  var img=e.target.closest('.photo-slot.has-photo img');if(img&&img.dataset.url){openLightbox(img.dataset.url);return;}
-  var dimg=e.target.closest('.det-photo img');if(dimg&&dimg.dataset.url){openLightbox(dimg.dataset.url);return;}
-});
-function openLightbox(url){var lb=gid('lightbox'),img=gid('lightbox-img'),dl=gid('lb-dl');if(lb&&img){img.src=url;if(dl)dl.href=url+'?fl_attachment=1';lb.classList.add('on');}}
-gid('btn-lb-close').addEventListener('click',function(){gid('lightbox').classList.remove('on');});
-gid('lightbox').addEventListener('click',function(e){if(e.target===this)this.classList.remove('on');});
-
-// ── SUBMIT NEW ──
+// ── SUBMIT NEW CLIENT ──
 function submitNew(pre,photosRef){
   var data=getFormData(pre,newIT,photosRef);
   if(!data.name){showToast('請輸入客戶姓名');return;}
-  if(!data.car){showToast('請輸入車輛款式');return;}
   var btn=gid(pre==='mf'?'m-submit':'d-submit');
   if(btn){btn.disabled=true;btn.textContent='儲存中...';}
   addClient(data).then(function(){buildNewForm();switchTab('db');}).finally(function(){if(btn){btn.disabled=false;btn.textContent='建立客戶資料';}});
@@ -685,12 +801,12 @@ function renderDash(){
     var ec=gid(px+'-ins-exp-count');if(ec)ec.textContent=expSoon.length;
   });
   renderInsExpList(expSoon);
-  var rHTML=clients.slice(0,6).map(function(c){return '<div class="ri"><div class="av">'+ini(c.name)+'</div><div class="ri-info"><div class="ri-name">'+c.name+'</div><div class="ri-car">'+(c.car||'-')+'</div></div><div class="ri-price">'+fmtM(calcDeal(c))+'</div></div>';}).join('')||'<div class="empty">尚無客戶資料</div>';
+  var rHTML=clients.slice(0,6).map(function(c){return'<div class="ri"><div class="av">'+ini(c.name)+'</div><div class="ri-info"><div class="ri-name">'+c.name+'</div><div class="ri-car">'+(c.carModel||c.car||'-')+'</div></div><div class="ri-price">'+fmtM(calcDeal(c))+'</div></div>';}).join('')||'<div class="empty">尚無客戶資料</div>';
   ['m-recent','d-recent'].forEach(function(id){var el=gid(id);if(el)el.innerHTML=rHTML;});
   var dd=gid('d-date');if(dd){var n=new Date();dd.textContent=n.getFullYear()+'年'+(n.getMonth()+1)+'月'+n.getDate()+'日';}
 }
 
-// ── INSURANCE EXPIRY LIST ──
+// ── INS EXPIRY LIST ──
 function renderInsExpList(expSoon){
   ['m','d'].forEach(function(px){
     var el=gid(px+'-ins-exp-list');if(!el)return;
@@ -699,66 +815,48 @@ function renderInsExpList(expSoon){
       var idx=clients.findIndex(function(x){return x._id===c._id;});
       var d=daysLeft(new Date(c.insurance.endDate));
       var dcls=d<=14?'days-urgent':'days-soon';
-      return '<div class="ins-exp-item">'+
-        '<div class="ins-exp-info">'+
-          '<div class="ins-exp-av">'+ini(c.name)+'</div>'+
-          '<div>'+
-            '<div class="ins-exp-name">'+c.name+'</div>'+
-            '<div class="ins-exp-date">'+c.car+' · 到期：'+fmtD(new Date(c.insurance.endDate))+'</div>'+
-          '</div>'+
-          '<span class="ins-exp-days '+dcls+'">'+d+'天</span>'+
-        '</div>'+
+      return'<div class="ins-exp-item">'+
+        '<div class="ins-exp-info"><div class="ins-exp-av">'+ini(c.name)+'</div>'+
+        '<div><div class="ins-exp-name">'+c.name+'</div><div class="ins-exp-date">'+(c.carModel||c.car||'-')+' · 到期：'+fmtD(new Date(c.insurance.endDate))+'</div></div>'+
+        '<span class="ins-exp-days '+dcls+'">'+d+'天</span></div>'+
         '<div class="ins-exp-btns">'+
           '<button class="ins-act-btn renew" data-ins-action="renew" data-idx="'+idx+'">✓ 完成續保</button>'+
-          '<button class="ins-act-btn edit" data-ins-action="edit" data-idx="'+idx+'">✏ 修改續保</button>'+
+          '<button class="ins-act-btn edit-ins" data-ins-action="edit" data-idx="'+idx+'">✏ 修改續保</button>'+
           '<button class="ins-act-btn stop" data-ins-action="stop" data-idx="'+idx+'">✕ 不續保</button>'+
-        '</div>'+
-      '</div>';
+        '</div></div>';
     }).join('');
   });
 }
-
-// insurance action delegation
 document.addEventListener('click',function(e){
   var btn=e.target.closest('[data-ins-action]');
   if(!btn)return;
-  var idx=parseInt(btn.dataset.idx);
-  var action=btn.dataset.insAction;
-  var c=clients[idx];
+  var idx=parseInt(btn.dataset.idx),action=btn.dataset.insAction,c=clients[idx];
   if(action==='renew'){
     if(!confirm('確定完成續保？保險起始日將自動往後延一年。'))return;
-    var oldStart=new Date(c.insurance.startDate);
-    var newStart=add1y(oldStart);
-    var newEnd=add1y(newStart);
-    var newRoc=dateToRoc(newStart);
-    var newIns=Object.assign({},c.insurance,{startRoc:newRoc,startDate:newStart.toISOString(),endDate:newEnd.toISOString()});
-    updClient(c._id,{insurance:newIns});
-  } else if(action==='stop'){
-    if(!confirm('確定不續保？此客戶將從到期提醒中移除，投保狀態改為未投保。'))return;
+    var ns=add1y(new Date(c.insurance.startDate)),ne=add1y(ns);
+    updClient(c._id,{insurance:Object.assign({},c.insurance,{startRoc:dateToRoc(ns),startDate:ns.toISOString(),endDate:ne.toISOString()})});
+  }else if(action==='stop'){
+    if(!confirm('確定不續保？投保狀態將改為未投保。'))return;
     updClient(c._id,{insurance:null});
-  } else if(action==='edit'){
-    openInsEdit(idx);
-  }
+  }else if(action==='edit') openInsEdit(idx);
 });
 
 // ── INS EDIT ──
 function openInsEdit(idx){
-  insEditIdx=idx;var c=clients[idx];
-  var ins=c.insurance||null;
+  insEditIdx=idx;var c=clients[idx];var ins=c.insurance||null;
   insEditIT={compulsory:!!(ins&&ins.compulsory),third:!!(ins&&ins.third),body:!!(ins&&ins.body),fire:!!(ins&&ins.fire)};
   gid('ins-edit-form').innerHTML='<div class="fs" style="box-shadow:none;padding:0;">'+insFormHTML('ie',ins,insEditIT)+'</div>';
   var yn=gid('ie-ins-yn');if(yn)yn.addEventListener('change',function(){toggleInsForm('ie');});
   var st=gid('ie-ins-start');if(st)st.addEventListener('input',function(){calcInsDate('ie');});
   var ig=gid('ie-ins-wrap');
-  if(ig){ig.querySelectorAll('.itog').forEach(function(tog){tog.addEventListener('click',function(){toggleInsType('ie',this.dataset.k);});});}
+  if(ig)ig.querySelectorAll('.itog').forEach(function(tog){tog.addEventListener('click',function(){toggleInsType('ie',this.dataset.k);});});
   gid('ov-ins-edit').classList.add('on');
 }
 gid('btn-close-ins-edit').addEventListener('click',function(){gid('ov-ins-edit').classList.remove('on');});
 gid('ov-ins-edit').addEventListener('click',function(e){if(e.target===this)this.classList.remove('on');});
 gid('btn-save-ins-edit').addEventListener('click',function(){
   if(insEditIdx===null)return;
-  var hasIns=gid('ie-ins-yn')&&gid('ie-ins-yn').value==='yes';
-  var ins=null;
+  var hasIns=gid('ie-ins-yn')&&gid('ie-ins-yn').value==='yes';var ins=null;
   if(hasIns){var sr=(gid('ie-ins-start')&&gid('ie-ins-start').value||'').replace(/\D/g,'');var sd=rocToDate(sr);var ed=sd?add1y(sd):null;ins=Object.assign({startRoc:sr,startDate:sd?sd.toISOString():null,endDate:ed?ed.toISOString():null},insEditIT);}
   var btn=this;btn.disabled=true;btn.textContent='儲存中...';
   updClient(clients[insEditIdx]._id,{insurance:ins}).then(function(){gid('ov-ins-edit').classList.remove('on');}).finally(function(){btn.disabled=false;btn.textContent='儲存保險資料';});
@@ -771,7 +869,7 @@ function renderDB(){
   var now=new Date();
   function doRender(q,listId,rcId){
     var fil=clients.filter(function(c){
-      var m=!q||(c.name&&c.name.toLowerCase().includes(q))||(c.car&&c.car.toLowerCase().includes(q))||((c.phone||'').includes(q))||((c.mobile||'').includes(q));
+      var m=!q||(c.name&&c.name.toLowerCase().includes(q))||(c.carModel&&c.carModel.toLowerCase().includes(q))||(c.car&&c.car.toLowerCase().includes(q))||((c.phone||'').includes(q))||((c.mobile||'').includes(q))||((c.plate||'').toLowerCase().includes(q));
       if(!m)return false;
       if(dbFilter==='month'){var ref=c.licenseDate?new Date(c.licenseDate):new Date(c.createdAt);return ref.getMonth()===now.getMonth()&&ref.getFullYear()===now.getFullYear();}
       if(dbFilter==='ins')return c.insurance&&c.insurance.startDate;
@@ -784,23 +882,16 @@ function renderDB(){
       var oi=clients.findIndex(function(x){return x._id===c._id;});
       var deal=calcDeal(c),profit=calcProfit(c),loss=calcLoss(c);
       var pills='';
-      if(c.insurance&&c.insurance.startDate){
-        var e=new Date(c.insurance.endDate);var d=daysLeft(e);
-        var cl=d<=30?'pill-warn':'pill-ok';
-        if(c.insurance.compulsory)pills+='<span class="pill '+cl+'">強制</span>';
-        if(c.insurance.third)pills+='<span class="pill '+cl+'">第三人</span>';
-        if(c.insurance.body)pills+='<span class="pill '+cl+'">車體</span>';
-        if(c.insurance.fire)pills+='<span class="pill '+cl+'">竊盜</span>';
-      }
-      return '<div class="card"><div class="cb">'+
+      if(c.insurance&&c.insurance.startDate){var e=new Date(c.insurance.endDate);var d=daysLeft(e);var cl=d<=30?'pill-warn':'pill-ok';if(c.insurance.compulsory)pills+='<span class="pill '+cl+'">強制</span>';if(c.insurance.third)pills+='<span class="pill '+cl+'">第三人</span>';if(c.insurance.body)pills+='<span class="pill '+cl+'">車體</span>';if(c.insurance.fire)pills+='<span class="pill '+cl+'">竊盜</span>';}
+      return'<div class="card"><div class="cb">'+
         '<div class="ch"><div class="av">'+ini(c.name)+'</div>'+
-        '<div><div class="cn">'+c.name+'</div>'+
+        '<div><div class="cn">'+c.name+(c.plate?' <span style="font-size:11px;color:var(--hint);">['+c.plate+']</span>':'')+'</div>'+
         '<div class="cm">'+(c.idNum||'無身分證')+' · '+new Date(c.createdAt).toLocaleDateString('zh-TW')+'</div></div></div>'+
         '<div class="cg">'+
-          '<div class="cf">車款<span>'+(c.car||'-')+'</span></div>'+
+          '<div class="cf">車款<span>'+(c.carModel||'-')+'</span></div>'+
+          '<div class="cf">型式<span>'+(c.car||'-')+'</span></div>'+
           '<div class="cf">聯絡<span>'+(c.mobile||c.phone||'-')+'</span></div>'+
-          (c.licenseDate?'<div class="cf">領牌日期<span>'+c.licenseDate.replace(/-/g,'/')+'</span></div>':'')+
-          (c.deliveryDate?'<div class="cf">交車日期<span>'+c.deliveryDate.replace(/-/g,'/')+'</span></div>':'')+
+          (c.licenseDate?'<div class="cf">領牌<span>'+c.licenseDate.replace(/-/g,'/')+'</span></div>':'')+
         '</div>'+(pills?'<div class="pills">'+pills+'</div>':'')+
         '</div>'+
         '<div class="cf-footer">'+
@@ -808,90 +899,50 @@ function renderDB(){
           '<span class="'+(profit>=0?'pc':'pc-loss')+'">淨利 '+fmtM(profit)+'</span>'+
           (loss>0?'<span class="pc-loss">損失 '+fmtM(loss)+'</span>':'')+
         '</div>'+
-        '<div class="ca">'+
-          '<button class="bs pri" data-action="detail" data-idx="'+oi+'">查看詳情</button>'+
-          '<button class="bs" data-action="edit" data-idx="'+oi+'">✏️ 修改</button>'+
-          '<button class="bs del" data-action="del" data-idx="'+oi+'">刪除</button>'+
-        '</div></div>';
+        '<div class="ca"><button class="bs pri" data-action="detail" data-idx="'+oi+'">查看詳情</button><button class="bs" data-action="edit" data-idx="'+oi+'">✏️ 修改</button><button class="bs del" data-action="del" data-idx="'+oi+'">刪除</button></div></div>';
     }).join('');
   }
-  doRender(mq,'m-list','m-rc');
-  doRender(dq,'d-list','d-rc');
+  doRender(mq,'m-list','m-rc');doRender(dq,'d-list','d-rc');
 }
-['m-list','d-list'].forEach(function(listId){
-  gid(listId).addEventListener('click',function(e){
-    var btn=e.target.closest('[data-action]');if(!btn)return;
-    var idx=parseInt(btn.dataset.idx),action=btn.dataset.action;
-    if(action==='detail')openDetail(idx);
-    else if(action==='edit')openEdit(idx);
-    else if(action==='del'){if(confirm('確定要刪除此筆客戶資料嗎？'))delClient(clients[idx]._id);}
-  });
-});
+['m-list','d-list'].forEach(function(listId){gid(listId).addEventListener('click',function(e){var btn=e.target.closest('[data-action]');if(!btn)return;var idx=parseInt(btn.dataset.idx),action=btn.dataset.action;if(action==='detail')openDetail(idx);else if(action==='edit')openEdit(idx);else if(action==='del'){if(confirm('確定要刪除此筆客戶資料嗎？'))delClient(clients[idx]._id);}});});
 document.querySelectorAll('.fb').forEach(function(b){b.addEventListener('click',function(){dbFilter=this.dataset.f;document.querySelectorAll('.fb').forEach(function(x){x.classList.toggle('on',x.dataset.f===dbFilter);});renderDB();});});
-gid('m-q').addEventListener('input',renderDB);
-gid('d-q').addEventListener('input',renderDB);
+gid('m-q').addEventListener('input',renderDB);gid('d-q').addEventListener('input',renderDB);
 
 // ── DETAIL ──
 function openDetail(idx){
   detIdx=idx;var c=clients[idx];
-  gid('det-name').textContent=c.name;
+  gid('det-name').textContent=c.name+(c.plate?' ['+c.plate+']':'');
   gid('det-note').textContent=c.note||'無備註';
   var deal=calcDeal(c),cost=calcCost(c),loss=calcLoss(c),profit=calcProfit(c);
-  var fields=[
-    ['身分證',c.idNum||'-'],['生日',c.birthday?c.birthday.replace(/-/g,'/'):'-'],
-    ['電話',c.phone||'-'],['手機',c.mobile||'-'],
-    ['地址',c.address||'-'],['車款',c.car||'-'],
-    ['訂車日期',c.orderDate?c.orderDate.replace(/-/g,'/'):'-'],
-    ['領牌日期',c.licenseDate?c.licenseDate.replace(/-/g,'/'):'-'],
-    ['交車日期',c.deliveryDate?c.deliveryDate.replace(/-/g,'/'):'-'],
-    ['原始車價',fmtM(c.origPrice||0)],['公司折扣金',fmtM(c.coDiscount||0)],
-    ['客人選配件',fmtM(c.custParts||0)],['我給折扣金',fmtM(c.myDiscount||0)],
-    ['我給配件價',fmtM(c.myParts||0)],
-    ['客人成交價','accent'],['我的成本',''],
-    ['折讓損失','red'],['淨利',profit>=0?'green':'red'],
-  ];
-  // rebuild fields with calculated values
   var f2=[
     ['身分證',c.idNum||'-',''],['生日',c.birthday?c.birthday.replace(/-/g,'/'):'-',''],
     ['電話',c.phone||'-',''],['手機',c.mobile||'-',''],
-    ['地址',c.address||'-',''],['車款',c.car||'-',''],
+    ['地址',c.address||'-',''],['車牌',c.plate||'-',''],
+    ['車輛款式',c.carModel||'-',''],['車輛型式',c.car||'-',''],
     ['訂車日期',c.orderDate?c.orderDate.replace(/-/g,'/'):'-',''],
     ['領牌日期',c.licenseDate?c.licenseDate.replace(/-/g,'/'):'-',''],
     ['交車日期',c.deliveryDate?c.deliveryDate.replace(/-/g,'/'):'-',''],
     ['原始車價',fmtM(c.origPrice||0),''],['公司折扣金',fmtM(c.coDiscount||0),''],
     ['客人選配件',fmtM(c.custParts||0),''],['我給折扣金',fmtM(c.myDiscount||0),''],
-    ['我給配件價',fmtM(c.myParts||0),''],
+    ['我給配件價',fmtM(c.myParts||0),''],['我的獎金',fmtM(c.myBonus||0),''],
     ['客人成交價',fmtM(deal),'accent'],['我的成本',fmtM(cost),''],
     ['折讓損失',fmtM(loss),loss>0?'red':'green'],
     ['淨利',fmtM(profit),profit>=0?'green':'red'],
   ];
   gid('det-grid').innerHTML=f2.map(function(f){return'<div><div class="df-lbl">'+f[0]+'</div><div class="df-val'+(f[2]?' '+f[2]:'')+'">'+f[1]+'</div></div>';}).join('');
-  // photos
   var dp=gid('det-photos');var urls=(c.photos||[]).filter(Boolean);
   if(!urls.length){dp.innerHTML='<div class="photo-empty">無照片記錄</div>';}
   else{dp.innerHTML=urls.map(function(u,i){return'<div class="det-photo"><img src="'+u+'" data-url="'+u+'" alt=""><div class="det-photo-actions"><a class="det-photo-btn" href="'+u+'?fl_attachment=1" target="_blank" download>⬇</a><button class="det-photo-btn" data-det-del="'+i+'">×</button></div></div>';}).join('');}
-  // insurance
   var di=gid('det-ins');
-  if(c.insurance&&c.insurance.startDate){
-    var s=new Date(c.insurance.startDate),e=new Date(c.insurance.endDate),d=daysLeft(e);
-    var eb=d<=30?'<span class="eb eb-soon">'+d+'天後到期</span>':'<span class="eb eb-ok">'+d+'天後到期</span>';
-    var types=Object.keys(INS_LABELS).filter(function(k){return c.insurance[k];}).map(function(k){return INS_LABELS[k];}).join('、')||'無';
-    di.innerHTML='<div class="idr2"><span style="color:var(--muted)">投保狀態</span><span style="color:var(--profit);font-weight:600">已投保</span></div>'+
-      '<div class="idr2"><span style="color:var(--muted)">險種</span><span>'+types+'</span></div>'+
-      '<div class="idr2"><span style="color:var(--muted)">起始日</span><span>'+fmtD(s)+'</span></div>'+
-      '<div class="idr2"><span style="color:var(--muted)">到期日</span><span>'+fmtD(e)+' '+eb+'</span></div>';
-  } else di.innerHTML='<div style="font-size:13px;color:var(--hint);padding:6px 0">未投保或未記錄保險資料</div>';
+  if(c.insurance&&c.insurance.startDate){var s=new Date(c.insurance.startDate),e=new Date(c.insurance.endDate),d=daysLeft(e);var eb=d<=30?'<span class="eb eb-soon">'+d+'天後到期</span>':'<span class="eb eb-ok">'+d+'天後到期</span>';var types=Object.keys(INS_LABELS).filter(function(k){return c.insurance[k];}).map(function(k){return INS_LABELS[k];}).join('、')||'無';di.innerHTML='<div class="idr2"><span style="color:var(--muted)">投保狀態</span><span style="color:var(--profit);font-weight:600">已投保</span></div><div class="idr2"><span style="color:var(--muted)">險種</span><span>'+types+'</span></div><div class="idr2"><span style="color:var(--muted)">起始日</span><span>'+fmtD(s)+'</span></div><div class="idr2"><span style="color:var(--muted)">到期日</span><span>'+fmtD(e)+' '+eb+'</span></div>';}
+  else di.innerHTML='<div style="font-size:13px;color:var(--hint);padding:6px 0">未投保或未記錄保險資料</div>';
   gid('ov-detail').classList.add('on');
 }
 gid('btn-close-detail').addEventListener('click',function(){gid('ov-detail').classList.remove('on');});
 gid('ov-detail').addEventListener('click',function(e){if(e.target===this)this.classList.remove('on');});
 gid('btn-det-edit').addEventListener('click',function(){gid('ov-detail').classList.remove('on');openEdit(detIdx);});
 gid('btn-det-del').addEventListener('click',function(){if(confirm('確定要刪除此筆客戶資料嗎？')){delClient(clients[detIdx]._id);gid('ov-detail').classList.remove('on');}});
-gid('det-photos').addEventListener('click',function(e){
-  var btn=e.target.closest('[data-det-del]');if(!btn)return;
-  var idx=parseInt(btn.dataset.detDel);
-  if(confirm('確定要刪除這張照片嗎？')){var c=clients[detIdx];var photos=(c.photos||[]).filter(Boolean);photos.splice(idx,1);updClient(c._id,{photos:photos}).then(function(){gid('ov-detail').classList.remove('on');});}
-});
+gid('det-photos').addEventListener('click',function(e){var btn=e.target.closest('[data-det-del]');if(!btn)return;var idx=parseInt(btn.dataset.detDel);if(confirm('確定要刪除這張照片嗎？')){var c=clients[detIdx];var photos=(c.photos||[]).filter(Boolean);photos.splice(idx,1);updClient(c._id,{photos:photos}).then(function(){gid('ov-detail').classList.remove('on');});}});
 
 // ── EDIT ──
 function openEdit(idx){
@@ -899,8 +950,7 @@ function openEdit(idx){
   editIT={compulsory:!!(c.insurance&&c.insurance.compulsory),third:!!(c.insurance&&c.insurance.third),body:!!(c.insurance&&c.insurance.body),fire:!!(c.insurance&&c.insurance.fire)};
   photoEdit=[(c.photos&&c.photos[0])||null,(c.photos&&c.photos[1])||null];
   gid('edit-form').innerHTML=buildFormHTML('ef',c,editIT,photoEdit);
-  bindFormEvents('ef',editIT);
-  calcPriceFields('ef');
+  bindFormEvents('ef',editIT);calcPriceFields('ef');
   gid('ov-edit').classList.add('on');
 }
 gid('btn-close-edit').addEventListener('click',function(){gid('ov-edit').classList.remove('on');});
@@ -909,9 +959,220 @@ gid('btn-save-edit').addEventListener('click',function(){
   if(detIdx===null)return;
   var data=getFormData('ef',editIT,photoEdit);
   if(!data.name){showToast('請輸入客戶姓名');return;}
-  if(!data.car){showToast('請輸入車輛款式');return;}
   var btn=this;btn.disabled=true;btn.textContent='儲存中...';
   updClient(clients[detIdx]._id,data).then(function(){gid('ov-edit').classList.remove('on');}).finally(function(){btn.disabled=false;btn.textContent='儲存修改';});
+});
+
+// ══════════════════════════════════
+// ── PROSPECT SYSTEM ──
+// ══════════════════════════════════
+function prospectFormHTML(pre,data){
+  var carVal=data&&data.interestedCar||'';
+  var isOther=carVal&&CAR_MODELS.indexOf(carVal)===-1&&carVal!=='';
+  return'<div class="fs"><div class="fs-title">基本資料</div>'+
+    '<div class="field"><label>客戶名稱 *</label><input id="'+pre+'-pname" type="text" placeholder="王小明" value="'+(data&&data.name||'')+'"></div>'+
+    '<div class="fr"><div class="field"><label>聯繫電話</label><input id="'+pre+'-pphone" type="tel" value="'+(data&&data.phone||'')+'"></div>'+
+    '<div class="field"><label>諮詢日期</label><input id="'+pre+'-pconsult" type="date" value="'+(data&&data.consultDate||'')+'"></div></div>'+
+    '<div class="field"><label>聯繫地址</label><input id="'+pre+'-paddress" type="text" value="'+(data&&data.address||'')+'"></div>'+
+    '<div class="fr"><div class="field"><label>預約聯繫日期</label><input id="'+pre+'-pfollowup" type="date" value="'+(data&&data.followupDate||'')+'"></div>'+
+    '<div class="field"><label>客戶來源</label><input id="'+pre+'-psource" type="text" placeholder="如：臨櫃、電話、FB..." value="'+(data&&data.source||'')+'"></div></div>'+
+    '</div>'+
+    '<div class="fs"><div class="fs-title">車輛意向</div>'+
+    '<div class="fr"><div class="field"><label>有興趣的車輛款式</label>'+carModelSelectHTML(pre+'-pcar-model',isOther?'新增其他車款':(carVal||''))+'</div>'+
+    '<div class="field"><label>是否換車</label><select id="'+pre+'-ptrade"><option value="no"'+(!(data&&data.isTradeIn)?' selected':'')+'>全新購車</option><option value="yes"'+((data&&data.isTradeIn)?' selected':'')+'>舊車換新車</option></select></div></div>'+
+    '<div class="field" id="'+pre+'-pother-wrap" style="display:'+(isOther?'block':'none')+'"><label>其他車款名稱</label><input id="'+pre+'-pcar-other" type="text" value="'+(isOther?carVal:'')+'"></div>'+
+    '</div>'+
+    '<div class="fs"><div class="fs-title">狀態與備註</div>'+
+    '<div class="field"><label>客戶狀態</label><select id="'+pre+'-pstatus">'+
+      '<option value="pending"'+((!data||data.status==='pending')?' selected':'')+'>尚未回覆</option>'+
+      '<option value="waiting"'+(data&&data.status==='waiting'?' selected':'')+'>待約時間</option>'+
+      '<option value="booked"'+(data&&data.status==='booked'?' selected':'')+'>已訂車</option>'+
+      '<option value="invalid"'+(data&&data.status==='invalid'?' selected':'')+'>無效客戶</option>'+
+    '</select></div>'+
+    '<div class="field"><label>備註</label><textarea id="'+pre+'-pnote" placeholder="記錄客戶喜好、預算、其他需求...">'+(data&&data.note||'')+'</textarea></div>'+
+    '</div>'+
+    '<div class="fs"><div class="fs-title">上傳照片（最多1張）</div>'+photoSlotsHTML(pre+'-ph',data&&data.photo?[data.photo]:[],1)+'</div>';
+}
+
+function bindProspectFormEvents(pre,photosRef){
+  var carSel=gid(pre+'-pcar-model');
+  if(carSel)carSel.addEventListener('change',function(){var wrap=gid(pre+'-pother-wrap');if(wrap)wrap.style.display=this.value==='新增其他車款'?'block':'none';});
+}
+
+function getProspectData(pre,photosRef){
+  var carModelSel=gid(pre+'-pcar-model');
+  var carModel=carModelSel?carModelSel.value:'';
+  if(carModel==='新增其他車款'){var oth=gid(pre+'-pcar-other');carModel=oth?oth.value.trim():'';}
+  return{
+    name:gid(pre+'-pname')&&gid(pre+'-pname').value.trim()||'',
+    phone:gid(pre+'-pphone')&&gid(pre+'-pphone').value.trim()||'',
+    address:gid(pre+'-paddress')&&gid(pre+'-paddress').value.trim()||'',
+    consultDate:gid(pre+'-pconsult')&&gid(pre+'-pconsult').value||'',
+    followupDate:gid(pre+'-pfollowup')&&gid(pre+'-pfollowup').value||'',
+    source:gid(pre+'-psource')&&gid(pre+'-psource').value.trim()||'',
+    interestedCar:carModel,
+    isTradeIn:gid(pre+'-ptrade')&&gid(pre+'-ptrade').value==='yes',
+    status:gid(pre+'-pstatus')&&gid(pre+'-pstatus').value||'pending',
+    note:gid(pre+'-pnote')&&gid(pre+'-pnote').value.trim()||'',
+    photo:(photosRef&&photosRef[0])||null
+  };
+}
+
+// open prospect form (new)
+function openProspectForm(data,editId){
+  var pre='pf';
+  photoProspectNew=[data&&data.photo?data.photo:null];
+  gid('prospect-form-title').textContent=editId?'修改預約資料':'新增預約資料';
+  gid('prospect-form-body').innerHTML=prospectFormHTML(pre,data);
+  bindProspectFormEvents(pre,photoProspectNew);
+  gid('ov-prospect-form').dataset.editId=editId||'';
+  gid('ov-prospect-form').classList.add('on');
+}
+gid('btn-close-prospect-form').addEventListener('click',function(){gid('ov-prospect-form').classList.remove('on');});
+gid('ov-prospect-form').addEventListener('click',function(e){if(e.target===this)this.classList.remove('on');});
+gid('m-add-prospect').addEventListener('click',function(){openProspectForm(null,null);});
+gid('d-add-prospect').addEventListener('click',function(){openProspectForm(null,null);});
+
+gid('btn-save-prospect').addEventListener('click',function(){
+  var pre='pf';
+  var data=getProspectData(pre,photoProspectNew);
+  if(!data.name){showToast('請輸入客戶名稱');return;}
+  var editId=gid('ov-prospect-form').dataset.editId||'';
+  var btn=this;btn.disabled=true;btn.textContent='儲存中...';
+  var p=editId?updProspect(editId,data):addProspect(data);
+  p.then(function(){
+    gid('ov-prospect-form').classList.remove('on');
+    // if booked, offer transfer
+    if(data.status==='booked'&&!editId) offerTransfer(data);
+  }).finally(function(){btn.disabled=false;btn.textContent='儲存';});
+});
+
+// ── RENDER PROSPECTS ──
+function renderProspects(){
+  var mq=(gid('m-pq')&&gid('m-pq').value||'').toLowerCase();
+  var dq=(gid('d-pq')&&gid('d-pq').value||'').toLowerCase();
+  function doRender(q,listId,rcId){
+    var fil=prospects.filter(function(p){
+      var m=!q||(p.name&&p.name.toLowerCase().includes(q))||((p.phone||'').includes(q))||(p.interestedCar&&p.interestedCar.toLowerCase().includes(q));
+      if(!m)return false;
+      if(!activeStatusFilters.all){
+        if(!activeStatusFilters[p.status||'pending'])return false;
+      }
+      return true;
+    });
+    var rc=gid(rcId);if(rc)rc.textContent='共 '+fil.length+' 筆';
+    var el=gid(listId);if(!el)return;
+    if(!fil.length){el.innerHTML='<div class="empty">查無符合資料</div>';return;}
+    el.innerHTML=fil.map(function(p){
+      var oi=prospects.findIndex(function(x){return x._id===p._id;});
+      var st=STATUS_MAP[p.status||'pending']||STATUS_MAP.pending;
+      return'<div class="prospect-card">'+
+        '<div class="prospect-cb">'+
+          '<div class="prospect-header">'+
+            '<div class="av">'+ini(p.name)+'</div>'+
+            '<div>'+
+              '<div class="prospect-name">'+p.name+' <span class="status-badge '+st.cls+'">'+st.label+'</span></div>'+
+              '<div class="prospect-meta">'+(p.source||'')+(p.consultDate?' · 諮詢：'+p.consultDate.replace(/-/g,'/'):'')+'</div>'+
+            '</div>'+
+          '</div>'+
+          '<div class="cg">'+
+            '<div class="cf">電話<span>'+(p.phone||'-')+'</span></div>'+
+            '<div class="cf">有興趣車款<span>'+(p.interestedCar||'-')+'</span></div>'+
+            (p.followupDate?'<div class="cf">預約聯繫<span>'+p.followupDate.replace(/-/g,'/')+'</span></div>':'')+
+            '<div class="cf">換車<span>'+(p.isTradeIn?'是':'否')+'</span></div>'+
+          '</div>'+
+        '</div>'+
+        '<div class="prospect-footer"><span style="font-size:11px;color:var(--muted);">'+(p.note?p.note.slice(0,30)+(p.note.length>30?'...':''):'無備註')+'</span></div>'+
+        '<div class="prospect-actions">'+
+          '<button class="bs pri" data-paction="detail" data-pidx="'+oi+'">查看</button>'+
+          '<button class="bs" data-paction="edit" data-pidx="'+oi+'">✏️ 修改</button>'+
+          (p.status!=='booked'?'<button class="bs" data-paction="transfer" data-pidx="'+oi+'">→ 轉入DB</button>':'')+
+          '<button class="bs del" data-paction="del" data-pidx="'+oi+'">刪除</button>'+
+        '</div></div>';
+    }).join('');
+  }
+  doRender(mq,'m-prospect-list','m-prc');
+  doRender(dq,'d-prospect-list','d-prc');
+}
+
+// status filter buttons
+document.querySelectorAll('[data-sf]').forEach(function(b){
+  b.addEventListener('click',function(){
+    var sf=this.dataset.sf;
+    if(sf==='all'){var anyOff=!activeStatusFilters.pending||!activeStatusFilters.waiting||!activeStatusFilters.booked||!activeStatusFilters.invalid;['pending','waiting','booked','invalid'].forEach(function(k){activeStatusFilters[k]=anyOff;});this.classList.toggle('on',anyOff);}
+    else{activeStatusFilters[sf]=!activeStatusFilters[sf];this.classList.toggle('on',activeStatusFilters[sf]);}
+    renderProspects();
+  });
+});
+
+gid('m-pq').addEventListener('input',renderProspects);
+gid('d-pq').addEventListener('input',renderProspects);
+
+// prospect card actions
+['m-prospect-list','d-prospect-list'].forEach(function(listId){
+  gid(listId).addEventListener('click',function(e){
+    var btn=e.target.closest('[data-paction]');if(!btn)return;
+    var idx=parseInt(btn.dataset.pidx),action=btn.dataset.paction;
+    if(action==='detail')openProspectDetail(idx);
+    else if(action==='edit'){var p=prospects[idx];openProspectForm(p,p._id);}
+    else if(action==='transfer')openTransfer(idx);
+    else if(action==='del'){if(confirm('確定要刪除此筆預約資料嗎？'))delProspect(prospects[idx]._id);}
+  });
+});
+
+// ── PROSPECT DETAIL ──
+function openProspectDetail(idx){
+  prospectDetIdx=idx;var p=prospects[idx];
+  var st=STATUS_MAP[p.status||'pending']||STATUS_MAP.pending;
+  gid('pd-name').innerHTML=p.name+' <span class="status-badge '+st.cls+'">'+st.label+'</span>';
+  var fields=[
+    ['電話',p.phone||'-'],['聯繫地址',p.address||'-'],
+    ['諮詢日期',p.consultDate?p.consultDate.replace(/-/g,'/'):'-'],
+    ['預約聯繫',p.followupDate?p.followupDate.replace(/-/g,'/'):'-'],
+    ['客戶來源',p.source||'-'],
+    ['有興趣車款',p.interestedCar||'-'],
+    ['是否換車',p.isTradeIn?'舊車換新車':'全新購車'],
+    ['建檔日期',p.createdAt?new Date(p.createdAt).toLocaleDateString('zh-TW'):'-'],
+  ];
+  gid('pd-grid').innerHTML=fields.map(function(f){return'<div><div class="df-lbl">'+f[0]+'</div><div class="df-val">'+f[1]+'</div></div>';}).join('');
+  var pp=gid('pd-photo');
+  if(p.photo){pp.innerHTML='<div class="det-photo"><img src="'+p.photo+'" data-url="'+p.photo+'" alt=""></div>';}
+  else pp.innerHTML='<div class="photo-empty">無照片記錄</div>';
+  gid('pd-note').textContent=p.note||'無備註';
+  gid('ov-prospect-detail').classList.add('on');
+}
+gid('btn-close-prospect-detail').addEventListener('click',function(){gid('ov-prospect-detail').classList.remove('on');});
+gid('ov-prospect-detail').addEventListener('click',function(e){if(e.target===this)this.classList.remove('on');});
+gid('btn-pd-edit').addEventListener('click',function(){gid('ov-prospect-detail').classList.remove('on');var p=prospects[prospectDetIdx];openProspectForm(p,p._id);});
+gid('btn-pd-del').addEventListener('click',function(){if(confirm('確定要刪除此筆預約資料嗎？')){delProspect(prospects[prospectDetIdx]._id);gid('ov-prospect-detail').classList.remove('on');}});
+
+// ── TRANSFER TO DB ──
+function offerTransfer(data){
+  if(confirm('已訂車！是否立即轉入客戶資料庫？'))openTransferFromData(data);
+}
+function openTransfer(idx){
+  transferIdx=idx;var p=prospects[idx];
+  openTransferFromData(p);
+}
+function openTransferFromData(p){
+  newIT={compulsory:false,third:false,body:false,fire:false};
+  photoNew=[null,null];
+  var prefill={name:p.name,phone:p.phone,mobile:p.phone,address:p.address,carModel:p.interestedCar,car:'',origPrice:0,coDiscount:0,custParts:0,myDiscount:0,myParts:0,myBonus:0};
+  gid('transfer-form').innerHTML=buildFormHTML('tf',prefill,newIT,photoNew);
+  bindFormEvents('tf',newIT);
+  gid('ov-transfer').classList.add('on');
+}
+gid('btn-close-transfer').addEventListener('click',function(){gid('ov-transfer').classList.remove('on');});
+gid('ov-transfer').addEventListener('click',function(e){if(e.target===this)this.classList.remove('on');});
+gid('btn-save-transfer').addEventListener('click',function(){
+  var data=getFormData('tf',newIT,photoNew);
+  if(!data.name){showToast('請輸入客戶姓名');return;}
+  var btn=this;btn.disabled=true;btn.textContent='儲存中...';
+  addClient(data).then(function(){
+    gid('ov-transfer').classList.remove('on');
+    showToast('已轉入客戶資料庫 ✓');
+    switchTab('db');
+  }).finally(function(){btn.disabled=false;btn.textContent='儲存至客戶資料庫';});
 });
 
 // INIT
